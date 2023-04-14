@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+{% block title %}Home Page{% endblock %}
+{% block content %}
+<h1 align="left" >Hej! {{user.first_name}}</h1>
+
+
+<a href="/add-pic"><img src="{{url_for('static', filename='images/emty_profile.jpg')}}" alt="profile_img" class="rounded-circle" width="150" height="150" align="right"></a>
+</div>
+
+</br>
+</br>
+</br>
+</br>
+</br>
+</br>
+</br>
+</br>
+</br>
+<h1 align="center">Biografi:</h1>
+<div align="center">
+    {% if user.bio %}
+    <p>{{user.bio}}</p>
+    <a class="button" id="addBio" href="/add-bio"><button type="button" class="btn btn-primary">Ändra bio</button></a>
+    {% else %}
+    <a class="button" id="addBio" href="/add-bio"><button type="button" class="btn btn-primary">Add bio</button></a>
+    {% endif %}
+
+  </div>
+    
+
+
+
+
+
+
+
+
+
+{% endblock %}

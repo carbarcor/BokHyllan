@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+{% block title %}Add pic{% endblock %}
+{% block content %}
+
+<div class="container">
+    <div class="row">
+        <div class="col">
+            <h1> Upload image</h1>
+            <hr>
+            <form action="/add-pic" method="POST" enctype="multipart/form-data">
+                <label> Select image</label>
+                <div class="custom-file">
+                    <input type="file" class="custom-file-input" name="image" id="image">
+                    <label class="custom-file-label" for="image">Select image...</label>
+
+                </div>
+                <hr>
+                <button type="submit" class="btn btn-primary">Skicka!</button>
+
+
+            </form>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
