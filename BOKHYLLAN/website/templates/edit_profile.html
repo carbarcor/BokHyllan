@@ -1,0 +1,53 @@
+{% extends "base.html" %}
+{% block title %}Home Page{% endblock %}
+{% block content %}
+<h1 align="left" >Hej! {{user.first_name}}</h1>
+<h1>Uppgradera dina uppgifter!</h1>
+<form>
+    <div class="form-group">
+      <label for="#">Ny Email adress</label>
+      <input type="#" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="#">
+    </div>
+    <div class="form-group">
+      <label for="#">Nytt Namn</label>
+      <input type="#" class="form-control" id="#" placeholder="#">
+    </div>
+    <div class="form-group">
+        <label for="#">Nytt lösenord</label>
+        <input type="#" class="form-control" id="#" placeholder="#">
+      </div>
+      <div class="form-group">
+        <label for="#">Gammalt lösenord</label>
+        <input type="#" class="form-control" id="#" placeholder="#">
+      </div>
+    <div class="form-group form-check">
+      <input type="checkbox" class="form-check-input" id="exampleCheck1">
+      <label class="form-check-label" for="exampleCheck1">Bekräfta</label>
+    </div>
+    <button type="submit" class="btn btn-primary">Skicka</button>
+  </form>
+</br>
+</br>
+</br>
+  <h1>Radera kontor :/ </h1>
+  <form>
+    <div class="form-group">
+      <label for="#">Email adress</label>
+      <input type="#" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="#">
+    </div>
+    
+    <div class="form-group">
+        <label for="#">Lösenord</label>
+        <input type="#" class="form-control" id="#" placeholder="#">
+      </div>
+      <div class="form-group">
+        <label for="#">Lösenord</label>
+        <input type="#" class="form-control" id="#" placeholder="#">
+      </div>
+    <div class="form-group form-check">
+      <input type="checkbox" class="form-check-input" id="exampleCheck1">
+      <label class="form-check-label" for="exampleCheck1">Radera konto</label>
+    </div>
+    <button type="submit" class="btn btn-primary">Skicka</button>
+  </form>
+{% endblock %}

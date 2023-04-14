@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+{% block title %}Login{% endblock %}
+{% block content %}
+<form method="POST">
+    <h3 align="center"> Logga in </h3>
+    <div class ="form-group">
+        <label for="email"> Mejl konto</label>
+        <input 
+        type="email" 
+        class="form-control" 
+        id="email" 
+        name="email" 
+        placeholder="Skriv in mejl"/>
+    </div>
+    <div class ="form-group">
+        <label for="password"> Lösenord </label>
+        <input 
+        type="password" 
+        class="form-control" 
+        id="password" 
+        name="password" 
+        placeholder="Ange ditt lösenord"/>
+    </div>
+    <br />
+    <button type="submit" class="btn btn-primary">Skicka in!</button>
+    <br />
+    <br />
+    <a class="button" id="signUp" href="/sign-up"><button type="button" class="btn btn-primary">Registrera</button></a>
+
+
+
+
+</form>
+{% endblock %}
