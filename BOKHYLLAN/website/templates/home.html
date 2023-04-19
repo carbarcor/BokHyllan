@@ -21,7 +21,7 @@
     <div class="book">
         <h3>{{ book.title }}</h3>
         <p>{{ book.author }}</p>
-        <p>{{ book.description }}</p>
+        <p>{{ book.review }}</p>
         <form method="POST" action="{{ url_for('views.remove_book', book_id=book.id) }}">
             <button type="submit" class="btn btn-danger">Ta bort</button>
         </form>
