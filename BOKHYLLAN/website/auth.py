@@ -3,10 +3,42 @@ from .models import User
 from werkzeug.security import generate_password_hash, check_password_hash
 from . import db   
 from flask_login import login_user, login_required, logout_user, current_user
+from sqlalchemy import update
 
 
 
 auth = Blueprint('auth', __name__)
+
+@auth.route('/delete_profile' , methods=['GET', 'POST'])
+@login_required
+def delete_profile():
+    id = User.id
+    if request.method == 'POST':
+        user = User.query.filter_by(id=current_user.id).first()
+        db.session.delete(user)
+        db.session.commit()
+        logout_user()
+        return redirect(url_for('auth.login',user=current_user))
+    
+
+@auth.route('/edit_profile', methods=['GET', 'POST'])
+@login_required
+def edit_profile():
+    if request.method == 'POST':
+        id = User.id
+        user = User.query.filter_by(id=current_user.id).first()
+        if user:
+            old_password = request.form.get("old_password")
+            new_name = request.form.get("new_name")
+            new_password = request.form.get("new_password") 
+            hash_new_password = generate_password_hash(new_password, method='sha256')
+            user.first_name = new_name
+            user.password = hash_new_password
+            db.session.commit()
+            flash('Kontouppgradering!', category='success')
+            return redirect(url_for('auth.login'))
+    
+
 
 
 @auth.route('/login', methods=['GET', 'POST'])
@@ -62,7 +94,7 @@ def sign_up():
             db.session.add(new_user)
             db.session.commit()
             login_user(new_user, remember=True)
-            flash('Account created!', category='success')
+            flash('Skapa konto!', category='success')
             return redirect(url_for('views.home'))
 
     return render_template("sign_up.html", user=current_user)
