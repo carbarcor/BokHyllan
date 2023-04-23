@@ -11,12 +11,13 @@ import os
 views = Blueprint('views', __name__)
 
 
-#route for homepage
+#Route för sidan home.html
 @views.route('/', methods=['GET', 'POST'])
 @login_required
 def home():
 
-    return render_template("home.html", user=current_user)
+     return render_template("home.html", user=current_user)
+
 
 #detta är för att "edit profile" den är inte klart än.
 @views.route('/edit-profile', methods=['GET', 'POST'])
@@ -24,6 +25,7 @@ def home():
 def editprofile():
      
      return render_template('edit_profile.html', user=current_user)
+
 
 #detta är för att ladda upp en bok, detta är inte klart än.
 @views.route('/add-book', methods=['GET', 'POST'])
@@ -56,7 +58,7 @@ def addBio():
             db.session.commit()
             flash('Biografi har skopat!', category='success')
             return redirect(url_for('views.home'))
-
+        
         return render_template("add_bio.html", user=current_user)
 
 """detta är för att radera bio, den är inte implementera än för att vet inte om det behövs
