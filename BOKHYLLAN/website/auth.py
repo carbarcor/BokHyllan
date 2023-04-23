@@ -22,13 +22,13 @@ def login():
         """detta kontrolerra om det finns i databasen är det så kan du logga in (logga in funtionen finns redan i falsk)"""
         if user:
             if check_password_hash(user.password, password):
-                flash('Logged in successfully!', category='success')
+                flash('Användare inloggad.', category='success')
                 login_user(user, remember=True)
                 return redirect(url_for('views.home'))
             else:
-                flash('Incorrect password, try again.', category='error')
+                flash('Felaktigt lösenord, försök igen.', category='error')
         else:
-            flash('Email does not exist.', category='error')
+            flash('E-post saknas.', category='error')
 
     return render_template("login.html", user=current_user)
 
@@ -53,21 +53,21 @@ def sign_up():
         user = User.query.filter_by(email=email).first()
         
         if user:
-            flash('account exist', category='error')
+            flash('Användarkontot finns redan.', category='error')
         elif len(email) < 5:
-            flash('Mejladressen måste vara mer en 4 bokstovlar', category='error')
+            flash('Mejladressen måste vara längre än 4 bokstäver.', category='error')
         elif len(first_name) < 3:
-            flash('Namnet är för kort', category='error')
+            flash('Namnet är för kort.', category='error')
         elif password1 != password2:
-            flash('Lösenord matchar inte', category='error')
+            flash('Lösenorden matchar inte.', category='error')
         elif len(password1) < 3:
-            flash('Lösenord måste ha mer en 2 tecken, försök igen!', category='error')
+            flash('Lösenordet måste ha fler än 2 tecken, försök igen!', category='error')
         else:
             new_user = User(email=email, first_name=first_name, password=generate_password_hash(password1, method='sha256'))
             db.session.add(new_user)
             db.session.commit()
             login_user(new_user, remember=True)
-            flash('Account created!', category='success')
+            flash('Användarkonto skapat.', category='success')
             return redirect(url_for('views.home'))
 
     return render_template("sign_up.html", user=current_user)
