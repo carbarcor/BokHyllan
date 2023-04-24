@@ -1,28 +1,30 @@
+#detta är jätte viktigt for flask eftersom det genererar automatisk databasen, 
+#den tillåter oss att skapa ett lösenord för att administrerat administratörsområdet
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 from os import path
 import os
 from flask_login import LoginManager
 
+#själva databasen
 db = SQLAlchemy()
 DB_NAME = "database.db"
 
 
+"""
+fungerar inte nu vet inte om vi behöver den
 def create_img_dir(app):
     Newfolder='Img'
     if not path.exists('website/static' + Newfolder):
-        os.makedirs(Newfolder)
+        os.makedirs(Newfolder)"""
     
-
-
-
-
+#detta är flaskappen. detta är obligatorisk utan den funkar inte programmet.
 def create_app():
     app = Flask(__name__)
     app.config['SECRET_KEY'] = 'Tito'
     app.config['SQLALCHEMY_DATABASE_URI'] = f'sqlite:///{DB_NAME}'
     db.init_app(app)
-
+    """importerar phytonkoden till programmet"""
     from .views import views
     from .auth import auth
 
@@ -44,7 +46,7 @@ def create_app():
 
     return app
 
-
+#den skapa filen fysiskt dvs:databasen
 def create_database(app):
     if not path.exists('website/' + DB_NAME):
         db.create_all(app=app)

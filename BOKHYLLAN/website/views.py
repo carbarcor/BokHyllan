@@ -1,19 +1,21 @@
-from flask import Blueprint, render_template, request, flash, redirect, url_for
+#Views, skapar vägarna för att navigiera runt på webbplatsen.
+#olika paketer som vi behöver ladda ner så programmet kan köra.
+from flask import Blueprint, render_template, request, flash,redirect, url_for, jsonify
 from flask_login import login_required, current_user
 from .models import User, Book
 from . import db
 import os
 
+
 # variable för blueprint, detta lotta oss organiserat appen/programmet
 views = Blueprint('views', __name__)
 
-# route for homepage
+#route for homepage
 @views.route('/', methods=['GET', 'POST'])
 @login_required
 def home():
     books = Book.query.all()
     return render_template("home.html", user=current_user, books=books)
-
 
 # detta är för att "edit profile" den är inte klart än.
 @views.route('/edit-profile', methods=['GET', 'POST'])
@@ -22,6 +24,14 @@ def editprofile():
     return render_template('edit_profile.html', user=current_user)
 
 # detta är så man lägger till en bok i databasen som sedan visas på home.html templaten.
+#detta är för att "edit profile" den är inte klart än.
+@views.route('/edit-profile', methods=['GET', 'POST'])
+@login_required
+def editprofile():
+     
+     return render_template('edit_profile.html', user=current_user)
+
+#detta är för att ladda upp en bok, detta är inte klart än.
 @views.route('/add-book', methods=['GET', 'POST'])
 @login_required
 def addBook():
@@ -48,7 +58,6 @@ def remove_book(book_id):
     return redirect(url_for('views.home'))
 
 
-
 # detta är för att ladda upp bilden. det är inte klart en det saknas förstarka "security" vi komma att göra det med werkzeug
 @views.route('/add-pic', methods=['GET', 'POST'])
 @login_required
@@ -61,6 +70,18 @@ def addpic():
 
 
 # detta är för att ladd upp biografi, detta är klart
+"""detta är för att ladda upp bilden. det är inte klart en det saknas förstarka "security" vi komma att göra det med werkzeug"""
+@views.route('/add-pic', methods=['GET', 'POST'])
+@login_required
+def addpic():
+     
+     if request.method == "POST":
+          if request.files:
+               image = request.files['image']
+               image.save(os.path.join("website\static\images", image.filename))
+     return render_template('add_pic.html', user=current_user)
+        
+"""detta är för att ladd upp biografi, detta är klart"""
 @views.route('/add-bio', methods=['GET', 'POST'])
 @login_required
 def add_bio():
@@ -74,7 +95,8 @@ def add_bio():
 
     return render_template("add_bio.html", user=current_user)
 
-"""@views.route('/delete-bio', methods=['POST'])
+"""detta är för att radera bio, den är inte implementera än för att vet inte om det behövs
+@views.route('/delete-bio', methods=['POST'])
 def delete_bio():
     bio = json.loads(request.data)
     bioId = bio['bioId']
