@@ -27,4 +27,25 @@ footer {
     bottom: 0;
     width: 100%;
     height: 2.5rem;
+    
 }
+
+#intro {
+   color:#dccaae;
+   position: absolute;
+   padding-top: 10%;
+   padding-right: 50%;
+
+}
+
+#intro b {
+    font-size: medium;
+    color:#edd5cc;
+
+}
+
+.btn-primary {
+    color: #fff;
+    background-color:#59372B;
+    border-color: #000509;
+  }
