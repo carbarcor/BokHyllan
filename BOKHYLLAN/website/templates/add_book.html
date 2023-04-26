@@ -3,17 +3,40 @@
 {% block content %}
 
     <h1>Ladda upp en bok</h1>
-    <form method="POST">
+    <form id="Laddabok" method="POST">
     <div class="form-group">
         <label for="title">Title</label>
         <input type="text" class="form-control" name="title" id="title" required>
       </div>
+      <div class="form-group">
+        <label for="author">Författare</label>
+        <input type="text" class="form-control" name="author" id="author" required>
+      </div>
+      <div class="form-group">
+        <label for="isbn">ISBN</label>
+        <input type="text" class="form-control" name="isbn" id="isbn">
+      </div>
     <div class="form-group">
         <label for="review">Review</label>
         <textarea class="form-control" name="review" id="review" rows="8" required></textarea>
-        <input type="submit" value="Add Book">
+    </br>
+        <button type="submit" class="btn btn-primary">Add Book!</button>
           
     </div>
     </form>
     
+
+    {% for book in books %}
+    <div class="book">
+       <h3>{{ book.title }}</h3>
+        <form method="POST" action="{{ url_for('views.remove_book', book_id=book.id) }}">
+            <button type="submit" class="btn btn-primary">Ta bort!</button>
+        </form>
+    </br>
+        <form method="#" action="#">
+            <button type="submit" class="btn btn-primary">Redigera boken!</button>
+        </form>
+    </div>
+  {% endfor %}
+  
 {% endblock %}

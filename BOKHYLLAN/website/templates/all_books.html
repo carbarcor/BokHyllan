@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% block title %}BokHylla{% endblock %}
+{% block content %}
+<h1>BokHylla:</h1>
+
+
+{% for book in books %}
+</br>
+<p><h4>Title:  {{book.title}} </br> Författare:  {{book.author}}</br> ISBN: {{book.isbn}} </br>
+    Recension: {{book.review}}</h4></p>
+</br>
+</br>
+{%endfor%}
+
+
+
+{% endblock %}

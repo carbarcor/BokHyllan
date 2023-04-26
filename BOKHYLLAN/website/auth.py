@@ -23,23 +23,34 @@ def delete_profile():
         logout_user()
         return redirect(url_for('auth.login',user=current_user))
     
-
+# detta är för att "edit profile" den är klart att köra nu.
 @auth.route('/edit_profile', methods=['GET', 'POST'])
 @login_required
 def edit_profile():
     if request.method == 'POST':
-        id = User.id
         user = User.query.filter_by(id=current_user.id).first()
-        if user:
-            old_password = request.form.get("old_password")
-            new_name = request.form.get("new_name")
-            new_password = request.form.get("new_password") 
-            hash_new_password = generate_password_hash(new_password, method='sha256')
-            user.first_name = new_name
-            user.password = hash_new_password
+        new_name = request.form.get('new_name')
+        new_password = request.form.get('new_password')
+        old_password = request.form.get('old_password')    
+        user.first_name = new_name
+        hash_pw = generate_password_hash(new_password, method='sha256')
+        check_pw = check_password_hash(user.password, old_password)
+        user.password = hash_pw
+        
+        if len(new_password) < 7:
+            flash('Lösenord är för kort, minst 8 tecken', category='error')
+        elif len(new_name) < 1:
+            flash('Namnet är för kort', category='error')
+        elif check_pw == False:
+            flash('Det gamla lösenordet är inte korrekt!', category='error')
+        else:
             db.session.commit()
-            flash('Kontouppgradering!', category='success')
-            return redirect(url_for('auth.login'))
+            login_user(user, remember=True)
+            flash('Profilen har uppdaterats!', category='success')
+            return redirect(url_for('views.home'))
+    
+    return render_template("edit_profile.html", user=current_user)
+    
     
 
 
