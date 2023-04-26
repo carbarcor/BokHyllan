@@ -16,3 +16,7 @@ Klicka på main.py och sen på run knappen för att starta igång webbapplikatio
 Steg 4. 
 På terminalen kommer en länk (http://127.0.0.1:5000) att dyka upp. Lägg in länken i webbläsaren.
 Steg 5. Välkommen till Bokhyllans Webbapplikation!
+=======
+Installera manual de olika paketer som Flask, flask_login,sqlalchemy
+Clicka på main.py och sen run för att köra programmet.
+

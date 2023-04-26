@@ -1,3 +1,5 @@
+#denna handlar om användarautentisering.
+
 from flask import Blueprint, render_template, request, flash, redirect, url_for
 from .models import User
 from werkzeug.security import generate_password_hash, check_password_hash
@@ -6,8 +8,9 @@ from flask_login import login_user, login_required, logout_user, current_user
 from sqlalchemy import update
 
 
-
+#hjälpa att organiserat bätter väggarna "path"
 auth = Blueprint('auth', __name__)
+
 
 @auth.route('/delete_profile' , methods=['GET', 'POST'])
 @login_required
@@ -52,13 +55,16 @@ def edit_profile():
 
 
 
+#detta köra logg in
 @auth.route('/login', methods=['GET', 'POST'])
 def login():
+    """hämta data from html"""
     if request.method == 'POST':
         email = request.form.get("email")
         password = request.form.get("password")
 
         user = User.query.filter_by(email=email).first()
+        """detta kontrolerra om det finns i databasen är det så kan du logga in (logga in funtionen finns redan i falsk)"""
         if user:
             if check_password_hash(user.password, password):
                 flash('Logged in successfully!', category='success')
@@ -72,14 +78,15 @@ def login():
     return render_template("login.html", user=current_user)
 
 
-
+#detta logga ut
 @auth.route('/logout')
 @login_required
+#detta begränsa acces till user som har varit autetificierat
 def logout():
     logout_user()
     return redirect(url_for('auth.login'))
 
-
+#resgiterat user
 @auth.route('/sign-up', methods=['GET', 'POST'])
 def sign_up():
     if request.method == 'POST':

@@ -1,3 +1,4 @@
+#detta är för att starta programmet
 from website import create_app
 
 app = create_app()
