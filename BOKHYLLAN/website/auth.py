@@ -21,7 +21,7 @@ def delete_profile():
         return redirect(url_for('auth.login',user=current_user))
     
 # detta är för att "edit profile" den är klart att köra nu.
-@auth.route('/edit_profile', methods=['GET', 'POST'])
+@auth.route('/edit-profile', methods=['GET', 'POST'])
 @login_required
 def edit_profile():
     if request.method == 'POST':
