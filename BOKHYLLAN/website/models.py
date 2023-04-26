@@ -9,8 +9,11 @@ from datetime import datetime
 class Book(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     title = db.Column(db.String(150))
+    author = db.Column(db.String(150))
+    isbn = db.Column(db.String(150))
     review = db.Column(db.String(30000))
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
+    cover_pic = db.Column(db.String(30000))
 
 
 #detta är databasen för user. där PK är id som genereras automatisk när user registrerar sig
@@ -21,3 +24,4 @@ class User(db.Model, UserMixin):
     first_name = db.Column(db.String(150))
     books = db.relationship('Book')
     bio = db.Column(db.String(30000))
+    profile_pic = db.Column(db.String(30000))

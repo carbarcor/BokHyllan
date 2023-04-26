@@ -1,4 +1,4 @@
-from flask import Flask
+from flask import Flask, flash
 from flask_sqlalchemy import SQLAlchemy
 from os import path
 import os
@@ -21,6 +21,7 @@ def create_app():
     app = Flask(__name__)
     app.config['SECRET_KEY'] = 'Tito'
     app.config['SQLALCHEMY_DATABASE_URI'] = f'sqlite:///{DB_NAME}'
+    app.config['MESSAGE_FLASHING_OPTIONS'] = {'duration': 5}
     db.init_app(app)
 
     from .views import views
