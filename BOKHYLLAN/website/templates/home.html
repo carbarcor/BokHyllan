@@ -1,7 +1,6 @@
 {% extends "base.html" %}
 {% block title %}Home Page{% endblock %}
 {% block content %}
-</br>
 <h1 align="left" >Hej! {{user.first_name}}</h1>
 
 <a href="/add-pic"><img src="{{url_for('static', filename='images/emty_profile.jpg')}}" alt="profile_img" class="rounded-circle" width="150" height="150" align="right"></a>
@@ -18,6 +17,18 @@
 </br>
 <h1 align="center">Biografi:</h1>
 
+{% for book in books %}
+    <div class="book">
+        <h3>{{ book.title }}</h3>
+        <p>{{ book.author }}</p>
+        <p>{{ book.review }}</p>
+        <form method="POST" action="{{ url_for('views.remove_book', book_id=book.id) }}">
+            <button type="submit" class="btn btn-danger">Ta bort</button>
+        </form>
+    </div>
+{% endfor %}
+
+
 <div align="center">
     {% if user.bio %}
     <p>{{user.bio}}</p>
@@ -27,15 +38,14 @@
     {% endif %}
 
   </div>
+    
 
 
-  <h1 align="left">Dina böcker:</h1>
 
-  {% for book in books %}
-  <div class="book">
-     <h3>{{ book.title }}</h3>
-  </div>
-{% endfor %}
+
+
+
+
 
 
 {% endblock %}
