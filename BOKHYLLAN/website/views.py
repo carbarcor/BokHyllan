@@ -15,6 +15,7 @@ def home():
     books = Book.query.filter_by(user_id=current_user.id).all()
     return render_template("home.html", user=current_user, books=books)
 
+
 '''Funktion för visning av biblioteket av samtliga uppladdade böcker'''
 @views.route('/all-books')
 @login_required
