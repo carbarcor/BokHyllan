@@ -4,19 +4,18 @@ from .models import User, Book
 from . import db
 import os
 
-# variable för blueprint, detta lotta oss organiserat appen/programmet
+'''Variabel för blueprint. Detta organiserar appen/programmet'''
 views = Blueprint('views', __name__)
 
-# route for homepage
+
+'''Funktion för route till homepage'''
 @views.route('/', methods=['GET', 'POST'])
 @login_required
 def home():
     books = Book.query.filter_by(user_id=current_user.id).all()
     return render_template("home.html", user=current_user, books=books)
 
-
-
-
+'''Funktion för visning av biblioteket av samtliga uppladdade böcker'''
 @views.route('/all-books')
 @login_required
 def show_all_books():
@@ -24,11 +23,13 @@ def show_all_books():
     return render_template('all_books.html', user=current_user, books=books )
 
 
-# detta är så man lägger till en bok i databasen som sedan visas på home.html templaten.
+'''Funktion för användaren att lägga till en bok för utbyte.
+Boken läggs in i databasen samt visas på home.html'''
 @views.route('/add-book', methods=['GET', 'POST'])
 @login_required
-def addBook():
+def add_book():
     books = Book.query.filter_by(user_id=current_user.id).all()
+    
     if request.method == 'POST':
         title = request.form.get('title')
         author = request.form.get('author')
@@ -38,27 +39,31 @@ def addBook():
         db.session.add(new_book)
         db.session.commit()
         flash('Boken har laddats upp!', category='success')
-        return redirect(url_for('views.addBook'))
+        return redirect(url_for('views.add_book'))
+    
     return render_template('add_book.html', user=current_user, books=books )
 
+
+'''Funktion för att ta bort en uppladdad bok'''
 @views.route('/remove-book/<int:book_id>', methods=['POST'])
 @login_required
 def remove_book(book_id):
     book = Book.query.get(book_id)
+
     if book.user_id == current_user.id:
         db.session.delete(book)
         db.session.commit()
         flash('Boken har tagits bort!', category='success')
     else:
         flash('Du kan bara ta bort dina egna böcker!', category='error')
-    return redirect(url_for('views.addBook'))
+    return redirect(url_for('views.add_book'))
 
 
-
-# detta är för att ladda upp bilden. det är inte klart en det saknas förstarka "security" vi komma att göra det med werkzeug
+'''Funktion för att ladda upp bild (över bok eller biografi?)
+Det är inte klart, saknas förstarka "security" som görs genom werkzeug'''
 @views.route('/add-pic', methods=['GET', 'POST'])
 @login_required
-def addpic():
+def add_pic():
     if request.method == "POST":
         if request.files:
             image = request.files['image']
@@ -66,7 +71,7 @@ def addpic():
     return render_template('add_pic.html', user=current_user)
 
 
-# detta är för att ladd upp biografi, detta är klart
+'''Funktion för att ladda upp användarens biografi'''
 @views.route('/add-bio', methods=['GET', 'POST'])
 @login_required
 def add_bio():
@@ -83,6 +88,7 @@ def add_bio():
             return redirect(url_for('views.home'))
 
     return render_template("add_bio.html", user=current_user)
+
 
 """@views.route('/delete-bio', methods=['POST'])
 def delete_bio():
