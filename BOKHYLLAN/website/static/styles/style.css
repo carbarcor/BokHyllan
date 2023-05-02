@@ -5,11 +5,6 @@ body {
     letter-spacing: 2px;
 }
 
-h3 {
-    text-align:center;
-    margin-top:1em;
-}
-
 #Laddabok{
     background-color: #edc5b8;
     position: fixed;
@@ -34,6 +29,11 @@ h3 {
     padding-bottom: 3%;
     padding-left: 3%;
     padding-right: 3%;
+}
+
+#Login > h3 {
+    text-align:center;
+    margin-top:1em;
 }
 
 footer {

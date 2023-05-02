@@ -16,18 +16,15 @@
 </br>
 </br>
 </br>
-<h1 align="center">Biografi:</h1>
-
-<div align="center">
-    {% if user.bio %}
-    <p>{{user.bio}}</p>
-    <a class="button" id="addBio" href="/add-bio"><button type="button" class="btn btn-primary">Ändra bio</button></a>
-    {% else %}
-    <a class="button" id="addBio" href="/add-bio"><button type="button" class="btn btn-primary">Add bio</button></a>
-    {% endif %}
-
-  </div>
-
+  <h2 align="center">Biografi:</h1>
+    <div align="center">
+      {% if user.bio %}
+      <p>{{user.bio}}</p>
+      <a class="button" id="addBio" href="/add-bio"><button type="button" class="btn btn-primary">Ändra bio</button></a>
+      {% else %}
+      <a class="button" id="addBio" href="/add-bio"><button type="button" class="btn btn-primary">Add bio</button></a>
+      {% endif %}
+    </div>
 
   <h1 align="left">Dina böcker:</h1>
 
