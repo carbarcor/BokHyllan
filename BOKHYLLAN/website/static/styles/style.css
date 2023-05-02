@@ -7,9 +7,11 @@ body {
 
 #Laddabok{
     background-color: #edc5b8;
-    position: fixed;
+    width: 50%;
+    position: sticky;
     right: 10%;
     margin-top: 5%;
+    margin-bottom: 5%;
     border: 3px solid #f8f9fa;
     border-radius: 5%;
     padding-top: 3%;
