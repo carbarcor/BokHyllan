@@ -4,6 +4,7 @@ body {
     font-variant: small-caps;
     letter-spacing: 2px;
     }
+
 #Laddabok{
     background-color: #edc5b8;
     position: fixed;
@@ -62,4 +63,5 @@ footer {
     color: #fff;
     background-color:#59372B;
     border-color: #000509;
+    margin-top:1em;
   }

@@ -2,48 +2,46 @@
 {% block title %}Sign Up{% endblock %}
 {% block content %}
 
-<form method="POST">
-    <h3 align="center"> Registrera </h3>
-    <div class ="form-group">
-        <label for="email"> Mejl konto</label>
-        <input 
-        type="email" 
-        class="form-control" 
-        id="email" 
-        name="email" 
-        placeholder="Skriv in mejl"/>
-    </div>
-    <div class ="form-group">
-        <label for="firtName"> Namn </label>
-        <input 
-        type="text" 
-        class="form-control" 
-        id="firstName" 
-        name="firstName" 
-        placeholder="Ange ditt namn"/>
-    </div>
-    <div class ="form-group">
-        <label for="password1"> Lösenord </label>
-        <input 
-        type="password" 
-        class="form-control" 
-        id="password1" 
-        name="password1" 
-        placeholder="Ange ditt lösenord"/>
-    </div>
-    <div class ="form-group">
-        <label for="password2"> Bekräfta lösenord </label>
-        <input 
-        type="password" 
-        class="form-control" 
-        id="password2" 
-        name="password2" 
-        placeholder="Bekräfta lösenord"/>
-    </div>
-    <br />
-    <button type="submit" class="btn btn-primary">Skicka in!</button>
+    <form method="POST">
+        <h3 align="center">Registrera nytt konto</h3>
+            <div class ="form-group">
+                <label for="email">Mejladress</label>
+                <input 
+                    type="email" 
+                    class="form-control" 
+                    id="email" 
+                    name="email" 
+                    placeholder="exempel@email.se"/>
+            </div>
+            <div class ="form-group">
+                <label for="firtName">Namn</label>
+                <input 
+                    type="text" 
+                    class="form-control" 
+                    id="firstName" 
+                    name="firstName" 
+                    placeholder="Maria"/>
+            </div>
+            <div class ="form-group">
+                <label for="password1">Lösenord (minst 8 tecken)</label>
+                    <input 
+                    type="password" 
+                    class="form-control" 
+                    id="password1" 
+                    name="password1" 
+                    placeholder=""/>
+            </div>
+            <div class ="form-group">
+                <label for="password2">Bekräfta lösenord </label>
+                <input 
+                    type="password" 
+                    class="form-control" 
+                    id="password2" 
+                    name="password2" 
+                    placeholder=""/>
+            </div>
 
+        <button type="submit" class="btn btn-primary">Registrera</button>
 
-
-</form>
+    </form>
 {% endblock %}
