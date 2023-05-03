@@ -6,13 +6,7 @@ from flask_login import LoginManager
 
 db = SQLAlchemy()
 DB_NAME = "database.db"
-basedir = os.path.abspath(os.path.dirname(__file__))
 
-
-def create_img_dir(app):
-    newfolder='Img'
-    if not path.exists('website/' + newfolder):
-        os.makedirs(newfolder)
 
 
 def create_app():
