@@ -15,6 +15,10 @@ def create_app():
     app.config['SQLALCHEMY_DATABASE_URI'] = f'sqlite:///{DB_NAME}'
     app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
     app.config['MESSAGE_FLASHING_OPTIONS'] = {'duration': 5}
+    
+
+    UPLOAD_FOLDER = 'BOKHYLLAN\website\static\images'
+    app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 
     db.init_app(app)
 

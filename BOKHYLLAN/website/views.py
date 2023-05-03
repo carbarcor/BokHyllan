@@ -1,4 +1,4 @@
-from flask import Blueprint, render_template, request, flash, redirect, url_for
+from flask import Blueprint, render_template, request, flash, redirect, url_for, current_app
 from flask_login import login_required, current_user
 from .models import User, Book
 from . import db
@@ -65,6 +65,13 @@ def remove_book(book_id):
 '''Funktion för att ladda upp bild (över bok eller biografi?)
 Det är inte klart, saknas förstarka "security" som görs genom werkzeug'''
 
+
+ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg', 'gif'}
+
+def allowed_file(pic_name):
+    return '.' in pic_name and \
+           pic_name.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
+
 @views.route('/add-pic', methods=['GET', 'POST'])
 @login_required
 def add_pic():
@@ -75,11 +82,15 @@ def add_pic():
             pic_file_name = str(uuid.uuid1()) + "_" + pic_name
             pic_user = User.query.filter_by(id=current_user.id).first()
             pic_user.profile_pic = pic_file_name
-            """saver.save(os.path.join(views.config['UPLOAD_FOLDER'], pic_name))"""
-            if image == None:
+            if 'image' not in request.files:
                 flash('Bilden har inte sparat!', category='error')
-                return redirect(url_for('views.home'))
+                return redirect(url_for('views.add_pic'))
+            if pic_file_name == '':
+                flash('Ingen fil har valts')
+                return redirect(url_for('views.add_pic'))
             else:
+                image and allowed_file(image.filename)
+                image.save(os.path.join(current_app.config['UPLOAD_FOLDER'], pic_file_name))
                 db.session.commit()
                 flash('Bilden har sparat!', category='success')
                 return redirect(url_for('views.home'))
