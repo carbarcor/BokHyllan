@@ -72,6 +72,14 @@ def allowed_file(pic_name):
     return '.' in pic_name and \
            pic_name.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
 
+"""def delete_old_pic():
+    user = User.query.filter_by(id=current_user.id).first()
+    old_profile_pic = user.profile_pic
+    os.unlink(os.path.join(current_app.config['UPLOAD_FOLDER'], old_profile_pic))"""
+
+
+
+
 @views.route('/add-pic', methods=['GET', 'POST'])
 @login_required
 def add_pic():

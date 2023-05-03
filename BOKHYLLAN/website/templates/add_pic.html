@@ -1,17 +1,18 @@
 {% extends "base.html" %}
 {% block title %}LaddaUppbilden{% endblock %}
 {% block content %}
-
+<!--Denna htmlsidan låter användaren välja ett profilbild och ladda upp den till webbplatsen-->
+<!--funktion add-pic finns i views.py-->
 <div class="container">
     <div class="row">
         <div class="col">
-            <h1> Upload image</h1>
+            <h1> Upplada bild</h1>
             <hr>
             <form action="/add-pic" method="POST" enctype="multipart/form-data">
-                <label>Wälj en bild från din enhet!</label>
+                <label>Ladda upp en bild här</label>
                 <div class="custom-file">
-                    <input type="file" class="custom-file-input" name="image" id="image">
-                    <label class="custom-file-label" for="image">välj en bild!</label>
+                    <input type="file" class="custom-file-input" name="image" >
+                    <label class="custom-file-label" for="image" placeholder="välj en bild!"></label>
 
                 </div>
                 <hr>
