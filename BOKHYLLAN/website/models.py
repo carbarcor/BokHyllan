@@ -1,11 +1,11 @@
-#här är strukteren till själva database.
-"""punkten ledar programnet filer databasen directory"""
+'''Denna fil innehåller strukturen för databasen.
+"from . import db" - . leder programmets filer till databasens directory'''
 from . import db 
 from flask_login import UserMixin
 from sqlalchemy.sql import func
 from datetime import datetime
 
-#detta är databasen för bocker
+'''Databasen för uppladdade böcker'''
 class Book(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     title = db.Column(db.String(150))
@@ -16,7 +16,8 @@ class Book(db.Model):
     cover_pic = db.Column(db.String(30000))
 
 
-#detta är databasen för user. där PK är id som genereras automatisk när user registrerar sig
+'''Databasen för användare.
+Primary key är id som genereras automatisk när en användare registrerar sig'''
 class User(db.Model, UserMixin):
     id = db.Column(db.Integer, primary_key=True)
     email = db.Column(db.String(150), unique=True)

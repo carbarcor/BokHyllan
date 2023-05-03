@@ -12,9 +12,6 @@ def create_img_dir(app):
     Newfolder='Img'
     if not path.exists('website/static' + Newfolder):
         os.makedirs(Newfolder)
-    
-
-
 
 
 def create_app():
