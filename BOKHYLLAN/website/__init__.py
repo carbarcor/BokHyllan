@@ -6,19 +6,22 @@ from flask_login import LoginManager
 
 db = SQLAlchemy()
 DB_NAME = "database.db"
+basedir = os.path.abspath(os.path.dirname(__file__))
 
 
 def create_img_dir(app):
-    Newfolder='Img'
-    if not path.exists('website/static' + Newfolder):
-        os.makedirs(Newfolder)
+    newfolder='Img'
+    if not path.exists('website/' + newfolder):
+        os.makedirs(newfolder)
 
 
 def create_app():
     app = Flask(__name__)
     app.config['SECRET_KEY'] = 'Tito'
     app.config['SQLALCHEMY_DATABASE_URI'] = f'sqlite:///{DB_NAME}'
+    app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
     app.config['MESSAGE_FLASHING_OPTIONS'] = {'duration': 5}
+
     db.init_app(app)
 
     from .views import views
@@ -46,6 +49,6 @@ def create_app():
 
 
 def create_database(app):
-    if not path.exists('website/' + DB_NAME):
+    if not path.exists('website/static' + DB_NAME):
         db.create_all(app=app)
         print('Created Database!')
