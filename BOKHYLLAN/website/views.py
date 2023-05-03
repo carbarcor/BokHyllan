@@ -2,6 +2,8 @@ from flask import Blueprint, render_template, request, flash, redirect, url_for
 from flask_login import login_required, current_user
 from .models import User, Book
 from . import db
+from werkzeug.utils import secure_filename
+import uuid as uuid
 import os
 
 '''Variabel för blueprint. Detta organiserar appen/programmet'''
@@ -62,13 +64,26 @@ def remove_book(book_id):
 
 '''Funktion för att ladda upp bild (över bok eller biografi?)
 Det är inte klart, saknas förstarka "security" som görs genom werkzeug'''
+
 @views.route('/add-pic', methods=['GET', 'POST'])
 @login_required
 def add_pic():
     if request.method == "POST":
         if request.files:
             image = request.files['image']
-            image.save(os.path.join("website\static\images", image.filename))
+            pic_name = secure_filename(image.filename)
+            pic_file_name = str(uuid.uuid1()) + "_" + pic_name
+            pic_user = User.query.filter_by(id=current_user.id).first()
+            pic_user.profile_pic = pic_file_name
+            """saver.save(os.path.join(views.config['UPLOAD_FOLDER'], pic_name))"""
+            if image == None:
+                flash('Bilden har inte sparat!', category='error')
+                return redirect(url_for('views.home'))
+            else:
+                db.session.commit()
+                flash('Bilden har sparat!', category='success')
+                return redirect(url_for('views.home'))
+
     return render_template('add_pic.html', user=current_user)
 
 
