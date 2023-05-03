@@ -13,7 +13,7 @@ class Book(db.Model):
     isbn = db.Column(db.String(150))
     review = db.Column(db.String(30000))
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
-    cover_pic = db.Column(db.String(30000))
+    cover_pic = db.Column(db.String())
 
 
 '''Databasen för användare.
@@ -25,4 +25,4 @@ class User(db.Model, UserMixin):
     first_name = db.Column(db.String(150))
     books = db.relationship('Book')
     bio = db.Column(db.String(30000))
-    profile_pic = db.Column(db.String(30000))
+    profile_pic = db.Column(db.String())
