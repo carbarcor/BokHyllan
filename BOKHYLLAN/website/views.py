@@ -85,8 +85,11 @@ def add_pic():
             if 'image' not in request.files:
                 flash('Bilden har inte sparat!', category='error')
                 return redirect(url_for('views.add_pic'))
-            if pic_file_name == '':
+            if pic_name == '':
                 flash('Ingen fil har valts')
+                return redirect(url_for('views.add_pic'))
+            if allowed_file(image.filename) == False:
+                flash('filformat inte tillåtet!')
                 return redirect(url_for('views.add_pic'))
             else:
                 image and allowed_file(image.filename)
@@ -96,6 +99,7 @@ def add_pic():
                 return redirect(url_for('views.home'))
 
     return render_template('add_pic.html', user=current_user)
+
 
 
 '''Funktion för att ladda upp användarens biografi'''
