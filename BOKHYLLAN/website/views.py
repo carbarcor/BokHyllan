@@ -66,12 +66,15 @@ def remove_book(book_id):
 Det är inte klart, saknas förstarka "security" som görs genom werkzeug'''
 
 
-ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg', 'gif'}
+ALLOWED_EXTENSIONS = { 'jpg', 'jpeg'} #denna är de filerna som är godkänns för att ladda upp.
 
+#jämfora filensnamn med den typ av fil som är godkänn dvs jpg och jpeg. 
 def allowed_file(pic_name):
     return '.' in pic_name and \
            pic_name.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
 
+
+#denna är underkontruktion, inte klart ännu.
 """def delete_old_pic():
     user = User.query.filter_by(id=current_user.id).first()
     old_profile_pic = user.profile_pic
@@ -79,29 +82,39 @@ def allowed_file(pic_name):
 
 
 
-
+#vi kommer att komenterar varje rad.
 @views.route('/add-pic', methods=['GET', 'POST'])
 @login_required
 def add_pic():
     if request.method == "POST":
         if request.files:
+            #den fisiska filen sparas i denna variabel.
             image = request.files['image']
+            #i denna variable säkerställa filen. 
             pic_name = secure_filename(image.filename)
+            #filen få en unik namn.
             pic_file_name = str(uuid.uuid1()) + "_" + pic_name
+            #hämta current user och letar efter den i databasen.
             pic_user = User.query.filter_by(id=current_user.id).first()
+            #denna är profil bild Kolumn i databasen.
             pic_user.profile_pic = pic_file_name
+            # image refererat till image html om det är inte en request så vissar att det är en error.
             if 'image' not in request.files:
                 flash('Bilden har inte sparat!', category='error')
                 return redirect(url_for('views.add_pic'))
+            #om user clicka på skicka utan att ladda upp en bildformat så vissar error.
             if pic_name == '':
                 flash('Ingen fil har valts')
                 return redirect(url_for('views.add_pic'))
+            #kontrolerar filen, om filen är inte godkänns som vissar att det kan man inte göra
             if allowed_file(image.filename) == False:
                 flash('filformat inte tillåtet!')
                 return redirect(url_for('views.add_pic'))
             else:
                 image and allowed_file(image.filename)
+                #spara filden i mappen: static/images
                 image.save(os.path.join(current_app.config['UPLOAD_FOLDER'], pic_file_name))
+                #bifoga filens namn i databasen
                 db.session.commit()
                 flash('Bilden har sparat!', category='success')
                 return redirect(url_for('views.home'))
