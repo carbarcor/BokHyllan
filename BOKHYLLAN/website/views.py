@@ -74,11 +74,13 @@ def allowed_file(pic_name):
            pic_name.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
 
 
-#denna är underkontruktion, inte klart ännu.
-"""def delete_old_pic():
+#denna är för att ta bort profilbilden från användaren och ta bort automatisk den gammla. 
+def delete_old_pic():
     user = User.query.filter_by(id=current_user.id).first()
-    old_profile_pic = user.profile_pic
-    os.unlink(os.path.join(current_app.config['UPLOAD_FOLDER'], old_profile_pic))"""
+    old_profile_pic = str(user.profile_pic)
+    path = str('./BOKHYLLAN/website/static/images/'+ old_profile_pic)
+    if user.profile_pic  == old_profile_pic and user.profile_pic != "":
+        os.remove(path)
 
 
 
@@ -88,6 +90,7 @@ def allowed_file(pic_name):
 def add_pic():
     if request.method == "POST":
         if request.files:
+            delete_old_pic()
             #den fisiska filen sparas i denna variabel.
             image = request.files['image']
             #i denna variable säkerställa filen. 
