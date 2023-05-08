@@ -163,8 +163,8 @@ def add_bio():
 @views.route('/policy')
 @login_required
 def policy():
-    user = session.get('user')  # Replace 'user' with the key used to store the user object in the session
-    return render_template('policy.html', user=user)
+    
+    return render_template('policy.html', user=current_user)
 
 
 
