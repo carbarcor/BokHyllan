@@ -38,7 +38,7 @@ body {
     margin-top:1em;
 }
 
-#sign_up {
+#sign-up-div {
     margin:auto;
     width:75%;
 }
@@ -50,6 +50,16 @@ body {
 
 #add-bio-div > form {
     margin-top: 1em;
+}
+
+#edit-profile-div {
+    margin:auto;
+    width:75%;
+    margin-top:1em;
+}
+
+#edit-profile-div > form > h3 {
+    margin-top:2em;
 }
 
 footer {
