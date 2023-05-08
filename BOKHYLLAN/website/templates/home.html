@@ -2,7 +2,7 @@
 {% block title %}Home Page{% endblock %}
 {% block content %}
 </br>
-<h1 align="left" >Hej! {{user.first_name}}</h1>
+<h1 align="left" >Hej, {{user.first_name}}!</h1>
 
 {% if user.profile_pic %}
 <a href="/add-pic"><img src="{{url_for('static', filename='images/' + user.profile_pic)}}" alt="profile_img" class="rounded-circle" width="150" height="150" align="right"></a>
@@ -18,17 +18,17 @@
 </br>
 </br>
 </br>
-  <h2 align="center">Biografi:</h1>
+  <h2 align="center">Biografi</h1>
     <div align="center">
       {% if user.bio %}
       <p>{{user.bio}}</p>
       <a class="button" id="addBio" href="/add-bio"><button type="button" class="btn btn-primary">Ändra bio</button></a>
       {% else %}
-      <a class="button" id="addBio" href="/add-bio"><button type="button" class="btn btn-primary">Add bio</button></a>
+      <a class="button" id="addBio" href="/add-bio"><button type="button" class="btn btn-primary">Lägg till bio</button></a>
       {% endif %}
     </div>
 
-  <h1 align="left">Dina böcker:</h1>
+  <h1 align="left">Dina böcker</h1>
 
   {% for book in books %}
   <div class="book">

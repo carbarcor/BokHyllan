@@ -3,25 +3,40 @@
 {% block content %}
 <!--Denna htmlsidan låter användaren välja ett profilbild och ladda upp den till webbplatsen-->
 <!--funktion add-pic finns i views.py-->
-<div class="container">
-    <div class="row">
-        <div class="col">
-            <h1> Upplada bild</h1>
-            <hr>
-            <form action="/add-pic" method="POST" enctype="multipart/form-data">
-                <label>Ladda upp en bild här</label>
-                <div class="custom-file">
-                    <input type="file" class="custom-file-input" name="image" >
-                    <label class="custom-file-label" for="image" placeholder="välj en bild!"></label>
 
-                </div>
-                <hr>
-                <button type="submit" class="btn btn-primary">Skicka!</button>
+    <div class="container">
+        <div class="row">
+            <div class="col">
+                <h1>Ladda upp en profilbild</h1>
 
+                <form action="/add-pic" method="POST" enctype="multipart/form-data">
+                    <label>Klicka på fältet och välj bilden du vill ladda upp</label>
+                    <div class="custom-file">
+                        <input type="file" class="custom-file-input" name="image">
+                        <label class="custom-file-label" for="image" placeholder=""></label>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Ladda upp</button>
+                </form>
 
-            </form>
+            </div>
         </div>
     </div>
-</div>
+
+    <!-- Ev ändra till följande
+    <div id="add-pic-div">
+
+        <h1>Ladda upp en profilbild</h1>
+
+        <form action="/add-pic" method="POST" enctype="multipart/form-data">
+            <label>Klicka på fältet och välj bilden du vill ladda upp</label>
+            <div class="custom-file">
+                <input type="file" class="custom-file-input" name="image">
+                <label class="custom-file-label" for="image" placeholder=""></label>
+            </div>
+            <button type="submit" class="btn btn-primary">Ladda upp</button>
+        </form>
+
+    </div>
+    -->
 
 {% endblock %}

@@ -1,3 +1,5 @@
+/*
+Tidigare bakgrundsfärger
 body {
     background-color: #9F624F;
     font-family: "Palatino Linotype", "Book Antiqua", Palatino, serif;
@@ -5,32 +7,54 @@ body {
     letter-spacing: 2px;
 }
 
-#Laddabok{
+Formulär
     background-color: #edc5b8;
-    width: 50%;
+    border: 3px solid #f8f9fa;
+
+#intro 
+   color:#dccaae;
+
+#intro b
+    color:#edd5cc;
+*/
+
+body {
+    background-color:#fffcf9 ;
+    font-family: "Palatino Linotype", "Book Antiqua", Palatino, serif;
+    font-variant: small-caps;
+    letter-spacing: 2px;
+}
+
+.navbar {
+    background-color:rgb(255, 183, 50);
+}
+
+#add-book-div {
+    width:75%;
+    margin:auto;
+    margin-top:1em;
+}
+
+#add-book-form {
+    background-color: rgb(255, 210, 126);
     position: sticky;
-    right: 10%;
     margin-top: 5%;
     margin-bottom: 5%;
-    border: 3px solid #f8f9fa;
     border-radius: 5%;
-    padding-top: 3%;
-    padding-bottom: 3%;
-    padding-left: 3%;
-    padding-right: 3%;
+    padding: 5%
+}
+
+#add-book-text {
+    font-size: 80%;
 }
     
-#Login{
-    background-color: #edc5b8;
+#Login {
+    background-color: rgb(255, 210, 126);
     position: absolute;
     right: 10%;
     margin-top: 5%;
-    border: 3px solid #f8f9fa;
     border-radius: 5%;
-    padding-top: 3%;
-    padding-bottom: 3%;
-    padding-left: 3%;
-    padding-right: 3%;
+    padding: 3%;
 }
 
 #Login > h3 {
@@ -39,13 +63,15 @@ body {
 }
 
 #sign-up-div {
-    margin:auto;
     width:75%;
+    margin:auto;
+    margin-top:1em;
 }
 
 #add-bio-div {
     width: 75%;
     margin:auto;
+    margin-top:1em;
 }
 
 #add-bio-div > form {
@@ -53,8 +79,8 @@ body {
 }
 
 #edit-profile-div {
-    margin:auto;
     width:75%;
+    margin:auto;
     margin-top:1em;
 }
 
@@ -62,8 +88,14 @@ body {
     margin-top:2em;
 }
 
+#add-pic-div {
+    width:75%;
+    margin:auto;
+    margin-top:1em;
+}
+
 footer {
-    background-color: #59372B;
+    background-color: rgb(255, 183, 50);
     color: #F7E7CE;
     position: fixed;
     padding-left: 10px;
@@ -72,8 +104,12 @@ footer {
     height: 2.5rem;
 }
 
+footer > p {
+    margin-top: 1em;
+}
+
 #intro {
-   color:#dccaae;
+   color:rgb(127, 28, 122);
    position: absolute;
    padding-top: 10%;
    padding-right: 50%;
@@ -81,19 +117,19 @@ footer {
 
 #intro b {
     font-size: medium;
-    color:#edd5cc;
+    color:rgb(127, 28, 122);
 }
 
 /* Knappar */ 
     .btn-primary {
         color: #fff;
-        background-color:#59372B;
-        border-color: #000509;
+        background-color:#9c379b;
+        border-color: #9c379b;
         margin-top:1em;
     }
 
     .btn-primary:hover {
-        background-color:rgb(110, 130, 160);
+        background-color:rgb(127, 28, 122);
         color:white;
-        border-color:rgb(110, 130, 160);
+        border-color:rgb(127, 28, 122);
     }
