@@ -133,3 +133,14 @@ footer > p {
         color:white;
         border-color:rgb(127, 28, 122);
     }
+
+#policyh1, #policyp{
+    background-color: rgb(123, 94, 94);
+    text-align: center;
+}
+#policyp{
+   margin-top: 20%;
+   padding-top: 20%;
+   padding-bottom: 20%;
+   border-radius: 55px;
+}

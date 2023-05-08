@@ -31,9 +31,10 @@ en mer anständig version eller med var egen html och css kod-->
           <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav mr-auto">
               <li class="nav-item active">
-                {% if user.is_authenticated %}
+               
                 <a class="nav-link" id ="home" href="/">Bokhyllan<span class="sr-only">(current)</span></a>
               </li>
+              {% if user.is_authenticated %}
               <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                   Böcker
@@ -43,7 +44,7 @@ en mer anständig version eller med var egen html och css kod-->
                   <a class="dropdown-item" id="#" href="/all-books">Alla Böcker</a>
                 </div>
               <li class="nav-item">
-                  <a class="nav-link" href="#">Användarvillkor</a>
+                  <a class="nav-link" href="/policy">Användarvillkor</a>
                 {% endif %}
                 </li>
               <li class="nav-item dropdown">

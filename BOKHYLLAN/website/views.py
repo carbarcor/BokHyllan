@@ -13,7 +13,7 @@ uuid funktionene skapar ett unik namn för filen, blanda det och krypterar
 datum samt tid för överlappande av filen
 os en del av standarbiblioteket, låter användaren interagera med det inbyggda operativsystemet phyton körs på
 """
-from flask import Blueprint, render_template, request, flash, redirect, url_for, current_app
+from flask import Blueprint, render_template, request, flash, redirect, url_for, current_app, session
 from flask_login import login_required, current_user
 from .models import User, Book
 from . import db
@@ -158,6 +158,17 @@ def add_bio():
             return redirect(url_for('views.home'))
 
     return render_template("add_bio.html", user=current_user)
+
+
+@views.route('/policy')
+@login_required
+def policy():
+    user = session.get('user')  # Replace 'user' with the key used to store the user object in the session
+    return render_template('policy.html', user=user)
+
+
+
+
 
 
 """@views.route('/delete-bio', methods=['POST'])
