@@ -8,6 +8,24 @@ Från orange till rosa:
 #FA59BA
 */
 
+@media only screen and (min-width: 600px) {
+    html {
+      zoom: .8;
+    }
+  }
+
+  @media only screen and (min-width: 800px) {
+    html {
+      zoom: .9;        
+    }
+  }
+
+  @media only screen and (min-width: 1000px) {
+    html {
+      zoom: 1;
+    }
+  }
+  
 body {
     background-color:#fffcf9 ;
     font-family: "Palatino Linotype", "Book Antiqua", Palatino, serif;
