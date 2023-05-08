@@ -6,17 +6,20 @@ Från orange till rosa:
 #F96570
 #F9618B
 #FA59BA
+
+https://getcssscan.com/css-box-shadow-examples
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 3px 0px, rgba(0, 0, 0, 0.06) 0px 1px 2px 0px;
 */
 
 body {
     background-color:#fffcf9 ;
     font-family: "Palatino Linotype", "Book Antiqua", Palatino, serif;
     font-variant: small-caps;
-    letter-spacing: 2px;
+    letter-spacing: 3px;
 }
 
 .navbar {
-    background-color:rgb(255, 183, 50);
+    background-color:#F97821;
 }
 
 #add-book-div, #sign-up-div, #add-bio-div, #edit-profile-div, #add-pic-div, #policy-div {
@@ -25,8 +28,9 @@ body {
     margin-top:1em;
 }
 
-#add-book-form, #Login {
+#add-book-form, #Login, #edit-profile {
     background-color: rgb(255, 210, 126);
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 3px 0px, rgba(0, 0, 0, 0.06) 0px 1px 2px 0px;
 }
 
 
@@ -35,7 +39,7 @@ body {
     margin-top: 5%;
     margin-bottom: 5%;
     border-radius: 35px;
-    padding: 5%
+    padding: 5%;
 }
 
 #add-book-text {
@@ -48,6 +52,7 @@ body {
     margin-top: 5%;
     border-radius: 25px;
     padding: 3%;
+    box-shadow: rgba(240, 46, 170, 0.4) 5px 5px, rgba(240, 46, 170, 0.3) 10px 10px, rgba(240, 46, 170, 0.2) 15px 15px, rgba(240, 46, 170, 0.1) 20px 20px, rgba(240, 46, 170, 0.05) 25px 25px;
 }
 
 #Login > h3 {
@@ -55,8 +60,19 @@ body {
     margin-top:1em;
 }
 
+.form-control {
+    border-radius:0.75rem;
+}
+
 #add-bio-div > form {
     margin-top: 1em;
+}
+
+#edit-profile {
+    margin-top: 5%;
+    margin-bottom: 5%;
+    border-radius: 35px;
+    padding: 5%;
 }
 
 #edit-profile-div > form > h3 {
@@ -64,7 +80,7 @@ body {
 }
 
 footer {
-    background-color: rgb(255, 183, 50);
+    background-color: #FA59BA;
     color: #F7E7CE;
     position: fixed;
     padding-left: 10px;
@@ -78,7 +94,7 @@ footer > p {
 }
 
 #intro {
-   color:rgb(127, 28, 122);
+   color:#F96570;
    position: absolute;
    padding-top: 10%;
    padding-right: 50%;
@@ -86,21 +102,24 @@ footer > p {
 
 #intro b {
     font-size: medium;
-    color:rgb(127, 28, 122);
+    color:#F96E4D;
 }
 
 /* Knappar */ 
     .btn-primary {
         color: #fff;
-        background-color:#9c379b;
-        border-color: #9c379b;
+        background-color:#F9618B;
+        border-color: #F9618B;
         margin-top:1em;
+        border-radius:10px;
+        box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 3px 0px, rgba(0, 0, 0, 0.06) 0px 1px 2px 0px;
     }
 
     .btn-primary:hover {
         background-color:rgb(127, 28, 122);
         color:white;
         border-color:rgb(127, 28, 122);
+        box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 3px 0px, rgba(0, 0, 0, 0.06) 0px 1px 2px 0px;
     }
 
 
