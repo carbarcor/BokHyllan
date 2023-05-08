@@ -1,4 +1,5 @@
-"""vi importera fråm flask de olika paket som redo finns för att kunna
+"""
+vi importera fråm flask de olika paket som redo finns för att kunna
 byga olika funktioner i programmet
 Blueprint hjälpa oss att dela projektet och sortera i olika files.
 render_template för att flask kan använda sig av html, 
@@ -10,7 +11,8 @@ werkzeug.utils det hjälper till att säkra filer och kod
 secure_filename files namn
 uuid funktionene skapar ett unik namn för filen, blanda det och krypterar
 datum samt tid för överlappande av filen
-os en del av standarbiblioteket, låter användaren interagera med det inbyggda operativsystemet phyton körs på"""
+os en del av standarbiblioteket, låter användaren interagera med det inbyggda operativsystemet phyton körs på
+"""
 from flask import Blueprint, render_template, request, flash, redirect, url_for, current_app
 from flask_login import login_required, current_user
 from .models import User, Book
@@ -148,7 +150,7 @@ def add_bio():
         bio_user = User.query.filter_by(id=current_user.id).first()
         bio_user.bio = new_bio
         if new_bio == "":
-            flash('Biografin har inte skapats!', category='error')
+            flash('Biografin kunde inte skapas, försök igen.', category='error')
             return redirect(url_for('views.home'))
         else:
             db.session.commit()

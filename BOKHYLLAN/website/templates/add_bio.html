@@ -1,16 +1,16 @@
 {% extends "base.html" %}
 {% block title %}Add Bio{% endblock %}
 {% block content %}
-<h1 align="left" >{{user.first_name}} berätta något om dig själv!</h1>
-</br>
-<form method="POST">
-<textarea class="form-control" id="bio" name="bio" rows="8" cols="50" placeholder="Ange en bio!"></textarea>
-</br>
- 
-<button  type="submit" class="btn btn-primary">Skicka in!</button>
 
-</form>
+    <div id="add-bio-div">
 
+        <h1>{{user.first_name}}, berätta något om dig själv</h1>
 
+        <form method="POST">
+            <textarea class="form-control" id="bio" name="bio" rows="8" cols="50" placeholder=""></textarea>
+            <button type="submit" class="btn btn-primary">Skapa biografi</button>
+        </form>
+
+    </div>
 
 {% endblock %}

@@ -38,6 +38,20 @@ body {
     margin-top:1em;
 }
 
+#sign_up {
+    margin:auto;
+    width:75%;
+}
+
+#add-bio-div {
+    width: 75%;
+    margin:auto;
+}
+
+#add-bio-div > form {
+    margin-top: 1em;
+}
+
 footer {
     background-color: #59372B;
     color: #F7E7CE;
