@@ -72,7 +72,7 @@ def login():
     return render_template("login.html", user=current_user)
 
 
-'''Funktion för utloggning'''
+'''Funktion för utloggning, detta kommer fråm flask/loggin paket'''
 @auth.route('/logout')
 @login_required
 def logout():
@@ -102,7 +102,9 @@ def sign_up():
         elif len(password1) < 7:
             flash('Lösenordet är för kort, använd minst 8 tecken', category='error')
         else:
-            new_user = User(email=email, first_name=first_name, password=generate_password_hash(password1, method='sha256'))
+            new_user = User(email=email,
+            first_name=first_name, 
+            password=generate_password_hash(password1, method='sha256'))
             db.session.add(new_user)
             db.session.commit()
             login_user(new_user, remember=True)
