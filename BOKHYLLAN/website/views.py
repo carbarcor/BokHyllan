@@ -198,6 +198,15 @@ def policy():
 
 
 
+"""Error 404. Funktion som skickar användare till error-sida 400 """
+@views.app_errorhandler(404)
+def page_not_found(e):
+    return render_template('error_404.html'), 404
+
+"""Error 500. Funktion som skickar användare till error-sida 500"""
+@views.app_errorhandler(500)
+def page_not_found(e):
+    return render_template('error_500.html'), 500
 
 
 
