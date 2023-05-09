@@ -1,11 +1,11 @@
 /*
 Färgkoder tagna direkt från postern
 Från orange till rosa:
-#F97821
-#F96E4D
+#F97821 - klarorange
+#F96E4D 
 #F96570
 #F9618B
-#FA59BA
+#FA59BA - klarrosa
 
 https://getcssscan.com/css-box-shadow-examples
     box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 3px 0px, rgba(0, 0, 0, 0.06) 0px 1px 2px 0px;
@@ -80,7 +80,7 @@ body {
 }
 
 footer {
-    background-color: #FA59BA;
+    background-color: #ff934b;
     color: #F7E7CE;
     position: fixed;
     padding-left: 10px;
