@@ -24,6 +24,17 @@ import os
 '''Variabel för blueprint. Detta organiserar appen/programmet'''
 views = Blueprint('views', __name__)
 
+"""search function"""
+@views.route('/search', methods=["POST"])
+def search():
+    form = request.form.get('searched')
+    books = Book.query.filter_by().all()
+    books_result = Book.query.filter(Book.title.like(form))
+    
+    print(books_result)
+    return render_template("search.html", user=current_user, searched = form, books =books , result= books_result)
+
+
 
 '''Funktion för route till homepage'''
 @views.route('/', methods=['GET', 'POST'])
@@ -74,7 +85,7 @@ def add_book():
             db.session.add(new_book)
             db.session.commit()
             flash('Boken har laddats upp!', category='success')
-            return redirect(url_for('views.add_book'))
+            return redirect(url_for('views.home'))
     
     return render_template('add_book.html', user=current_user, books=books )
     
@@ -101,7 +112,7 @@ def remove_book(book_id):
 Det är inte klart, saknas förstarka "security" som görs genom werkzeug'''
 
 
-ALLOWED_EXTENSIONS = { 'jpg', 'jpeg'} #denna är de filerna som är godkänns för att ladda upp.
+ALLOWED_EXTENSIONS = { 'jpg', 'jpeg','gif'} #denna är de filerna som är godkänns för att ladda upp.
 
 #jämfora filensnamn med den typ av fil som är godkänn dvs jpg och jpeg. 
 def allowed_file(pic_name):
