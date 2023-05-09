@@ -1,47 +1,47 @@
 {% extends "base.html" %}
 {% block title %}Home Page{% endblock %}
 {% block content %}
-</br>
-<h1 align="left" >Hej, {{user.first_name}}!</h1>
 
-{% if user.profile_pic %}
-<a href="/add-pic"><img src="{{url_for('static', filename='images/' + user.profile_pic)}}" alt="profile_img" class="rounded-circle" width="150" height="150" align="right"></a>
-{%else%}
-<a href="/add-pic"><img src="{{url_for('static', filename='images/emty_profile.jpg')}}" alt="profile_img" class="rounded-circle" width="150" height="150" align="right"></a>
-{%endif%}
-</br>
-</br>
-</br>
-<p><h1>Poäng:
-  {% if user.score %}
-  <h1>{{user.score}}</h1>
-  {%else%}
-  <h1>0</h1>
-  {%endif%}
-</p>
-</br>
-</br>
-</br>
-</br>
-</br>
-</br>
-  <h2 align="center">Biografi</h1>
-    <div align="center">
-      {% if user.bio %}
-      <p>{{user.bio}}</p>
-      <a class="button" id="addBio" href="/add-bio"><button type="button" class="btn btn-primary">Ändra bio</button></a>
-      {% else %}
-      <a class="button" id="addBio" href="/add-bio"><button type="button" class="btn btn-primary">Lägg till bio</button></a>
-      {% endif %}
-    </div>
+  <div id="home-div">
+    <h1>Hej, {{user.first_name}}!</h1>
 
-  <h1 align="left">Dina böcker</h1>
+      <div id="user-pic">
+        {% if user.profile_pic %}
+        <a href="/add-pic"><img src="{{url_for('static', filename='images/' + user.profile_pic)}}" alt="profile_img" class="rounded-circle" width="150" height="150" align="right"></a>
+        {%else%}
+        <a href="/add-pic"><img src="{{url_for('static', filename='images/emty_profile.jpg')}}" alt="profile_img" class="rounded-circle" width="150" height="150" align="right"></a>
+        {%endif%}
+      </div>
 
-  {% for book in books %}
-  <div class="book">
-     <h3>{{ book.title }}</h3>
+      <div id="user-points">
+        <p><h1>Poäng:</h1>
+          {% if user.score %}
+          <h1>{{user.score}}</h1>
+          {%else%}
+          <h1>0</h1>
+          {%endif%}
+        </p>
+      </div>
+
+      <div id="user-bio">
+        <h2>Biografi</h2>
+          {% if user.bio %}
+          <p>{{user.bio}}</p>
+          <a class="button" id="addBio" href="/add-bio"><button type="button" class="btn btn-primary">Ändra bio</button></a>
+          {% else %}
+          <a class="button" id="addBio" href="/add-bio"><button type="button" class="btn btn-primary">Lägg till bio</button></a>
+          {% endif %}
+      </div>
+
+      <div id="user-books">
+        <h1>Dina böcker</h1>
+          {% for book in books %}
+          <div class="book">
+            <h3>{{ book.title }}</h3>
+          </div>
+          {% endfor %}
+      </div>
+
   </div>
-{% endfor %}
-
 
 {% endblock %}

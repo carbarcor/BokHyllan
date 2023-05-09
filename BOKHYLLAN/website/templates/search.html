@@ -1,12 +1,15 @@
 {% extends "base.html" %}
 {% block title %}search{% endblock %}
 {% block content %}
-<h1>SEARCH PAGE</h1>
-<h1> You are looking for {{searched}}</h1>
 
-{{books}}
-</br>
-{{result}}
+    <div id="search-div">
+        <h1>SEARCH PAGE</h1>
+            <h2> You are looking for {{searched}}</h2>
 
+                {{books}}
+                </br>
+                {{result}}
+
+    </div>
 
 {% endblock %}

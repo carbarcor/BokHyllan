@@ -21,17 +21,43 @@ body {
 .navbar {
     background-color:#f9b821;
     position:sticky;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 9999;
+    width: 100%;
 }
 
-#add-book-div, #sign-up-div, #add-bio-div, #edit-profile-div, #add-pic-div, #policy-div {
+#home-div, #add-book-div, #sign-up-div, #add-bio-div, #edit-profile-div,
+#add-pic-div, #policy-div, #search-div, #all-books-div {
     width:75%;
     margin:auto;
-    margin-top:1em;
+    margin-top:6em;
 }
+
 
 #add-book-form, #sign-up, #Login, #edit-profile {
     background-color: rgb(255, 210, 126);
     box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 3px 0px, rgba(0, 0, 0, 0.06) 0px 1px 2px 0px;
+}
+
+/*
+#user-points {
+
+}
+
+#user-pic {
+
+}
+*/
+
+#user-bio {
+    float:right;
+    margin-top: 3em;
+}
+
+#user-books {
+    float:left;
 }
 
 
@@ -109,10 +135,10 @@ footer > p {
 }
 
 #intro {
-   color:rgb(127, 28, 122);
-   position: absolute;
-   padding-top: 10%;
-   padding-right: 50%;
+    color:rgb(127, 28, 122);
+    position: absolute;
+    padding-top: 10%;
+    padding-right: 50%;
 }
 
 #intro b {
