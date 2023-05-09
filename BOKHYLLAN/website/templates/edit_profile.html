@@ -8,7 +8,7 @@
     <h2>Uppdatera din profil</h2>
     <p>Mejladress: {{user.email}}</p>
 
-      <form method="POST" action="/edit-profile">
+      <form id="edit-profile" method="POST" action="/edit-profile">
 
           <div class="form-group">
             <label for="new_name">Nytt namn</label>
@@ -41,7 +41,7 @@
 
       </form>
 
-      <form method="POST" action="/delete_profile">
+      <form id="delete-profile" method="POST" action="/delete_profile">
         <h3>Vill du ta bort ditt konto?</h3>
         <button type="submit" class="btn btn-primary">Ta bort konto</button>
       </form>
