@@ -3,6 +3,13 @@
 {% block content %}
 <h1>BokHylla:</h1>
 
+<div>
+<form method= "POST" action="/search" class="form-inline my-2 my-lg-0">
+    <input name="searched" class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+    <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+</form>
+</div>
+
 
 {% for book in books %}
 <div><a href="#">
