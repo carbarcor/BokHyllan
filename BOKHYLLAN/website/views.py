@@ -47,19 +47,56 @@ Boken läggs in i databasen samt visas på home.html'''
 @login_required
 def add_book():
     books = Book.query.filter_by(user_id=current_user.id).all()
-    
+
     if request.method == 'POST':
+        user = User.query.filter_by(id=current_user.id).first()
+        cover = request.files['cover']
+        cover_name = secure_filename(cover.filename)
+        cover_file_name = str(uuid.uuid1()) + "_" + cover_name
+        cover.save(os.path.join(current_app.config['UPLOAD_FOLDER'], cover_file_name))
         title = request.form.get('title')
         author = request.form.get('author')
         isbn = request.form.get('isbn')
         review = request.form.get('review')
-        new_book = Book(title=title,author=author, isbn=isbn, review=review, user_id=current_user.id)
-        db.session.add(new_book)
-        db.session.commit()
-        flash('Boken har laddats upp!', category='success')
-        return redirect(url_for('views.add_book'))
+        if 'cover' not in request.files:
+            flash('Bilden har inte sparat!', category='error')
+            return redirect(url_for('views.add_book'))
+        if cover_name == '':
+            flash('Ingen fil har valts')
+            return redirect(url_for('views.add_book'))
+        if allowed_file(cover.filename) == False:
+            flash('filformat inte tillåtet!')
+            return redirect(url_for('views.add_book'))
+        else:
+            cover and allowed_file(cover.filename)
+            new_book = Book(title=title,author=author, isbn=isbn, review=review, user_id=current_user.id, cover_pic= cover_file_name )
+            user.score = user.score + 1
+            db.session.add(new_book)
+            db.session.commit()
+            flash('Boken har laddats upp!', category='success')
+            return redirect(url_for('views.add_book'))
     
     return render_template('add_book.html', user=current_user, books=books )
+
+"""        if 'cover' not in request.files:
+            flash('Bilden har inte sparat!', category='error')
+            return redirect(url_for('views.add_book'))
+        if cover_name == '':
+            flash('Ingen fil har valts')
+            return redirect(url_for('views.add_book'))
+        if allowed_file(cover.filename) == False:
+            flash('filformat inte tillåtet!')
+            return redirect(url_for('views.add_book'))
+        else:
+            cover and allowed_file(cover.filename)
+            cover.save(os.path.join(current_app.config['UPLOAD_FOLDER'], cover_file_name))
+            new_book = Book(title=title,author=author, isbn=isbn, review=review, user_id=current_user.id, cover_pic= cover_file_name )
+            db.session.add(new_book)
+            db.session.commit()
+            flash('Boken har laddats upp!', category='success')
+            return redirect(url_for('views.add_book'))"""
+    
+    
 
 
 '''Funktion för att ta bort en uppladdad bok'''
@@ -67,9 +104,11 @@ def add_book():
 @login_required
 def remove_book(book_id):
     book = Book.query.get(book_id)
+    user = User.query.filter_by(id=current_user.id).first()
 
     if book.user_id == current_user.id:
         db.session.delete(book)
+        user.score = user.score - 1
         db.session.commit()
         flash('Boken har tagits bort!', category='success')
     else:
@@ -96,7 +135,6 @@ def delete_old_pic():
     path = str('./BOKHYLLAN/website/static/images/'+ old_profile_pic)
     if user.profile_pic  == old_profile_pic and user.profile_pic != "":
         os.remove(path)
-
 
 
 #vi kommer att komenterar varje rad.

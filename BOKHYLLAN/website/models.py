@@ -23,6 +23,7 @@ class User(db.Model, UserMixin):
     email = db.Column(db.String(150), unique=True)
     password = db.Column(db.String(150))
     first_name = db.Column(db.String(150))
-    books = db.relationship('Book')
+    books = db.relationship('Book', backref='user')
     bio = db.Column(db.String(30000))
     profile_pic = db.Column(db.String())
+    score = db.Column(db.Integer, default=0)

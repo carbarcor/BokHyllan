@@ -5,12 +5,20 @@
 
 
 {% for book in books %}
+<div><a href="#">
 </br>
+{% if book.cover_pic %}
+<img src="{{url_for('static', filename='images/' + book.cover_pic)}}" alt="#" class="rounded-circle" width="150" height="150" align="left">
+{%else%}
+<img src="{{url_for('static', filename='images/emty_profile.jpg')}}" alt="#" class="rounded-circle" width="150" height="150" align="left">
+{%endif%}
 <p><h4>Title:  {{book.title}} </br> Författare:  {{book.author}}</br> ISBN: {{book.isbn}} </br>
-    Recension: {{book.review}}</h4></p>
+    Recension: {{book.review}}</h4></p></a>
 </br>
 </br>
+</div>
 {%endfor%}
+</div>
 
 
 

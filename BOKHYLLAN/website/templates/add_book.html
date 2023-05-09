@@ -8,7 +8,7 @@ hur innehållet placeras på denna sida så att både ladda upp och ta bort är 
   <div id="add-book-div">
     <h1>Ladda upp en bok att byta ut</h1>
 
-      <form id="add-book-form" method="POST">
+      <form action="/add-book" id="add-book-form" method="POST" enctype="multipart/form-data">
         <div class="form-group">
           <label for="title">Titel</label>
           <input type="text" class="form-control" name="title" id="title" required>
@@ -27,10 +27,16 @@ hur innehållet placeras på denna sida så att både ladda upp och ta bort är 
         <div class="form-group">
           <label for="review">Beskrivning</label>
           <p id="add-book-text">Exempelvis bokens handling eller bokens skick (nyskick, välanvänd etc)</p>
-          <textarea class="form-control" name="review" id="review" rows="8" required></textarea>
-          <button type="submit" class="btn btn-primary">Ladda upp bok</button>  
+          <textarea class="form-control" name="review" id="review" rows="8" required></textarea> 
         </div>
 
+      
+        <label>Klicka på fältet och välj bilden du vill ladda upp</label>
+        <div class="custom-file">
+            <input type="file" class="custom-file-input" name="cover">
+            <label class="custom-file-label" for="cover" placeholder=""></label>
+        </div>
+        <button type="submit" class="btn btn-primary">Ladda upp bok</button>
       </form>
 
   </div>
