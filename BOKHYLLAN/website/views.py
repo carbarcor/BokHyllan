@@ -20,6 +20,7 @@ from . import db
 from werkzeug.utils import secure_filename
 import uuid as uuid
 import os
+import random
 
 '''Variabel för blueprint. Detta organiserar appen/programmet'''
 views = Blueprint('views', __name__)
@@ -201,12 +202,24 @@ def policy():
 """Error 404. Funktion som skickar användare till error-sida 400 """
 @views.app_errorhandler(404)
 def page_not_found(e):
-    return render_template('error_404.html'), 404
+    quotes = ["Why, sometimes I've believed as many as six impossible things before breakfast.",
+                "It's no use going back to yesterday, because I was a different person then.",
+                "'Who in the world am I?' Ah, that's the great puzzle!",
+                "'And what is the use of a book,' thought Alice, 'without pictures or conversation?'",
+                "Off with their heads!"]
+    quote = random.choice(quotes)
+    return render_template('error_404.html', quote = quote), 404
 
 """Error 500. Funktion som skickar användare till error-sida 500"""
 @views.app_errorhandler(500)
 def page_not_found(e):
-    return render_template('error_500.html'), 500
+    quotes = ["Why, sometimes I've believed as many as six impossible things before breakfast.",
+                "It's no use going back to yesterday, because I was a different person then.",
+                "'Who in the world am I?' Ah, that's the great puzzle!",
+                "'And what is the use of a book,' thought Alice, 'without pictures or conversation?'",
+                "Off with their heads!"]
+    quote = random.choice(quotes)
+    return render_template('error_500.html', quote = quote), 500
 
 
 
