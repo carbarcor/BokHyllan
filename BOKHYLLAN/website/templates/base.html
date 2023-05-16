@@ -61,6 +61,39 @@ en mer anständig version eller med var egen html och css kod-->
                   <div class="dropdown-divider"></div>
                   <a class="dropdown-item" id="logout" href="/logout">Logga ut</a>
                   {% endif %}
+                  
+                  <!-- Nav drop down som kopplas till javascrip som gör det möjligt att ändra färgapalett på sidan. -->
+                  <div class="dropdown">
+                    <li class="nav-item dropdown">
+                      <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Välj din färg!
+                      </a>
+                      <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <div class="dropdown-item">
+                          <a class="dropdown-item" href="#" onclick="setTheme('default')">Default</a>
+                        </div>
+                        <div class="dropdown-item">
+                          <a class="dropdown-item" href="#" onclick="setTheme('dark')">Dark</a>
+                        </div>
+                        <div class="dropdown-item">
+                          <a class="dropdown-item" href="#" onclick="setTheme('light')">Light</a>
+                        </div>
+                        <div class="dropdown-item">
+                          <a class="dropdown-item" href="#" onclick="setTheme('alice')">Alice in Wonderland</a>
+                        </div>
+                        <div class="dropdown-item">
+                          <a class="dropdown-item" href="#" onclick="setTheme('harrypotter')">Harry Potter</a>
+                        </div>
+                        <div class="dropdown-item">
+                          <a class="dropdown-item" href="#" onclick="setTheme('crazy')">Crazy</a>
+                        </div>
+                      </div>
+                    </li>
+                  </div>
+                  
+                
+                
+                
                 </div>
               </li>
             </ul>
@@ -112,6 +145,46 @@ en mer anständig version eller med var egen html och css kod-->
     });
     }
   </script>
+<script>
+  // Funktion så att färgpaletten du har valt aktiveras
+  function setTheme(theme) {
+    const body = document.querySelector('body');
+    switch (theme) {
+      case 'default':
+        body.style.backgroundColor = '#f2f2f2';
+        body.style.color = '#333';
+        break;
+      case 'alice':
+        body.style.backgroundColor = '#ffefd5';
+        body.style.color = '#333';
+        break;
+      case 'harrypotter':
+        body.style.backgroundColor = '#7f0909';
+        body.style.color = '#ffd700';
+        break;
+      case 'dark':
+        body.style.backgroundColor = '#333';
+        body.style.color = '#fff';
+        break;
+      case 'crazy':
+        body.style.backgroundColor = '#ff00ff';
+        body.style.color = '#00ffff';
+        break;
+      default:
+        break;
+    }
+
+    // lagrar färgpaletten du valt
+    localStorage.setItem('selectedTheme', theme);
+  }
+
+  // kollar i local storage så att samma färgpalett hålls konsist efter du bytt.
+  const selectedTheme = localStorage.getItem('selectedTheme');
+  if (selectedTheme) {
+    setTheme(selectedTheme);
+  }
+</script>
+
   {% endblock %}
 
     <footer>
