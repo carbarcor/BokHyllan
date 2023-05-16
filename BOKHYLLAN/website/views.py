@@ -30,7 +30,14 @@ views = Blueprint('views', __name__)
 def search():
     form = request.form.get('searched')
     books = Book.query.filter_by().all()
-    books_result = Book.query.filter(Book.title.like(form))
+    if form:
+            books_result = Book.query.filter(
+            (Book.title.ilike(f'%{form}%')) |
+            (Book.author.ilike(f'%{form}%')) |
+            (Book.isbn.ilike(f'%{form}%'))
+        ).all()
+    else:
+        books_result = []
     
     print(books_result)
     return render_template("search.html", user=current_user, searched = form, books =books , result= books_result)
