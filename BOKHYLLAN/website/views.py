@@ -25,7 +25,8 @@ import random
 '''Variabel för blueprint. Detta organiserar appen/programmet'''
 views = Blueprint('views', __name__)
 
-"""search function"""
+"""denna funktion (sökfunktion) letar efter bok i db. Vi vålde denna funktion
+för att det letar fram det mest liknande resultatet """
 @views.route('/search', methods=["POST"])
 def search():
     form = request.form.get('searched')
