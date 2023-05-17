@@ -3,13 +3,18 @@
 from . import db 
 from flask_login import UserMixin
 from sqlalchemy.sql import func
+from sqlalchemy import Column, Integer, ForeignKey
+from sqlalchemy.orm import relationship
 from datetime import datetime
 
 class Rooms(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
-    user_1_id = db.Column(db.Integer, db.ForeignKey('user.id'))
-    user_2_id = db.Column(db.String(150))    
-    room_code = db.Column(db.String(150), unique=True)  
+    id = Column(Integer, primary_key=True, autoincrement=True)
+    user_1_id = Column(Integer, ForeignKey('user.id'), nullable=False)
+    user_2_id = Column(Integer, ForeignKey('user.id'), nullable=False)
+    room_code = db.Column(db.String(150), unique=True)
+    user_1 = relationship("User", foreign_keys=[user_1_id])
+    user_2 = relationship("User", foreign_keys=[user_2_id])
+    
 
 '''Databasen för uppladdade böcker'''
 class Book(db.Model):

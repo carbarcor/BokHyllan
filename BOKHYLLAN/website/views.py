@@ -33,32 +33,28 @@ def generate_room(length):
         existing_room = Rooms.query.filter_by(room_code=room_code).first()
 
         if not existing_room:
-            new_room = Rooms(room_code=room_code)
-            db.session.add(new_room)
+            existing_room = Rooms.query.get(1)
+            existing_room.room_code = room_code
             db.session.commit()
             break
 
     return room_code
 
-@views.route("/chat/<chat_room>", methods= ['POST', 'GET'])
-def chat(chat_room):
-        book_owner_id = request.form.get("owner.id")
-        user_1 = User.query.get(current_user.id)
-        user_2 = User.query.get(book_owner_id)
-        chat_room = generate_room(6)
+@views.route("/chat/<int:owner_id>", methods= ['POST'])
+def chat(owner_id):
+        if request.method == "POST": 
+            book_owner_id = owner_id
+            user_1 = User.query.get(current_user.id)
+            user_1_name = user_1.first_name
+            user_2 = User.query.get(book_owner_id)
+            user_2_name = user_2.first_name
 
-        if user_2 is None:
-            return abort(505)
-
-        chat_room = chat_room if chat_room else generate_room(6)
-
-        
-        if request.method == "POST":
-            new_chat = Rooms(user_1_id = user_1.id , user_2_id = user_2.id, room_code = chat_room)
+            new_chat = Book(user_1 = user_1 , user_2 = user_2, room_code = "" )
             db.session.add(new_chat)
             db.session.commit()
+            
         
-        return render_template("chat_room.html", user_1=user_1, user_2=user_2, chat_room=chat_room)
+        return render_template("chat_room.html", user_1 = user_1_name, user_2 = user_2_name, user = current_user)
 
 
 @views.route('/book-file/<int:book_id>', methods=['GET'])

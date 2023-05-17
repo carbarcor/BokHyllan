@@ -23,9 +23,9 @@
     </p>
   </div> </div>
 <div>
- <form action="/chat/{{chat_room}}" method="POST">
-  <button type="submit" name="owner_id" value="{{ owner.id }}">Chat!</button>
- </form>
+  <form action="/chat/{{ owner.id }}" method="POST">
+    <button type="submit">chat!</button>
+  </form>
 
 </div>
 <div>
@@ -35,4 +35,12 @@
   {{book.author}}
 
 </div>
+
+<script>
+  document.getElementById("chatForm").addEventListener("submit", function(event) {
+    event.preventDefault();
+    var ownerId = document.getElementById("chatButton").value;
+    this.submit();
+  });
+</script>
 {% endblock %}
