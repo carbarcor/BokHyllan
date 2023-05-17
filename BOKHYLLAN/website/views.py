@@ -29,8 +29,12 @@ views = Blueprint('views', __name__)
 @login_required
 def book_file(book_id):
     book = Book.query.get(book_id)
+    id_owner = book.user_id
     user = User.query.filter_by(id=current_user.id).first()
-    owner = Book.user_id
+    owner = User.query.filter_by(id=id_owner).first()
+    owner_name = owner.first_name
+    owner_score = owner.score
+    
 
     return render_template('book_page.html', book=book, user = user, owner= owner)
 

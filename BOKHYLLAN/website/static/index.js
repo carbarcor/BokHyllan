@@ -1,9 +1,10 @@
+var input = document.querySelector('.custom-file-input');
+var label = document.getElementById('file-label');
 
-function updateLabel(input) {
-    var label = document.getElementById('file-label');
-    if (input.files.length > 0) {
+input.addEventListener('change', function() {
+  if (input.files.length > 0) {
     label.textContent = input.files[0].name;
-    } else {
+  } else {
     label.textContent = "";
-    }
-}
+  }
+});

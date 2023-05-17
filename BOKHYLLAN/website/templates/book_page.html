@@ -4,23 +4,30 @@
 
 <div>
     <h1>Det här boken tillhör: </h1>
+    <h1>{{owner.first_name}}</h1>
     <div id="user-pic">
-    {% if user.profile_pic %}
-    <img src="{{url_for('static', filename='images/' + user.profile_pic)}}" alt="profile_img" class="rounded-circle" width="150" height="150" align="right">
+    {% if owner.profile_pic %}
+    <img src="{{url_for('static', filename='images/' + owner.profile_pic)}}" alt="profile_img" class="rounded-circle" width="150" height="150" align="right">
     {%else%}
     <img src="{{url_for('static', filename='images/emty_profile.jpg')}}" alt="profile_img" class="rounded-circle" width="150" height="150" align="right">
     {%endif%}
   </div>
 
   <div id="user-points">
-    <p><h1>Poäng:</h1>
-      {% if user.score %}
-      <h1>{{user.score}}</h1>
+    <p><h1>Användarpoäng:</h1>
+      {% if owner.score %}
+      <h1>{{owner.score}}</h1>
       {%else%}
       <h1>0</h1>
       {%endif%}
     </p>
   </div> </div>
 
+<div>
 
+  {{book.title}}
+</br>
+  {{book.author}}
+
+</div>
 {% endblock %}
