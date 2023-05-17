@@ -22,7 +22,12 @@
       {%endif%}
     </p>
   </div> </div>
+<div>
+ <form action="/chat/{{chat_room}}" method="POST">
+  <button type="submit" name="owner_id" value="{{ owner.id }}">Chat!</button>
+ </form>
 
+</div>
 <div>
 
   {{book.title}}

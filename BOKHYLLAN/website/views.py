@@ -13,9 +13,9 @@ uuid funktionene skapar ett unik namn för filen, blanda det och krypterar
 datum samt tid för överlappande av filen
 os en del av standarbiblioteket, låter användaren interagera med det inbyggda operativsystemet phyton körs på
 """
-from flask import Blueprint, render_template, request, flash, redirect, url_for, current_app, session
+from flask import Blueprint, render_template, request, flash, redirect, url_for, current_app, abort
 from flask_login import login_required, current_user
-from .models import User, Book
+from .models import User, Book, Rooms
 from . import db
 from werkzeug.utils import secure_filename
 from flask_socketio import SocketIO, send, join_room, leave_room
@@ -26,29 +26,39 @@ import random
 
 '''Variabel för blueprint. Detta organiserar appen/programmet'''
 views = Blueprint('views', __name__)
-rooms = {}
-
+   
 def generate_room(length):
     while True:
-        room_code = ""
-        for code in range(length):
-            room_code += random.choice(ascii_uppercase)
+        room_code = ''.join(random.choice(ascii_uppercase) for _ in range(length))
+        existing_room = Rooms.query.filter_by(room_code=room_code).first()
 
-        if room_code not in rooms:
+        if not existing_room:
+            new_room = Rooms(room_code=room_code)
+            db.session.add(new_room)
+            db.session.commit()
             break
-        
+
     return room_code
 
-@views.route("/chat", methods= ['POST', 'GET'])
-def chat():
-    if request.method == "POST":
-        user_1 = User.query.filter_by(id=current_user.id).first()
-        user_2 = '*'
+@views.route("/chat/<chat_room>", methods= ['POST', 'GET'])
+def chat(chat_room):
+        book_owner_id = request.form.get("owner.id")
+        user_1 = User.query.get(current_user.id)
+        user_2 = User.query.get(book_owner_id)
         chat_room = generate_room(6)
 
+        if user_2 is None:
+            return abort(505)
 
+        chat_room = chat_room if chat_room else generate_room(6)
 
-    return render_template("chat_room.html", user_1 = user_1, user_2 = user_2)
+        
+        if request.method == "POST":
+            new_chat = Rooms(user_1_id = user_1.id , user_2_id = user_2.id, room_code = chat_room)
+            db.session.add(new_chat)
+            db.session.commit()
+        
+        return render_template("chat_room.html", user_1=user_1, user_2=user_2, chat_room=chat_room)
 
 
 @views.route('/book-file/<int:book_id>', methods=['GET'])
@@ -58,8 +68,6 @@ def book_file(book_id):
     id_owner = book.user_id
     user = User.query.filter_by(id=current_user.id).first()
     owner = User.query.filter_by(id=id_owner).first()
-    owner_name = owner.first_name
-    owner_score = owner.score
     
 
     return render_template('book_page.html', book=book, user = user, owner= owner)
@@ -256,6 +264,16 @@ def page_not_found(e):
                 "Off with their heads!"]
     quote = random.choice(quotes)
     return render_template('error_404.html', quote = quote), 404
+
+@views.app_errorhandler(505)
+def page_not_found(e):
+    quotes = ["Why, sometimes I've believed as many as six impossible things before breakfast.",
+                "It's no use going back to yesterday, because I was a different person then.",
+                "'Who in the world am I?' Ah, that's the great puzzle!",
+                "'And what is the use of a book,' thought Alice, 'without pictures or conversation?'",
+                "Off with their heads!"]
+    quote = random.choice(quotes)
+    return render_template('error_505.html', quote = quote), 505
 
 """Error 500. Funktion som skickar användare till error-sida 500"""
 @views.app_errorhandler(500)

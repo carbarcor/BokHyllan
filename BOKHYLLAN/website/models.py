@@ -5,6 +5,12 @@ from flask_login import UserMixin
 from sqlalchemy.sql import func
 from datetime import datetime
 
+class Rooms(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    user_1_id = db.Column(db.Integer, db.ForeignKey('user.id'))
+    user_2_id = db.Column(db.String(150))    
+    room_code = db.Column(db.String(150), unique=True)  
+
 '''Databasen för uppladdade böcker'''
 class Book(db.Model):
     id = db.Column(db.Integer, primary_key=True)
