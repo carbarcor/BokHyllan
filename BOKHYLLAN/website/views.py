@@ -13,7 +13,7 @@ uuid funktionene skapar ett unik namn för filen, blanda det och krypterar
 datum samt tid för överlappande av filen
 os en del av standarbiblioteket, låter användaren interagera med det inbyggda operativsystemet phyton körs på
 """
-from flask import Blueprint, render_template, request, flash, redirect, url_for, current_app, abort
+from flask import Blueprint, render_template, request, flash, redirect, url_for, current_app, abort, session
 from flask_login import login_required, current_user
 from .models import User, Book, Rooms
 from . import db
@@ -23,17 +23,40 @@ from string import ascii_uppercase
 import uuid as uuid
 import os
 import random
+import json
+
 
 '''Variabel för blueprint. Detta organiserar appen/programmet'''
 views = Blueprint('views', __name__)
-   
+rooms = {} 
+socketio = SocketIO()
+
+@views.route('/edit-book/<int:book_id>', methods=['GET', 'POST'])
+@login_required
+def edit_book(book_id):
+    book = Book.query.get(book_id)
+    if request.method == 'POST':        
+        new_title = request.form.get('new_title')
+        new_author = request.form.get('new_author')
+        new_isbn = request.form.get('new_isbn')
+        new_review = request.form.get('new_review')
+        book.title = new_title
+        book.author = new_author
+        book.isbn = new_isbn
+        book.review = new_review
+        db.session.commit()
+        flash('Boken har uppdaterats!', category='success')
+        return redirect(url_for('views.home'))
+    return render_template("edit_book.html",user = current_user, book = book)
+
+
 def generate_room(length):
     while True:
         room_code = ''.join(random.choice(ascii_uppercase) for _ in range(length))
         existing_room = Rooms.query.filter_by(room_code=room_code).first()
 
         if not existing_room:
-            existing_room = Rooms.query.get(1)
+            existing_room = Rooms()
             existing_room.room_code = room_code
             db.session.commit()
             break
@@ -41,21 +64,84 @@ def generate_room(length):
     return room_code
 
 @views.route("/chat/<int:owner_id>", methods= ['POST'])
+@login_required
 def chat(owner_id):
+        session.clear()
         if request.method == "POST": 
             book_owner_id = owner_id
             user_1 = User.query.get(current_user.id)
             user_1_name = user_1.first_name
+            user_1_id = user_1.id
             user_2 = User.query.get(book_owner_id)
             user_2_name = user_2.first_name
-
-            new_chat = Book(user_1 = user_1 , user_2 = user_2, room_code = "" )
-            db.session.add(new_chat)
-            db.session.commit()
+            user_2_id = user_2.id
+            email = user_2.email
             
-        
-        return render_template("chat_room.html", user_1 = user_1_name, user_2 = user_2_name, user = current_user)
+            existing_room = Rooms.query.filter_by(user_1_id=user_1_id, user_2_id=user_2_id).first()
 
+            if existing_room:
+                return render_template("chat_room.html", 
+                               user_1 = user_1_name, 
+                               user_2 = user_2_name,
+                               email = email, 
+                               user = current_user, 
+                               room_code = existing_room.room_code)
+            else:
+                new_room_code = generate_room(6)
+                new_chat = Rooms(user_1_id=user_1_id, user_2_id=user_2_id, room_code=new_room_code)
+                db.session.add(new_chat)
+                db.session.commit()
+
+            room_data = {"members": 0, "messages": []}
+            room_json = json.dumps(room_data)
+
+            session["room"] = room_json
+            session["name"] = user_1_name
+        
+        return render_template("chat_room.html", 
+                               user_1 = user_1_name, 
+                               user_2 = user_2_name,
+                               email = email,
+                               user = current_user, 
+                               room_code = new_room_code)
+
+@socketio.on("message")
+def message(data):
+    room = session.get("room")
+    if room not in rooms:
+        return 
+    
+    content = {
+        "name": session.get("name"),
+        "message": data["data"]
+    }
+    send(content, to=room)
+    rooms[room]["messages"].append(content)
+    print(f"{session.get('name')} said: {data['data']}")
+
+@socketio.on("connect")
+def connect(auth):
+    room = session.get("room")
+    name = session.get("name")
+    if not room or not name:
+        return
+    if room not in rooms:
+        leave_room(room)
+        return
+    
+    join_room(room)
+    send({"name": name, "message": "has entered the room"}, to=room)
+    print(f"{name} joined room {room}")
+
+@socketio.on("disconnect")
+def disconnect():
+    room = session.get("room")
+    name = session.get("name")
+    leave_room(room)
+
+    
+    send({"name": name, "message": "has left the room"}, to=room)
+    print(f"{name} has left the room {room}")
 
 @views.route('/book-file/<int:book_id>', methods=['GET'])
 @login_required
@@ -281,16 +367,3 @@ def page_not_found(e):
                 "Off with their heads!"]
     quote = random.choice(quotes)
     return render_template('error_500.html', quote = quote), 500
-
-
-
-"""@views.route('/delete-bio', methods=['POST'])
-def delete_bio():
-    bio = json.loads(request.data)
-    bioId = bio['bioId']
-    bio = Bio.query.get(bioId)
-    if bio:
-        if bio.user_id == current_user.id:
-            db.session.delete(bio)
-            db.session.commit()
-            return jsonify({})"""

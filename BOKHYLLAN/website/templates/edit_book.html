@@ -2,6 +2,33 @@
 {% block title %}Edit books{% endblock %}
 {% block content %}
 
+<div id="edit-book-div">
 
+    <form id="edit-book" method="POST" action="{{ url_for('views.edit_book', book_id=book.id) }}">
+        <div class="form-group">
+            <label for="new_title">Nytt titel</label>
+            <input type="text" class="form-control" id="new_title" name="new_title" value="{{ book.title }}">
+        </div>
+        <div class="form-group">
+            <label for="new_author">Nytt författare</label>
+            <input type="text" class="form-control" id="new_author" name="new_author" value="{{ book.author }}">
+        </div>
+        <div class="form-group">
+            <label for="new_isbn">Nytt ISBN</label>
+            <input type="text" class="form-control" id="new_isbn" name="new_isbn" value="{{ book.isbn }}">
+        </div>
+        <div class="form-group">
+            <label for="new_review">Nytt review</label>
+            <textarea class="form-control" id="new_review" name="new_review">{{ book.review }}</textarea>
+        </div>
+        <div class="form-group form-check">
+            <input type="checkbox" class="form-check-input" id="Check1" required>
+            <label class="form-check-label" for="Check1">Bekräfta ändringarna</label>
+        </div>
+        <button type="submit" class="btn btn-primary">Uppdatera bok</button>
+    </form>
+
+    
+</div>
 
 {% endblock %}

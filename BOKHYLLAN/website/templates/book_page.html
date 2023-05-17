@@ -22,10 +22,15 @@
       {%endif%}
     </p>
   </div> </div>
+
+  {% if owner.id != user.id%}
 <div>
   <form action="/chat/{{ owner.id }}" method="POST">
     <button type="submit">chat!</button>
   </form>
+  {%else%}
+  <h1> Boken är redan din </h1>
+  {%endif%}
 
 </div>
 <div>

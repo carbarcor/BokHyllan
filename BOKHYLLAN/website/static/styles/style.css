@@ -28,12 +28,12 @@ body {
 }
 
 
-#home-div, #add-book-div, #sign-up-div, #add-bio-div, #edit-profile-div,
+/*#home-div, #add-book-div, #sign-up-div, #add-bio-div, #edit-profile-div,
 #add-pic-div, #policy-div, #search-div, #all-books-div {
     width:75%;
     margin:auto;
     margin-top:3em;
-}
+}*/
 
 
 #add-book-form, #sign-up, #Login, #edit-profile {
@@ -61,7 +61,7 @@ body {
 }
 
 
-#add-book-form {
+/*#add-book-form {
     position: sticky;
     margin-top: 5%;
     margin-bottom: 3.5em;
@@ -174,3 +174,43 @@ footer > p {
     border-radius: 55px;
     margin-bottom: 3.5em;
 }
+
+.message-box {
+    border-style: solid;
+    border-radius: 10px;
+    background-color: rgb(255, 210, 126);
+    height: 50vh;
+    display: flex;
+    flex-direction: column;
+    width: 50vw;
+    align-items: stretch;
+  }
+  
+  .messages {
+    overflow-y: scroll;
+    flex: 1;
+    width: 100%;
+  }
+  
+  .inputs {
+    padding: 10px;
+    display: flex;
+  }
+  
+  h2 {
+    text-align: center;
+  }
+  
+  #message {
+    flex: 1;
+  }
+  
+  .text {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    padding-left: 10px;
+    padding-right: 10px;
+  }
+  

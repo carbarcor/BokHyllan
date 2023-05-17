@@ -9,8 +9,8 @@ from datetime import datetime
 
 class Rooms(db.Model):
     id = Column(Integer, primary_key=True, autoincrement=True)
-    user_1_id = Column(Integer, ForeignKey('user.id'), nullable=False)
-    user_2_id = Column(Integer, ForeignKey('user.id'), nullable=False)
+    user_1_id = db.Column(db.String(150), ForeignKey('user.id'), nullable=False)
+    user_2_id = db.Column(db.String(150), ForeignKey('user.id'), nullable=False)
     room_code = db.Column(db.String(150), unique=True)
     user_1 = relationship("User", foreign_keys=[user_1_id])
     user_2 = relationship("User", foreign_keys=[user_2_id])

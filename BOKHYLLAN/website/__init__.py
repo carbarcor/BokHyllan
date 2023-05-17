@@ -2,10 +2,11 @@ from flask import Flask, flash
 from flask_sqlalchemy import SQLAlchemy
 from os import path
 from flask_login import LoginManager
+from flask_socketio import join_room, leave_room, send, SocketIO
 
 db = SQLAlchemy()
 DB_NAME = "database.db"
-
+socketio = SocketIO()
 
 def create_app():
     app = Flask(__name__)
@@ -13,6 +14,7 @@ def create_app():
     app.config['SQLALCHEMY_DATABASE_URI'] = f'sqlite:///{DB_NAME}'
     app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
     app.config['MESSAGE_FLASHING_OPTIONS'] = {'duration': 5}
+    socketio.init_app(app)
     
 #denna är adressen där bilden sparas.
     UPLOAD_FOLDER = 'BOKHYLLAN\website\static\images'
@@ -29,12 +31,15 @@ def create_app():
     from .models import User, Book
     
     with app.app_context():
+        socketio.init_app(app)
+    with app.app_context():
         db.create_all()
 
     login_manager = LoginManager()
     login_manager.login_view = 'auth.login'
     login_manager.init_app(app)
     login_manager.login_message = 'Du måste logga in för att komma åt din hemsida!'
+    
     
 
     @login_manager.user_loader

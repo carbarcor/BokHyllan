@@ -3,12 +3,57 @@
 {% block content %}
 
 <h1>chat!</h1>
-<h2>User 1</h2>
-<p>User ID: {{ user_1 }}</p>
 </br>
-<h2>User 2</h2>
-<p>User ID: {{ user_2 }}</p>
+<p>Du chattar med: {{ user_2 }}</p>
+<h3>Chat code: {{room_code}}</h3>
+<h4> "Denna funktion är under utveckling.
+     Om du vill kontakta bokägaren, här är hens e-postadress :   {{email}}"</h4>
+<div class="message-box">
 
+    <div class="messages" id ="messages" ></div>
+    <div class="inputs">
+        <input type="text" rows="4" placeholder="Message" name="message" id="message"/>
+        <button type="button" name="send" id="send-btn" onClick="sendMessage()">Skicka</button>
+    </div>
+
+
+</div>
+
+<script type="text/javascript">
+    var socketio = io();
+  
+    const messages = document.getElementById("messages");
+  
+    const createMessage = (name, msg) => {
+      const content = `
+      <div class="text">
+          <span>
+              <strong>${name}</strong>: ${msg}
+          </span>
+          <span class="muted">
+              ${new Date().toLocaleString()}
+          </span>
+      </div>
+      `;
+      messages.innerHTML += content;
+    };
+  
+    socketio.on("message", (data) => {
+      createMessage(data.name, data.message);
+    });
+  
+    const sendMessage = () => {
+      const message = document.getElementById("message");
+      if (message.value == "") return;
+      socketio.emit("message", { data: message.value });
+      message.value = "";
+    };
+  </script>
+  {% for msg in messages %}
+  <script type="text/javascript">
+    createMessage("{{msg.name}}", "{{msg.message}}");
+  </script>
+  {% endfor %}
 
 
 {% endblock %}
