@@ -44,12 +44,12 @@ hur innehållet placeras på denna sida så att både ladda upp och ta bort är 
 {% for book in books %}
   <div class="book">
     <h3>{{ book.title }}</h3> 
-    <form method="POST" action="{{ url_for('views.remove_book', book_id=book.id) }}">
-            <button type="submit" class="btn btn-primary">Ta bort!</button>
+    <form method="GET" action="{{ url_for('views.edit_book', book_id=book.id) }}">
+            <button type="submit" class="btn btn-primary">Redigera bok!</button>
         </form>
-        <form method="POST" action="{{ url_for('views.edit_book', book_id=book.id) }}">
+      <!--  <form method="POST" action="{{ url_for('views.edit_book', book_id=book.id) }}">
           <button type="submit" class="btn btn-primary">Redigera bok!</button>
-        </form>
+        </form>--->
   </div>
 {% endfor %}
 

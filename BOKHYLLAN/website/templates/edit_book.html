@@ -30,5 +30,7 @@
 
     
 </div>
-
+<form method="POST" action="{{ url_for('views.remove_book', book_id=book.id) }}">
+    <button type="submit" class="btn btn-primary">Ta bort!</button>
+</form>
 {% endblock %}

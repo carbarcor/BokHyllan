@@ -61,7 +61,7 @@ body {
 }
 
 
-#add-book-form {
+/*#add-book-form {
     position: sticky;
     margin-top: 5%;
     margin-bottom: 3.5em;
@@ -72,7 +72,7 @@ body {
 #add-book-text {
     font-size: 80%;
 }
-    
+ */ 
 #Login {
     position: absolute;
     right: 15em;

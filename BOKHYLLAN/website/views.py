@@ -47,7 +47,22 @@ def edit_book(book_id):
         db.session.commit()
         flash('Boken har uppdaterats!', category='success')
         return redirect(url_for('views.home'))
+    
     return render_template("edit_book.html",user = current_user, book = book)
+"""    book = Book.query.get(book_id)
+    if request.method == 'POST':        
+        new_title = request.form.get('new_title')
+        new_author = request.form.get('new_author')
+        new_isbn = request.form.get('new_isbn')
+        new_review = request.form.get('new_review')
+        book.title = new_title
+        book.author = new_author
+        book.isbn = new_isbn
+        book.review = new_review
+        db.session.commit()
+        flash('Boken har uppdaterats!', category='success')
+        return redirect(url_for('views.home'))"""
+    
 
 
 def generate_room(length):
