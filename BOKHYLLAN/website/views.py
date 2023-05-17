@@ -26,13 +26,29 @@ import random
 
 '''Variabel för blueprint. Detta organiserar appen/programmet'''
 views = Blueprint('views', __name__)
+rooms = {}
 
+def generate_room(length):
+    while True:
+        room_code = ""
+        for code in range(length):
+            room_code += random.choice(ascii_uppercase)
+
+        if room_code not in rooms:
+            break
+        
+    return room_code
 
 @views.route("/chat", methods= ['POST', 'GET'])
 def chat():
-    user_1 = User.query.filter_by(id=current_user.id).first()
-    user_2 = '*'
-    return render_template("chat_room.html")
+    if request.method == "POST":
+        user_1 = User.query.filter_by(id=current_user.id).first()
+        user_2 = '*'
+        chat_room = generate_room(6)
+
+
+
+    return render_template("chat_room.html", user_1 = user_1, user_2 = user_2)
 
 
 @views.route('/book-file/<int:book_id>', methods=['GET'])
