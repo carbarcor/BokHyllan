@@ -18,12 +18,22 @@ from flask_login import login_required, current_user
 from .models import User, Book
 from . import db
 from werkzeug.utils import secure_filename
+from flask_socketio import SocketIO, send, join_room, leave_room
+from string import ascii_uppercase
 import uuid as uuid
 import os
 import random
 
 '''Variabel för blueprint. Detta organiserar appen/programmet'''
 views = Blueprint('views', __name__)
+
+
+@views.route("/chat", methods= ['POST', 'GET'])
+def chat():
+    user_1 = User.query.filter_by(id=current_user.id).first()
+    user_2 = '*'
+    return render_template("chat_room.html")
+
 
 @views.route('/book-file/<int:book_id>', methods=['GET'])
 @login_required
