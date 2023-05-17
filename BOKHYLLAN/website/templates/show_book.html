@@ -6,57 +6,5 @@
 <h1>Uppgradera dina uppgifter! {{ user.email}}</h1>
 <form method="POST" action="/edit-profile">
 
-  <!--
-  <div class="form-group">
-    <label for="new_email">Nytt email</label>
-    <input type="email" class="form-control" id="new_email" name="new_email" value="{{user.email}}" placeholder="{{user.email}}">
-  </div>
--->
-    <div class="form-group">
-      <label for="new_name">Nytt Namn</label>
-      <input type="text" class="form-control" id="new_name" name="new_name" placeholder="{{user.first_name}}" value="{{user.first_name}}">
-    </div>
-    <div class="form-group">
-        <label for="new_password">Nytt lösenord</label>
-        <input type="password" class="form-control" id="new_password" name="new_password" >
-      </div>
-      <div class="form-group">
-        <label for="old_password">Gammalt lösenord</label>
-        <input type="password" class="form-control" id="old_password" name="old_password" required>
-      </div>
-    <div class="form-group form-check">
-      <input type="checkbox" class="form-check-input" id="Check1" required>
-      <label class="form-check-label" for="Check1" >Bekräfta</label>
-    </div>
-    <button type="submit" class="btn btn-primary">Skicka</button>
-  </form>
-</br>
-</br>
-</br>
-<form method="POST" action="/delete_profile">
-<button type="submit" class="btn btn-primary">Ta bort profil!</button>
-</form>
-<!--
-    <h1>Radera kontor :/ </h1>
-  <form method="POST">
-    <div class="form-group">
-      <label for="del_mail">Email adress</label>
-      <input type="del_mail" class="form-control" id="del_mail" aria-describedby="emailHelp" placeholder="#">
-    </div>
-    
-    <div class="form-group">
-        <label for="del_password">Lösenord</label>
-        <input type="del_password" class="form-control" id="del_password" placeholder="#">
-      </div>
-      <div class="form-group">
-        <label for="check_del_password">Lösenord</label>
-        <input type="check_del_password" class="form-control" id="check_del_password" placeholder="#">
-      </div>
-    <div class="form-group form-check">
-      <input type="checkbox" class="form-check-input" id="exampleCheck1">
-      <label class="form-check-label" for="exampleCheck1">Radera konto</label>
-    </div>
-    <button type="submit" class="btn btn-primary">Skicka</button>
-  </form>
--->
+
 {% endblock %}

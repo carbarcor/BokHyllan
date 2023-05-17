@@ -14,7 +14,8 @@
             </div>
 
         {% for book in result %}
-            <a href="#"><li>{{ book.title }} - {{ book.author }} ({{ book.year }})</li></a>
+        <a href="{{ url_for('views.book_file', book_id=book.id) }}">
+            {{ book.title }} - {{ book.author }} - {{ book.isbn }}</a>
         {% endfor %}
 
     </div>

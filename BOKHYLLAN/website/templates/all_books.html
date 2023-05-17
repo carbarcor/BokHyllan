@@ -15,7 +15,7 @@
 
 
         {% for book in books %}
-        <div><a href="#">
+        <div><a href="{{ url_for('views.book_file', book_id=book.id) }}">
         </br>
         {% if book.cover_pic %}
         <img src="{{url_for('static', filename='images/' + book.cover_pic)}}" alt="#" class="rounded-circle" width="150" height="150" align="left">

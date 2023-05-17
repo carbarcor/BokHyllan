@@ -174,3 +174,25 @@ footer > p {
     border-radius: 55px;
     margin-bottom: 3.5em;
 }
+
+.custom-file-input {
+    visibility: hidden;
+    width: 0;
+  }
+  
+  .custom-file-label {
+    cursor: pointer;
+    border: 1px solid #ccc;
+    padding: 6px 10px;
+    display: inline-block;
+    background-color: #f5f5f5;
+  }
+  
+  .custom-file-input:focus + .custom-file-label {
+    outline: 2px solid #000;
+  }
+  
+  .custom-file-input:disabled + .custom-file-label {
+    background-color: #e9ecef;
+    cursor: not-allowed;
+  }

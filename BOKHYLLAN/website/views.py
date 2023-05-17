@@ -25,6 +25,15 @@ import random
 '''Variabel för blueprint. Detta organiserar appen/programmet'''
 views = Blueprint('views', __name__)
 
+@views.route('/book-file/<int:book_id>', methods=['GET'])
+@login_required
+def book_file(book_id):
+    book = Book.query.get(book_id)
+    user = User.query.filter_by(id=current_user.id).first()
+    owner = Book.user_id
+
+    return render_template('book_page.html', book=book, user = user, owner= owner)
+
 """denna funktion (sökfunktion) letar efter bok i db. Vi vålde denna funktion
 för att det letar fram det mest liknande resultatet """
 @views.route('/search', methods=["POST"])
