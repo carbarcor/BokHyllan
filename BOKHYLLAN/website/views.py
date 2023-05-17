@@ -1,10 +1,11 @@
-from flask import Blueprint, render_template, request, flash, redirect, url_for, current_app
+from flask import Blueprint, render_template, request, flash, redirect, url_for, current_app, jsonify
 from flask_login import login_required, current_user
 from .models import User, Book
 from . import db
 from werkzeug.utils import secure_filename
 import uuid as uuid
 import os
+import random
 
 '''Variabel för blueprint. Detta organiserar appen/programmet'''
 views = Blueprint('views', __name__)
@@ -141,6 +142,19 @@ def add_bio():
 
     return render_template("add_bio.html", user=current_user)
 
+    
+'''Funktion som  gör att en slumpmässig bok framvisas till användaren'''
+@views.route('/random-book')
+@login_required
+def random_book():
+    books = Book.query.filter_by(user_id=current_user.id).all()
+    if not books:
+        flash('No books available.', category='error')
+        return redirect(url_for('views.home'))
+
+    random_book = random.choice(books)
+    book_data = {'title': random_book.title, 'author': random_book.author}
+    return render_template('random_book.html', user=current_user, book=book_data)
 
 """@views.route('/delete-bio', methods=['POST'])
 def delete_bio():
