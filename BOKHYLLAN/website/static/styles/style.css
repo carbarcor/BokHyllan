@@ -28,12 +28,12 @@ body {
 }
 
 
-/*#home-div, #add-book-div, #sign-up-div, #add-bio-div, #edit-profile-div,
+#home-div, #add-book-div, #sign-up-div, #add-bio-div, #edit-profile-div,
 #add-pic-div, #policy-div, #search-div, #all-books-div {
     width:75%;
     margin:auto;
     margin-top:3em;
-}*/
+}
 
 
 #add-book-form, #sign-up, #Login, #edit-profile {
@@ -61,7 +61,7 @@ body {
 }
 
 
-/*#add-book-form {
+#add-book-form {
     position: sticky;
     margin-top: 5%;
     margin-bottom: 3.5em;
