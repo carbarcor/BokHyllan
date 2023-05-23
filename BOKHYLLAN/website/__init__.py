@@ -17,7 +17,7 @@ def create_app():
     socketio.init_app(app)
     
 #denna är adressen där bilden sparas.
-    UPLOAD_FOLDER = 'BOKHYLLAN\website\static\images'
+    UPLOAD_FOLDER = './BOKHYLLAN/website/static/images'
     app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 
     db.init_app(app)
