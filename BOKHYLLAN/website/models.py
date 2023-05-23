@@ -7,12 +7,19 @@ from sqlalchemy import Column, Integer, ForeignKey
 from sqlalchemy.orm import relationship
 from datetime import datetime
 
+#declassromms representerar den rummen där två användare möts.
 class Rooms(db.Model):
+    #identifiereingsnummer för rummet, det är unik
     id = Column(Integer, primary_key=True, autoincrement=True)
+    #1_id för den första användaren i rummet
     user_1_id = db.Column(db.String(150), ForeignKey('user.id'), nullable=False)
+    ##2_id för den första användaren i rummet
     user_2_id = db.Column(db.String(150), ForeignKey('user.id'), nullable=False)
+    #koden till rummet. unik
     room_code = db.Column(db.String(150), unique=True)
+#relation till den första användaren 1_id
     user_1 = relationship("User", foreign_keys=[user_1_id])
+#relation till andra användaren 2_id
     user_2 = relationship("User", foreign_keys=[user_2_id])
     
 
