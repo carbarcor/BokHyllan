@@ -349,7 +349,9 @@ def policy():
     
     return render_template('policy.html', user=current_user)
 
-'''Funktion som  gör att en slumpmässig bok framvisas till användaren'''
+
+
+
 @views.route('/random-book')
 @login_required
 def random_book():
@@ -359,7 +361,11 @@ def random_book():
         return redirect(url_for('views.home'))
 
     random_book = random.choice(books)
-    book_data = {'title': random_book.title, 'author': random_book.author}
+    book_data = {
+        'title': random_book.title,
+        'author': random_book.author,
+        'cover_pic': random_book.cover_pic
+    }
     return render_template('random_book.html', user=current_user, book=book_data)
 
 

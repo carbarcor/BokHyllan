@@ -3,7 +3,14 @@
 {% block content %}
   <button id="refresh-btn">Slumpa fram en bok!</button>
   <div id="chosen-book">
-    <p>Chosen Book: <span id="book-info">{{ book.title }} by {{ book.author }}</span></p>
+    <p>Chosen Book:</p>
+    <div id="book-info">
+      {% if book.cover_pic %}
+        <img src="{{ url_for('static', filename=book.cover_pic) }}" alt="Book Cover">
+      {% endif %}
+      <p>Title: {{ book.title }}</p>
+      <p>Author: {{ book.author }}</p>
+    </div>
   </div>
 
   <script>
