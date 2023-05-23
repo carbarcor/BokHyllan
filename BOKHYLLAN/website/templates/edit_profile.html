@@ -1,40 +1,52 @@
 {% extends "base.html" %}
 {% block title %}Home Page{% endblock %}
 {% block content %}
-</br>
-<h1 align="left" >Hej! {{user.first_name}}</h1>
-<h1>Uppgradera dina uppgifter! {{ user.email}}</h1>
-<form method="POST" action="/edit_profile">
-<!--
-  <div class="form-group">
-    <label for="new_email">Nytt email</label>
-    <input type="email" class="form-control" id="new_email" name="new_email" value="{{user.email}}" placeholder="{{user.email}}">
+
+  <div id="edit-profile-div">
+
+    <h1>Hej, {{user.first_name}}!</h1>
+    <h2>Uppdatera din profil</h2>
+    <p>Mejladress: {{user.email}}</p>
+
+      <form id="edit-profile" method="POST" action="/edit-profile">
+
+          <div class="form-group">
+            <label for="new_name">Nytt namn</label>
+            <input type="text" class="form-control" id="new_name" name="new_name" placeholder="{{user.first_name}}" value="{{user.first_name}}">
+          </div>
+
+          <div class="form-group">
+            <label for="new_password">Nytt lösenord (minst 8 tecken)</label>
+            <input type="password" class="form-control" id="new_password" name="new_password" >
+          </div>
+
+          <div class="form-group">
+            <label for="old_password">Nuvarande lösenord</label>
+            <input type="password" class="form-control" id="old_password" name="old_password" required>
+          </div>
+
+          <div class="form-group form-check">
+            <input type="checkbox" class="form-check-input" id="Check1" required>
+            <label class="form-check-label" for="Check1">Bekräfta ändringarna</label>
+          </div>
+
+          <!--
+          <div class="form-group">
+            <label for="new_email">Nytt email</label>
+            <input type="email" class="form-control" id="new_email" name="new_email" value="{{user.email}}" placeholder="{{user.email}}">
+          </div>
+          -->
+
+          <button type="submit" class="btn btn-primary">Uppdatera profil</button>
+
+      </form>
+
+      <form id="delete-profile" method="POST" action="/delete_profile">
+        <h3>Vill du ta bort ditt konto?</h3>
+        <button type="submit" class="btn btn-primary">Ta bort konto</button>
+      </form>
+
   </div>
--->
-    <div class="form-group">
-      <label for="new_name">Nytt Namn</label>
-      <input type="text" class="form-control" id="new_name" name="new_name" placeholder="{{user.first_name}}" value="{{user.first_name}}">
-    </div>
-    <div class="form-group">
-        <label for="new_password">Nytt lösenord</label>
-        <input type="password" class="form-control" id="new_password" name="new_password" >
-      </div>
-      <div class="form-group">
-        <label for="old_password">Gammalt lösenord</label>
-        <input type="password" class="form-control" id="old_password" name="old_password" required>
-      </div>
-    <div class="form-group form-check">
-      <input type="checkbox" class="form-check-input" id="Check1" required>
-      <label class="form-check-label" for="Check1" >Bekräfta</label>
-    </div>
-    <button type="submit" class="btn btn-primary">Skicka</button>
-  </form>
-</br>
-</br>
-</br>
-<form method="POST" action="/delete_profile">
-<button type="submit" class="btn btn-primary">Ta bort profil!</button>
-</form>
 <!--
     <h1>Radera kontor :/ </h1>
   <form method="POST">

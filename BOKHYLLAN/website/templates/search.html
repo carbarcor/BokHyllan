@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+{% block title %}search{% endblock %}
+{% block content %}
+
+    <div id="search-div">
+        <h1>SEARCH PAGE</h1>
+            <h2> You are looking for {{searched}}</h2>
+            
+            <div>
+                <form method= "POST" action="/search" class="form-inline my-2 my-lg-0">
+                    <input name="searched" class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+                    <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+                </form>
+            </div>
+
+        {% for book in result %}
+        <a href="{{ url_for('views.book_file', book_id=book.id) }}">
+            {{ book.title }} - {{ book.author }} - {{ book.isbn }}</a>
+        {% endfor %}
+
+    </div>
+
+{% endblock %}

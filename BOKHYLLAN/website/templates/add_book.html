@@ -1,42 +1,58 @@
 {% extends "base.html" %}
 {% block title %}Ladda up boken{% endblock %}
 {% block content %}
+<!--Formulär för att ladda upp ny bok och att ta bort en bok ligger på denna sida
+Se över om knapp för att ta bort bok kan ligga på ett annat ställe, eller justera 
+hur innehållet placeras på denna sida så att både ladda upp och ta bort är tydliga-->
 
-    <h1>Ladda upp en bok</h1>
-    <form id="Laddabok" method="POST">
-    <div class="form-group">
-        <label for="title">Title</label>
-        <input type="text" class="form-control" name="title" id="title" required>
-      </div>
-      <div class="form-group">
-        <label for="author">Författare</label>
-        <input type="text" class="form-control" name="author" id="author" required>
-      </div>
-      <div class="form-group">
-        <label for="isbn">ISBN</label>
-        <input type="text" class="form-control" name="isbn" id="isbn">
-      </div>
-    <div class="form-group">
-        <label for="review">Review</label>
-        <textarea class="form-control" name="review" id="review" rows="8" required></textarea>
-    </br>
-        <button type="submit" class="btn btn-primary">Add Book!</button>
-          
-    </div>
-    </form>
+  <div id="add-book-div">
+    <h1>Ladda upp en bok att byta ut</h1>
+
+      <form action="/add-book" id="add-book-form" method="POST" enctype="multipart/form-data">
+        <div class="form-group">
+          <label for="title">Titel</label>
+          <input type="text" class="form-control" name="title" id="title" required>
+        </div>
+
+        <div class="form-group">
+          <label for="author">Författare</label>
+          <input type="text" class="form-control" name="author" id="author" required>
+        </div>
+
+        <div class="form-group">
+          <label for="isbn">ISBN</label>
+          <input type="text" class="form-control" name="isbn" id="isbn">
+        </div>
+
+        <div class="form-group">
+          <label for="review">Beskrivning</label>
+          <p id="add-book-text">Exempelvis bokens handling eller bokens skick (nyskick, välanvänd etc)</p>
+          <textarea class="form-control" name="review" id="review" rows="8" required></textarea> 
+        </div>
+
+      
+        <label>Klicka på fältet och välj bilden du vill ladda upp</label>
+        <div class="custom-file">
+            <input type="file" class="custom-file-input" name="cover">
+            <label class="custom-file-label" for="cover" placeholder=""></label>
+        </div>
+        <button type="submit" class="btn btn-primary">Ladda upp bok</button>
+      </form>
+
+  </div>
     
+{% for book in books %}
+  <div class="book">
+    <h3>{{ book.title }}</h3> 
+    <form method="GET" action="{{ url_for('views.edit_book', book_id=book.id) }}">
+            <button type="submit" class="btn btn-primary">Redigera bok!</button>
+        </form>
+      <!--  <form method="POST" action="{{ url_for('views.edit_book', book_id=book.id) }}">
+          <button type="submit" class="btn btn-primary">Redigera bok!</button>
+        </form>--->
+  </div>
+{% endfor %}
 
-    {% for book in books %}
-    <div class="book">
-       <h3>{{ book.title }}</h3>
-        <form method="POST" action="{{ url_for('views.remove_book', book_id=book.id) }}">
-            <button type="submit" class="btn btn-primary">Ta bort!</button>
-        </form>
-    </br>
-        <form method="#" action="#">
-            <button type="submit" class="btn btn-primary">Redigera boken!</button>
-        </form>
-    </div>
-  {% endfor %}
-  
+
+
 {% endblock %}

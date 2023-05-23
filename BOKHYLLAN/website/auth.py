@@ -4,14 +4,14 @@ from flask import Blueprint, render_template, request, flash, redirect, url_for
 from .models import User
 from werkzeug.security import generate_password_hash, check_password_hash
 from . import db   
-from flask_login import login_user, login_required, logout_user, current_user
+from flask_login import login_user, login_required, logout_user, current_user, login_manager
 from sqlalchemy import update
 
 
-#hjälpa att organiserat bätter väggarna "path"
+'''Variabel för blueprint. Detta organiserar appen/programmet'''
 auth = Blueprint('auth', __name__)
 
-
+'''Funktion för radering av användarprofil'''
 @auth.route('/delete_profile' , methods=['GET', 'POST'])
 @login_required
 def delete_profile():
@@ -22,9 +22,10 @@ def delete_profile():
         db.session.commit()
         logout_user()
         return redirect(url_for('auth.login',user=current_user))
-    
-# detta är för att "edit profile" den är klart att köra nu.
-@auth.route('/edit_profile', methods=['GET', 'POST'])
+
+
+'''Funktion för redigering av användarprofil'''
+@auth.route('/edit-profile', methods=['GET', 'POST'])
 @login_required
 def edit_profile():
     if request.method == 'POST':
@@ -38,11 +39,11 @@ def edit_profile():
         user.password = hash_pw
         
         if len(new_password) < 7:
-            flash('Lösenord är för kort, minst 8 tecken', category='error')
+            flash('Lösenordet är för kort, använd minst 8 tecken', category='error')
         elif len(new_name) < 1:
-            flash('Namnet är för kort', category='error')
+            flash('Du måste ange ett användarnamn', category='error')
         elif check_pw == False:
-            flash('Det gamla lösenordet är inte korrekt!', category='error')
+            flash('Det gamla lösenordet är inte korrekt, försök igen', category='error')
         else:
             db.session.commit()
             login_user(user, remember=True)
@@ -51,11 +52,8 @@ def edit_profile():
     
     return render_template("edit_profile.html", user=current_user)
     
-    
 
-
-
-#detta köra logg in
+'''Funktion för inloggning'''
 @auth.route('/login', methods=['GET', 'POST'])
 def login():
     """hämta data from html"""
@@ -67,18 +65,18 @@ def login():
         """detta kontrolerra om det finns i databasen är det så kan du logga in (logga in funtionen finns redan i falsk)"""
         if user:
             if check_password_hash(user.password, password):
-                flash('Logged in successfully!', category='success')
+                flash('Du är inloggad!', category='success')
                 login_user(user, remember=True)
                 return redirect(url_for('views.home'))
             else:
-                flash('Incorrect password, try again.', category='error')
+                flash('Felaktigt lösenord, försök igen', category='error')
         else:
-            flash('Email does not exist.', category='error')
+            flash('Mejladressen finns inte, registrera dig för att kunna logga in', category='error')
 
     return render_template("login.html", user=current_user)
 
 
-#detta logga ut
+'''Funktion för utloggning, detta kommer fråm flask/loggin paket'''
 @auth.route('/logout')
 @login_required
 #detta begränsa acces till user som har varit autetificierat
@@ -86,7 +84,8 @@ def logout():
     logout_user()
     return redirect(url_for('auth.login'))
 
-#resgiterat user
+
+'''Funktion för registrering av användare'''
 @auth.route('/sign-up', methods=['GET', 'POST'])
 def sign_up():
     if request.method == 'POST':
@@ -98,22 +97,23 @@ def sign_up():
         user = User.query.filter_by(email=email).first()
         
         if user:
-            flash('account exist', category='error')
+            flash('Det finns redan en användare registrerad på mejladressen', category='error')
         elif len(email) < 5:
-            flash('Mejladressen måste vara mer en 4 bokstovlar', category='error')
+            flash('Mejladressen måste innehålla mer än 4 tecken', category='error')
         elif len(first_name) < 3:
-            flash('Namnet är för kort', category='error')
+            flash('Namnet måste innehålla minst 3 tecken', category='error')
         elif password1 != password2:
-            flash('Lösenord matchar inte', category='error')
-        elif len(password1) < 3:
-            flash('Lösenord måste ha mer en 2 tecken, försök igen!', category='error')
+            flash('Lösenorden matchar inte, försök igen', category='error')
+        elif len(password1) < 7:
+            flash('Lösenordet är för kort, använd minst 8 tecken', category='error')
         else:
-            new_user = User(email=email, first_name=first_name, password=generate_password_hash(password1, method='sha256'))
+            new_user = User(email=email,
+            first_name=first_name, 
+            password=generate_password_hash(password1, method='sha256'))
             db.session.add(new_user)
             db.session.commit()
             login_user(new_user, remember=True)
-            flash('Skapa konto!', category='success')
+            flash('Ditt konto har skapats!', category='success')
             return redirect(url_for('views.home'))
 
     return render_template("sign_up.html", user=current_user)
-

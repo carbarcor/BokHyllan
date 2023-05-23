@@ -1,12 +1,22 @@
-#här är strukteren till själva database.
-"""punkten ledar programnet filer databasen directory"""
+'''Denna fil innehåller strukturen för databasen.
+"from . import db" - . leder programmets filer till databasens directory'''
 from . import db 
 from flask_login import UserMixin
 from sqlalchemy.sql import func
+from sqlalchemy import Column, Integer, ForeignKey
+from sqlalchemy.orm import relationship
 from datetime import datetime
 
+class Rooms(db.Model):
+    id = Column(Integer, primary_key=True, autoincrement=True)
+    user_1_id = db.Column(db.String(150), ForeignKey('user.id'), nullable=False)
+    user_2_id = db.Column(db.String(150), ForeignKey('user.id'), nullable=False)
+    room_code = db.Column(db.String(150), unique=True)
+    user_1 = relationship("User", foreign_keys=[user_1_id])
+    user_2 = relationship("User", foreign_keys=[user_2_id])
+    
 
-#detta är databasen för bocker
+'''Databasen för uppladdade böcker'''
 class Book(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     title = db.Column(db.String(150))
@@ -14,15 +24,17 @@ class Book(db.Model):
     isbn = db.Column(db.String(150))
     review = db.Column(db.String(30000))
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
-    cover_pic = db.Column(db.String(30000))
+    cover_pic = db.Column(db.String())
 
 
-#detta är databasen för user. där PK är id som genereras automatisk när user registrerar sig
+'''Databasen för användare.
+Primary key är id som genereras automatisk när en användare registrerar sig'''
 class User(db.Model, UserMixin):
     id = db.Column(db.Integer, primary_key=True)
     email = db.Column(db.String(150), unique=True)
     password = db.Column(db.String(150))
     first_name = db.Column(db.String(150))
-    books = db.relationship('Book')
+    books = db.relationship('Book', backref='user')
     bio = db.Column(db.String(30000))
-    profile_pic = db.Column(db.String(30000))
+    profile_pic = db.Column(db.String())
+    score = db.Column(db.Integer, default=0)

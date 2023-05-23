@@ -3,27 +3,26 @@
 from flask import Flask, flash
 from flask_sqlalchemy import SQLAlchemy
 from os import path
-import os
 from flask_login import LoginManager
+from flask_socketio import join_room, leave_room, send, SocketIO
 
 #själva databasen
 db = SQLAlchemy()
 DB_NAME = "database.db"
+socketio = SocketIO()
 
-
-"""
-fungerar inte nu vet inte om vi behöver den
-def create_img_dir(app):
-    Newfolder='Img'
-    if not path.exists('website/static' + Newfolder):
-        os.makedirs(Newfolder)"""
-    
-#detta är flaskappen. detta är obligatorisk utan den funkar inte programmet.
 def create_app():
     app = Flask(__name__)
     app.config['SECRET_KEY'] = 'Tito'
     app.config['SQLALCHEMY_DATABASE_URI'] = f'sqlite:///{DB_NAME}'
+    app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
     app.config['MESSAGE_FLASHING_OPTIONS'] = {'duration': 5}
+    socketio.init_app(app)
+    
+#denna är adressen där bilden sparas.
+    UPLOAD_FOLDER = './BOKHYLLAN/website/static/images'
+    app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
+
     db.init_app(app)
     """importerar phytonkoden till programmet"""
     from .views import views
@@ -35,11 +34,16 @@ def create_app():
     from .models import User, Book
     
     with app.app_context():
+        socketio.init_app(app)
+    with app.app_context():
         db.create_all()
 
     login_manager = LoginManager()
     login_manager.login_view = 'auth.login'
     login_manager.init_app(app)
+    login_manager.login_message = 'Du måste logga in för att komma åt din hemsida!'
+    
+    
 
     @login_manager.user_loader
     def load_user(id):
@@ -49,6 +53,6 @@ def create_app():
 
 #den skapa filen fysiskt dvs:databasen
 def create_database(app):
-    if not path.exists('website/' + DB_NAME):
+    if not path.exists('website/static' + DB_NAME):
         db.create_all(app=app)
         print('Created Database!')

@@ -1,44 +1,45 @@
 {% extends "base.html" %}
 {% block title %}Login{% endblock %}
 {% block content %}
-<div id="intro">
-    <h2>BokHyllan</h2>
-    <p>En <b>webbtjänst</b> och en <b>Community</b> för byte av böcker.
-    Byten sker från person till person, genom att
-    välja ut specifika böcker från en annan användares
-    bibliotek, eller genom att låta webbtjänsten
-    slumpa fram en bok.
-    Det är en <b>kostnarfri tjänst</b>!</p>
 
-</div>
-<form id="Login" method="POST">
-    <h3 align="center"> Logga in </h3>
-    <div class ="form-group">
-        <label for="email"> Mejl konto</label>
-        <input 
-        type="email" 
-        class="form-control" 
-        id="email" 
-        name="email" 
-        placeholder="Skriv in mejl"/>
+    <div id="intro">
+        <h2>BokHyllan</h2>
+            <p>En <b>webbtjänst</b> och en <b>Community</b> för byte av böcker.
+            Byten sker från person till person, genom att
+            välja ut specifika böcker från en annan användares
+            bibliotek, eller genom att låta webbtjänsten
+            slumpa fram en bok.
+            Det är en <b>kostnadsfri tjänst</b>!</p>
     </div>
-    <div class ="form-group">
-        <label for="password"> Lösenord </label>
-        <input 
-        type="password" 
-        class="form-control" 
-        id="password" 
-        name="password" 
-        placeholder="Ange ditt lösenord"/>
-    </div>
-    <br />
-    <button type="submit" class="btn btn-primary">Skicka in!</button>
-    <br />
-    <br />
-    <a class="button" id="signUp" href="/sign-up"><button type="button" class="btn btn-primary">Registrera</button></a>
 
+    <form id="Login" method="POST">
+        <h3>Logga in</h3>
+            <div class ="form-group">
+                <label for="email">Mejladress</label>
+                <input 
+                    type="email" 
+                    class="form-control" 
+                    id="email" 
+                    name="email" 
+                    placeholder="exempel@email.se"/>
+            </div>
+            <div class ="form-group">
+                <label for="password">Lösenord</label>
+                <input 
+                    type="password" 
+                    class="form-control" 
+                    id="password" 
+                    name="password" 
+                    placeholder=""/> <!-- Lägga i någon "hover" med info om 8 tecken istället för en placeholder? -->
+            </div>
 
+        <button type="submit" class="btn btn-primary">Logga in</button>
 
+        </br> <!-- Kolla hur kunna göra detta med CSS istället -->
+        <a class="button" id="signUp" href="/sign-up">
+            <button type="button" class="btn btn-primary">Registrera nytt konto</button>
+        </a>
 
-</form>
+    </form>
+
 {% endblock %}

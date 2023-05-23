@@ -1,17 +1,34 @@
 {% extends "base.html" %}
 {% block title %}BokHylla{% endblock %}
 {% block content %}
-<h1>BokHylla:</h1>
+
+    <div id="all-books-div">
+
+        <h1>BokHylla:</h1>
+
+            <div>
+                <form method= "POST" action="/search" class="form-inline my-2 my-lg-0">
+                    <input name="searched" class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+                    <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+                </form>
+            </div>
 
 
-{% for book in books %}
-</br>
-<p><h4>Title:  {{book.title}} </br> Författare:  {{book.author}}</br> ISBN: {{book.isbn}} </br>
-    Recension: {{book.review}}</h4></p>
-</br>
-</br>
-{%endfor%}
+        {% for book in books %}
+        <div><a href="{{ url_for('views.book_file', book_id=book.id) }}">
+        </br>
+        {% if book.cover_pic %}
+        <img src="{{url_for('static', filename='images/' + book.cover_pic)}}" alt="#" class="rounded-circle" width="150" height="150" align="left">
+        {%else%}
+        <img src="{{url_for('static', filename='images/emty_profile.jpg')}}" alt="#" class="rounded-circle" width="150" height="150" align="left">
+        {%endif%}
+        <p><h4>Title:  {{book.title}} </br> Författare:  {{book.author}}</br> ISBN: {{book.isbn}} </br>
+            Recension: {{book.review}}</h4></p></a>
+        </br>
+        </br>
+        </div>
+        {%endfor%}
 
-
+    </div>
 
 {% endblock %}

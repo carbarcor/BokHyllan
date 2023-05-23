@@ -1,0 +1,51 @@
+{% extends "base.html" %}
+{% block title %}bok!{% endblock %}
+{% block content %}
+
+<div>
+    <h1>Det här boken tillhör: </h1>
+    <h1>{{owner.first_name}}</h1>
+    <div id="user-pic">
+    {% if owner.profile_pic %}
+    <img src="{{url_for('static', filename='images/' + owner.profile_pic)}}" alt="profile_img" class="rounded-circle" width="150" height="150" align="right">
+    {%else%}
+    <img src="{{url_for('static', filename='images/emty_profile.jpg')}}" alt="profile_img" class="rounded-circle" width="150" height="150" align="right">
+    {%endif%}
+  </div>
+
+  <div id="user-points">
+    <p><h1>Användarpoäng:</h1>
+      {% if owner.score %}
+      <h1>{{owner.score}}</h1>
+      {%else%}
+      <h1>0</h1>
+      {%endif%}
+    </p>
+  </div> </div>
+
+  {% if owner.id != user.id%}
+<div>
+  <form action="/chat/{{ owner.id }}" method="POST">
+    <button type="submit">chat!</button>
+  </form>
+  {%else%}
+  <h1> Boken är redan din </h1>
+  {%endif%}
+
+</div>
+<div>
+
+  {{book.title}}
+</br>
+  {{book.author}}
+
+</div>
+
+<script>
+  document.getElementById("chatForm").addEventListener("submit", function(event) {
+    event.preventDefault();
+    var ownerId = document.getElementById("chatButton").value;
+    this.submit();
+  });
+</script>
+{% endblock %}
