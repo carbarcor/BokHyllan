@@ -21,6 +21,7 @@ def delete_profile():
         db.session.delete(user)
         db.session.commit()
         logout_user()
+        flash('Ditt konto har tagits bort', category='success')
         return redirect(url_for('auth.login',user=current_user))
 
 
