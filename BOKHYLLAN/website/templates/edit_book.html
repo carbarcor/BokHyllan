@@ -4,7 +4,7 @@
 
 <div id="edit-book-div">
 
-    <form id="edit-book" method="POST" action="{{ url_for('views.edit_book', book_id=book.id) }}">
+    <form id="edit-book-form" method="POST" action="{{ url_for('views.edit_book', book_id=book.id) }}">
         <div class="form-group">
             <label for="new_title">Nytt titel</label>
             <input type="text" class="form-control" id="new_title" name="new_title" value="{{ book.title }}">
