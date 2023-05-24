@@ -33,6 +33,7 @@ body {
 #sign-up-div,
 #add-bio-div,
 #edit-profile-div,
+#edit-book_div,
 #add-pic-div,
 #policy-div,
 #search-div,
@@ -46,7 +47,8 @@ body {
 #add-book-form,
 #sign-up,
 #Login,
-#edit-profile {
+#edit-profile,
+#edit-book-form {
     background-color: rgb(255, 210, 126);
     box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 3px 0px, rgba(0, 0, 0, 0.06) 0px 1px 2px 0px;
 }
@@ -71,7 +73,7 @@ body {
 }
 
 
-/*#add-book-form {
+#add-book-form {
     position: sticky;
     margin-top: 5%;
     margin-bottom: 3.5em;
@@ -79,6 +81,7 @@ body {
     padding: 2.5em;
 }
 
+/*
 #add-book-text {
     font-size: 80%;
 }
@@ -122,6 +125,12 @@ body {
     margin-bottom: 3.5em;
     border-radius: 35px;
     padding: 2.5em;
+}
+
+#user-books-div {
+    margin-bottom: 3.5em;
+    width:75%;
+    margin-top:3em;
 }
 
 #delete-profile {

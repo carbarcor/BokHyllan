@@ -42,7 +42,7 @@ def edit_profile():
         if len(new_password) < 7:
             flash('Lösenordet är för kort, använd minst 8 tecken', category='error')
         elif len(new_name) < 1:
-            flash('Du måste ange ett användarnamn', category='error')
+            flash('Du måste ange ett profilnamn', category='error')
         elif check_pw == False:
             flash('Det gamla lösenordet är inte korrekt, försök igen', category='error')
         else:
@@ -102,7 +102,7 @@ def sign_up():
         elif len(email) < 5:
             flash('Mejladressen måste innehålla mer än 4 tecken', category='error')
         elif len(first_name) < 3:
-            flash('Namnet måste innehålla minst 3 tecken', category='error')
+            flash('Namnet måste innehålla minst 2 tecken', category='error')
         elif password1 != password2:
             flash('Lösenorden matchar inte, försök igen', category='error')
         elif len(password1) < 7:
