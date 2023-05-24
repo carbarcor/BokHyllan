@@ -349,6 +349,18 @@ def policy():
     
     return render_template('policy.html', user=current_user)
 
+'''Funktion som  gör att en slumpmässig bok framvisas till användaren'''
+@views.route('/random-book')
+@login_required
+def random_book():
+    books = Book.query.filter_by(user_id=current_user.id).all()
+    if not books:
+        flash('No books available.', category='error')
+        return redirect(url_for('views.home'))
+
+    random_book = random.choice(books)
+    book_data = {'title': random_book.title, 'author': random_book.author}
+    return render_template('random_book.html', user=current_user, book=book_data)
 
 
 """Error 404. Funktion som skickar användare till error-sida 400 """

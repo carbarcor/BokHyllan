@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <button id="refresh-btn">Slumpa fram en bok!</button>
+  <div id="chosen-book">
+    <p>Chosen Book: <span id="book-info">{{ book.title }} by {{ book.author }}</span></p>
+  </div>
+
+  <script>
+    document.getElementById('refresh-btn').addEventListener('click', function() {
+      location.reload();
+    });
+  </script>
+{% endblock %}
