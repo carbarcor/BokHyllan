@@ -355,7 +355,7 @@ def policy():
 @views.route('/random-book')
 @login_required
 def random_book():
-    books = Book.query.filter_by(user_id=current_user.id).all()
+    books = Book.query.all()
     if not books:
         flash('No books available.', category='error')
         return redirect(url_for('views.home'))
