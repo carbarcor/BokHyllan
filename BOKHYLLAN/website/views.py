@@ -359,10 +359,12 @@ def random_book():
         return redirect(url_for('views.home'))
 
     random_book = random.choice(books)
+    cover_pic_path = 'images/' + random_book.cover_pic  # Modify the path here
+
     book_data = {
         'title': random_book.title,
         'author': random_book.author,
-        'cover_pic': random_book.cover_pic
+        'cover_pic': cover_pic_path
     }
     return render_template('random_book.html', user=current_user, book=book_data)
 

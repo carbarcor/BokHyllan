@@ -1,15 +1,21 @@
 {% extends 'base.html' %}
 
+{% block head %}
+<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+{% endblock %}
+
 {% block content %}
-  <button id="refresh-btn">Slumpa fram en bok!</button>
+  <div id="button-container">
+  <button id="refresh-btn">Slumpa en bok!</button>
+  </div>
   <div id="chosen-book">
-    <p>Chosen Book:</p>
+    <p id="randombook" >Chosen Book:</p>
     <div id="book-info">
       {% if book.cover_pic %}
-        <img src="{{ url_for('static', filename=book.cover_pic) }}" alt="Book Cover">
+        <img src="{{ url_for('static', filename=book.cover_pic) }}" alt="Book Cover" id="book-cover">
       {% endif %}
-      <p>Title: {{ book.title }}</p>
-      <p>Author: {{ book.author }}</p>
+      <p id="randomtitle">Title: {{ book.title }}</p>
+      <p id="randomauthor"> Author: {{ book.author }}</p>
     </div>
   </div>
 
