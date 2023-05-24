@@ -28,15 +28,27 @@ body {
 }
 
 
-#home-div, #add-book-div, #sign-up-div, #add-bio-div, #edit-profile-div,
-#add-pic-div, #policy-div, #search-div, #all-books-div {
+#home-div,
+#add-book-div,
+#sign-up-div,
+#add-bio-div,
+#edit-profile-div,
+#edit-book_div,
+#add-pic-div,
+#policy-div,
+#search-div,
+#all-books-div {
     width:75%;
     margin:auto;
     margin-top:3em;
 }
 
 
-#add-book-form, #sign-up, #Login, #edit-profile {
+#add-book-form,
+#sign-up,
+#Login,
+#edit-profile,
+#edit-book-form {
     background-color: rgb(255, 210, 126);
     box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 3px 0px, rgba(0, 0, 0, 0.06) 0px 1px 2px 0px;
 }
@@ -61,7 +73,7 @@ body {
 }
 
 
-/*#add-book-form {
+#add-book-form {
     position: sticky;
     margin-top: 5%;
     margin-bottom: 3.5em;
@@ -69,10 +81,12 @@ body {
     padding: 2.5em;
 }
 
+/*
 #add-book-text {
     font-size: 80%;
 }
  */ 
+
 #Login {
     position: absolute;
     right: 15em;
@@ -111,6 +125,12 @@ body {
     margin-bottom: 3.5em;
     border-radius: 35px;
     padding: 2.5em;
+}
+
+#user-books-div {
+    margin-bottom: 3.5em;
+    width:75%;
+    margin-top:3em;
 }
 
 #delete-profile {
@@ -165,10 +185,12 @@ footer > p {
     }
 
 
-#policyh1, #policyp{
+#policyh1,
+#policyp {
     text-align: center;
 }
-#policyp{
+
+#policyp {
     background-color: rgb(255, 210, 126);
     padding: 2.5em;
     border-radius: 55px;
@@ -184,7 +206,7 @@ footer > p {
     flex-direction: column;
     width: 50vw;
     align-items: stretch;
-  }
+}
   
   .messages {
     overflow-y: scroll;

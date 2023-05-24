@@ -1,17 +1,17 @@
 """
-vi importera fråm flask de olika paket som redo finns för att kunna
-byga olika funktioner i programmet
-Blueprint hjälpa oss att dela projektet och sortera i olika files.
-render_template för att flask kan använda sig av html, 
-request hjälp oss att kuna använda POST-method och GET-method,
-flash pop up meddelanderna, 
-redirect och url_for de hänvisar oss till funktion eller path,
-current_app användar vi för att konfigurerar själva appen
-werkzeug.utils det hjälper till att säkra filer och kod
-secure_filename files namn
-uuid funktionene skapar ett unik namn för filen, blanda det och krypterar
-datum samt tid för överlappande av filen
-os en del av standarbiblioteket, låter användaren interagera med det inbyggda operativsystemet phyton körs på
+Vi har importerat olika paket från flask som redan finns redo för att kunna
+bygga de olika funktionena i programmet
+Blueprint hjälper oss att dela projektet och sortera i olika files.
+Render_template används för att flask ska kunna använda sig av html, 
+Request hjälper oss för att kunna använda POST-method och GET-method,
+Flash pop up meddelanderna. 
+Redirect och url_for hänvisar oss till funktion eller path.
+Current_app använder vi för att konfigurera själva appen.
+werkzeug.utils hjälper till att säkra alla filer och kod.
+secure_filename files namn.
+uuid funktionene skapar ett unik namn för filen, blandar det och krypterar
+datum samt tid för överlappande av filen.
+os är en del av standarbiblioteket, låter användaren interagera med det inbyggda operativsystemet phyton körs på
 """
 from flask import Blueprint, render_template, request, flash, redirect, url_for, current_app, abort, session
 from flask_login import login_required, current_user
@@ -169,8 +169,8 @@ def book_file(book_id):
 
     return render_template('book_page.html', book=book, user = user, owner= owner)
 
-"""denna funktion (sökfunktion) letar efter bok i db. Vi vålde denna funktion
-för att det letar fram det mest liknande resultatet """
+"""Denna funktion (sökfunktion) letar efter bok i db. Vi valde denna funktion
+för att den letar fram det mest liknande resultatet till sökningen användaren gör. """
 @views.route('/search', methods=["POST"])
 def search():
     form = request.form.get('searched')
@@ -205,7 +205,7 @@ def show_all_books():
     return render_template('all_books.html', user=current_user, books=books )
 
 
-'''Funktion för användaren att lägga till en bok för utbyte.
+'''Funktion för att användaren ska kunna lägga till en bok för utbyte.
 Boken läggs in i databasen samt visas på home.html'''
 @views.route('/add-book', methods=['GET', 'POST'])
 @login_required
@@ -282,38 +282,38 @@ def delete_old_pic():
         os.remove(path)
 
 
-#vi kommer att komenterar varje rad.
+#vi kommer att kommentera varje rad:
 @views.route('/add-pic', methods=['GET', 'POST'])
 @login_required
 def add_pic():
     if request.method == "POST":
         if request.files:
             delete_old_pic()
-            #den fisiska filen sparas i denna variabel.
+            #den fysiska filen sparas i denna variabel.
             image = request.files['image']
-            #i denna variable säkerställa filen. 
+            #i denna variable säkerställs filen. 
             pic_name = secure_filename(image.filename)
-            #filen få en unik namn.
+            #filen får en unik namn.
             pic_file_name = str(uuid.uuid1()) + "_" + pic_name
             #hämta current user och letar efter den i databasen.
             pic_user = User.query.filter_by(id=current_user.id).first()
             #denna är profil bild Kolumn i databasen.
             pic_user.profile_pic = pic_file_name
-            # image refererat till image html om det är inte en request så vissar att det är en error.
+            # image refererat till image html om det är inte en request så visas error.
             if 'image' not in request.files:
                 flash('Bilden har inte sparat!', category='error')
                 return redirect(url_for('views.add_pic'))
-            #om user clicka på skicka utan att ladda upp en bildformat så vissar error.
+            #om user klickar på skicka utan att ladda upp en bildformat så visas error.
             if pic_name == '':
                 flash('Ingen fil har valts')
                 return redirect(url_for('views.add_pic'))
-            #kontrolerar filen, om filen är inte godkänns som vissar att det kan man inte göra
+            #kontrollerar filen, om filen är inte godkänns så visas det att det inte går
             if allowed_file(image.filename) == False:
                 flash('filformat inte tillåtet!')
                 return redirect(url_for('views.add_pic'))
             else:
                 image and allowed_file(image.filename)
-                #spara filden i mappen: static/images
+                #spara filen i mappen: static/images
                 image.save(os.path.join(current_app.config['UPLOAD_FOLDER'], pic_file_name))
                 #bifoga filens namn i databasen
                 db.session.commit()
@@ -349,9 +349,7 @@ def policy():
     
     return render_template('policy.html', user=current_user)
 
-
-
-
+'''Funktion som  gör att en slumpmässig bok framvisas till användaren'''
 @views.route('/random-book')
 @login_required
 def random_book():
@@ -369,7 +367,7 @@ def random_book():
     return render_template('random_book.html', user=current_user, book=book_data)
 
 
-"""Error 404. Funktion som skickar användare till error-sida 400 """
+"""Error 404. Funktion som skickar användare till error-sida 400. Visar ett slumpat citat av 5 st """
 @views.app_errorhandler(404)
 def page_not_found(e):
     quotes = ["Why, sometimes I've believed as many as six impossible things before breakfast.",
@@ -390,7 +388,7 @@ def page_not_found(e):
     quote = random.choice(quotes)
     return render_template('error_505.html', quote = quote), 505
 
-"""Error 500. Funktion som skickar användare till error-sida 500"""
+"""Error 500. Funktion som skickar användare till error-sida 500. Visar ett slumpat citat av 5st"""
 @views.app_errorhandler(500)
 def page_not_found(e):
     quotes = ["Why, sometimes I've believed as many as six impossible things before breakfast.",
