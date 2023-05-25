@@ -3,7 +3,7 @@
 {% block content %}
 <!--Formulär för att ladda upp ny bok och att ta bort en bok ligger på denna sida
 Se över om knapp för att ta bort bok kan ligga på ett annat ställe, eller justera 
-hur innehållet placeras på denna sida så att både ladda upp och ta bort är tydliga-->
+hur innehållet placeras på denna sida så att både ladda upp bok och ta bort bok är tydliga-->
 
   <div id="add-book-div">
     <h1>Ladda upp en bok att byta ut</h1>
@@ -39,22 +39,18 @@ hur innehållet placeras på denna sida så att både ladda upp och ta bort är 
         <button type="submit" class="btn btn-primary">Ladda upp bok</button>
       </form>
 
-      {% for book in books %}
-  <div id="user-books-div">
-    <h3>{{ book.title }}</h3> 
-    <form method="GET" action="{{ url_for('views.edit_book', book_id=book.id) }}">
+    {% for book in books %}
+      <div id="user-books-div">
+        <h3>{{ book.title }}</h3> 
+          <form method="GET" action="{{ url_for('views.edit_book', book_id=book.id) }}">
             <button type="submit" class="btn btn-primary">Redigera bok</button>
-        </form>
-      <!--  <form method="POST" action="{{ url_for('views.edit_book', book_id=book.id) }}">
+          </form>
+        <!--  <form method="POST" action="{{ url_for('views.edit_book', book_id=book.id) }}">
           <button type="submit" class="btn btn-primary">Redigera bok!</button>
         </form>--->
-  </div>
-{% endfor %}
+      </div>
+    {% endfor %}
 
   </div>
     
-
-
-
-
 {% endblock %}
