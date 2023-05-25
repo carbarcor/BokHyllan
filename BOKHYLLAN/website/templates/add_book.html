@@ -1,9 +1,7 @@
 {% extends "base.html" %}
 {% block title %}Ladda up boken{% endblock %}
 {% block content %}
-<!--Formulär för att ladda upp ny bok och att ta bort en bok ligger på denna sida
-Se över om knapp för att ta bort bok kan ligga på ett annat ställe, eller justera 
-hur innehållet placeras på denna sida så att både ladda upp bok och ta bort bok är tydliga-->
+<!--Formulär för att ladda upp ny bok och att ta bort en bok ligger på denna sida.-->
 
   <div id="add-book-div">
     <h1>Ladda upp en bok att byta ut</h1>
@@ -30,7 +28,6 @@ hur innehållet placeras på denna sida så att både ladda upp bok och ta bort 
           <textarea class="form-control" name="review" id="review" rows="8" required></textarea> 
         </div>
 
-      
         <label>Klicka på fältet och välj bilden du vill ladda upp</label>
         <div class="custom-file">
             <input type="file" class="custom-file-input" name="cover">
@@ -45,9 +42,6 @@ hur innehållet placeras på denna sida så att både ladda upp bok och ta bort 
           <form method="GET" action="{{ url_for('views.edit_book', book_id=book.id) }}">
             <button type="submit" class="btn btn-primary">Redigera bok</button>
           </form>
-        <!--  <form method="POST" action="{{ url_for('views.edit_book', book_id=book.id) }}">
-          <button type="submit" class="btn btn-primary">Redigera bok!</button>
-        </form>--->
       </div>
     {% endfor %}
 
