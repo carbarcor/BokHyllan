@@ -10,4 +10,4 @@ def socket_io():
 
 if __name__ =='__main__':
     socketio = SocketIO(app)
-    socketio.run(app, debug=True)
+    socketio.run(app, debug = True)
