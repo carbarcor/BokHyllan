@@ -8,26 +8,27 @@ from sqlalchemy import Column, Integer, ForeignKey
 from sqlalchemy.orm import relationship
 from datetime import datetime
 
+
 '''Klassen "rooms" representerar chattrummen där två användare möts.'''
 class Rooms(db.Model):
     #identifiereingsnummer för rummet, unikt värde.
-    id = Column(Integer, primary_key=True, autoincrement=True)
+    id = Column(Integer, primary_key = True, autoincrement = True)
     #1_id för den första användaren i chattrummet.
-    user_1_id = db.Column(db.String(150), ForeignKey('user.id'), nullable=False)
+    user_1_id = db.Column(db.String(150), ForeignKey('user.id'), nullable = False)
     ##2_id för den första användaren i chattrummet.
-    user_2_id = db.Column(db.String(150), ForeignKey('user.id'), nullable=False)
+    user_2_id = db.Column(db.String(150), ForeignKey('user.id'), nullable = False)
     #koden till rummet. Unikt värde.
-    room_code = db.Column(db.String(150), unique=True)
+    room_code = db.Column(db.String(150), unique = True)
     #relation till den första användaren 1_id.
-    user_1 = relationship("User", foreign_keys=[user_1_id])
+    user_1 = relationship("User", foreign_keys = [user_1_id])
     #relation till andra användaren 2_id.
-    user_2 = relationship("User", foreign_keys=[user_2_id])
+    user_2 = relationship("User", foreign_keys = [user_2_id])
     
 
 '''Databas för uppladdade böcker'''
 class Book(db.Model):
     #skapar ett unikt identifieringsnummer för boken.
-    id = db.Column(db.Integer, primary_key=True)
+    id = db.Column(db.Integer, primary_key = True)
     # Titel på boken.
     title = db.Column(db.String(150))
     # Författare av boken.
@@ -46,18 +47,18 @@ class Book(db.Model):
 Primary key är det id som genereras automatiskt när en användare registrerar sig.'''
 class User(db.Model, UserMixin):
     # Unikt identifieringsnummer för användaren.
-    id = db.Column(db.Integer, primary_key=True)
+    id = db.Column(db.Integer, primary_key = True)
     # E-postadress för användaren (unik).
-    email = db.Column(db.String(150), unique=True)
+    email = db.Column(db.String(150), unique = True)
     # Lösenord för användaren.
     password = db.Column(db.String(150))
     # Profilnamn(förnamn) för användaren.
     first_name = db.Column(db.String(150))
     # Relation till böcker som ägs av användaren.
-    books = db.relationship('Book', backref='user')
+    books = db.relationship('Book', backref = 'user')
     # Användarens biografi.
     bio = db.Column(db.String(30000))
     # Profilbild för användaren.
     profile_pic = db.Column(db.String())
     # Poäng för användaren (förvalt till 0).
-    score = db.Column(db.Integer, default=0)
+    score = db.Column(db.Integer, default = 0)
