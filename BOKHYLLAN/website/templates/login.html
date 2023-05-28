@@ -2,7 +2,7 @@
 {% block title %}Login{% endblock %}
 {% block content %}
 
-    <div id="intro">
+   <!-- <div class="intro">
         <h2>BokHyllan</h2>
         <h2>En <spam clas="highlighted">webbtjänst</spam> och 
             en <spam clas="highlighted">Community</spam> för byte av böcker.
@@ -11,7 +11,15 @@
             bibliotek, eller genom att låta webbtjänsten
             slumpa fram en bok.
             Det är en <spam clas="highlighted">kostnadsfri tjänst !</spam></h2>
+    </div> -->
+    <div class="welcome">
+            <img src="{{url_for('static', filename='images/logo.jpg')}}" class="rounded float-left" alt="...">
+            <p>En <span class="highlighted">webbtjänst</span> och en <span class="highlighted">Community</span> för byte av böcker.
+                 Byten sker från person till person, genom att välja ut specifika böcker från en annan användares bibliotek, 
+                 eller genom att låta webbtjänsten slumpa fram en bok. Det är en <span class="highlighted">kostnadsfri tjänst!</span></p>
     </div>
+    
+
 
     <form id="Login" method="POST">
         <h3>Logga in</h3>
