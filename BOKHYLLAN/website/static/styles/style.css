@@ -166,6 +166,16 @@ footer > p {
      font-size: medium;
      color:#F96E4D;
 }
+#valjdinfarg{
+  color: rgba(0, 0, 0, 0.5);
+  list-style: none;
+}
+#valjdinfarg:hover{
+  color: black;
+}
+.dropdown-item.no-bullet {
+  list-style: none;
+}
 
 /* Knappar */ 
     .btn-primary {
