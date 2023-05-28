@@ -35,7 +35,6 @@ body {
 #edit-profile-div,
 #edit-book_div,
 #add-pic-div,
-#policy-div,
 #search-div,
 #all-books-div {
     width:75%;
@@ -248,12 +247,22 @@ footer > p {
     text-align: center;
 }
 
+#policy-div{
+  width:75%;
+  margin:auto;
+  margin-top:3em;
+  text-align: left;
+}
+
 #policyp {
+    text-align: left;
     background-color: rgb(255, 210, 126);
     padding: 2.5em;
     border-radius: 55px;
     margin-bottom: 3.5em;
 }
+
+
 
 .message-box {
     border-style: solid;
