@@ -8,3 +8,8 @@ input.addEventListener('change', function() {
     label.textContent = "";
   }
 });
+
+// Visa popupen/drink-me flaskan efter 15 sekunder
+setTimeout(function() {
+  document.getElementById('drink-me').style.display = 'block';
+}, 15000);
