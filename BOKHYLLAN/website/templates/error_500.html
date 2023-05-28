@@ -1,11 +1,25 @@
-<div id="error-500-div">
-    <h1> Error 500 </h1>
-        <p> Internt fel på severn, oflyt!</p>
+{% extends "base.html" %}
+{% block title %}Home Page{% endblock %}
+{% block content %}
 
-    <h2>{{quote}}</h2>
-    </br>
-    <h3>-Lewis Carroll</h3>
-        
-        <p> länk tillbaka</p> #infoga   
+<div id="error-500-div">
+    <div>
+        <h1> Down the rabbithole! </h1>
+        <p> Internt fel på severn (Error 500)</p>
+    </div>
+
+    <div>
+        <h2 class="quote500">{{quote}}</h2>
+        </br>
+        <h3>-Lewis Carroll</h3>
+    </div>  
+
+    <div id="drink-me">
+        <h3>Vill du dricka denna dryck för att försöka ta dig tillbaka?</h3>
+        <a href="home.html"><img src="bottle-image.png"></a>
+    </div>  
+    <p><a länk tillbaka></a> #infoga  </p>      
 </div>    
-    
+   
+
+{% endblock %}

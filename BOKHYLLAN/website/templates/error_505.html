@@ -1,10 +1,27 @@
-<div id="error-505-div">
-    <h1> Error 505 </h1>
-        <p> Användaren hittades inte!</p>
+{% extends "base.html" %}
+{% block title %}Home Page{% endblock %}
+{% block content %}
 
-    <h2>{{quote}}</h2>
-    </br>
-    <h3>-Lewis Carroll</h3>
-        
-        <p> länk tillbaka</p> #infoga
+<div id="error-505-div">
+    <div>
+        <h1>Ohhh - Who are Alice?</h1>
+        <p> Användaren kunde tyvärr inte hittas (Error 505)</p>
+    </div>
+
+    <div>
+        <h2 class="quote505">{{quote}}</h2>
+        </br>
+        <h3>-Lewis Carroll</h3>
+    </div>  
+    
+    <div id="drink-me">
+        <h3>Vill du ha en ny chans?</h3>
+        <a href="sign_up.html"><img src="bottle-image.png"></a>
+    </div>     
+     
+    <p><a länk tillbaka></a> #infoga  </p>   
+    
 </div>   
+
+
+{% endblock %}
