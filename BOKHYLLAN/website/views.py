@@ -369,7 +369,7 @@ def random_book():
     return render_template('random_book.html', user=current_user, book=book_data)
 
 
-"""Error 404. Funktion som skickar användare till error-sida 400. Visar ett slumpat citat av 5 st """
+"""Error 404. Funktion som skickar användare till error-sida 404 (client-error). Visar ett slumpat citat av 5 st """
 @views.app_errorhandler(404)
 def page_not_found(e):
     quotes = ["Why, sometimes I've believed as many as six impossible things before breakfast.",
@@ -380,6 +380,8 @@ def page_not_found(e):
     quote = random.choice(quotes)
     return render_template('error_404.html', quote = quote), 404
 
+
+"""Error 505. Funktion som skickar användare till error-sida 505 (server-error: användare hittas ej). Visar ett slumpat citat av 5st """
 @views.app_errorhandler(505)
 def page_not_found(e):
     quotes = ["Why, sometimes I've believed as many as six impossible things before breakfast.",
@@ -390,7 +392,8 @@ def page_not_found(e):
     quote = random.choice(quotes)
     return render_template('error_505.html', quote = quote), 505
 
-"""Error 500. Funktion som skickar användare till error-sida 500. Visar ett slumpat citat av 5st"""
+
+"""Error 500. Funktion som skickar användare till error-sida 500 (server-error: internt fel på servern) Visar ett slumpat citat av 5st"""
 @views.app_errorhandler(500)
 def page_not_found(e):
     quotes = ["Why, sometimes I've believed as many as six impossible things before breakfast.",
