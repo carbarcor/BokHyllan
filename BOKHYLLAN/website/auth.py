@@ -63,7 +63,7 @@ def login():
         password = request.form.get("password")
 
         user = User.query.filter_by(email=email).first()
-        """detta kontrolerra om det finns i databasen är det så kan du logga in (logga in funtionen finns redan i falsk)"""
+        """detta kontrollerar om användaren finns i databasen är det så kan användaren logga in (logga in funktionen finns redan i flask)"""
         if user:
             if check_password_hash(user.password, password):
                 flash('Du är inloggad!', category='success')
@@ -77,10 +77,10 @@ def login():
     return render_template("login.html", user=current_user)
 
 
-'''Funktion för utloggning, detta kommer fråm flask/loggin paket'''
+'''Funktion för utloggning, detta kommer från flask/login paket'''
 @auth.route('/logout')
 @login_required
-#detta begränsa acces till user som har varit autetificierat
+#detta begränsar tillgången till användaren som har varit autentiserad
 def logout():
     logout_user()
     return redirect(url_for('auth.login'))
