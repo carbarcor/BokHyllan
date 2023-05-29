@@ -1,17 +1,49 @@
 {% extends "base.html" %}
-{% block title %}Mina böcker{% endblock %}
+{% block title %}Mina bokhylla{% endblock %}
 {% block content %}
 <!-- Ska innehålla en lista över användarens egna böcker samt möjligtheten att redigera och radera dem-->
 
-    {% for book in books %}
     <div id="user-books-div">
-        <h3>{{ book.title }}</h3> 
+        <h1>Min bokhylla</h1>
 
-        <form method="GET" action="{{ url_for('views.edit_book', book_id=book.id) }}">
-            <button type="submit" class="btn btn-primary">Redigera bok</button>
-        </form>
-        
+        {% for book in books %}
+        <div id="book-list-div">
+            <a href="{{ url_for('views.book_file', book_id=book.id) }}">
+
+                <div id="book-list-img-div">
+                {% if book.cover_pic %}
+                    <img src="{{url_for('static', filename='images/' + book.cover_pic)}}" alt="#" class="rounded-circle" width="150" height="150" align="left">
+                {%else%}
+                    <img src="{{url_for('static', filename='images/emty_profile.jpg')}}" alt="#" class="rounded-circle" width="150" height="150" align="left">
+                {%endif%}
+                </div>
+
+                <ul id="book-list">
+                    <li>
+                        Titel:  {{book.title}}
+                    </li>
+                    <li>
+                        Författare:  {{book.author}}
+                    </li>
+                    <li>
+                        ISBN: {{book.isbn}}
+                    </li>
+                    <li>
+                        Beskrivning: 
+                        {% if book.review|length > 100 %}
+                            {{ book.review[:100] }}
+                        {% else %}
+                            {{ book.review }}
+                        {% endif %}
+                    </li>
+                </ul>
+
+                <form method="GET" action="{{ url_for('views.edit_book', book_id=book.id) }}">
+                    <button type="submit" class="btn btn-primary">Redigera</button>
+                </form>
+            </a>
+        </div>
+        {%endfor%}
+
     </div>
-    {% endfor %}
-
 {% endblock %}

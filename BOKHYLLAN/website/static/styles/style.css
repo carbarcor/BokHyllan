@@ -63,7 +63,9 @@ body {
 #edit-profile-div,
 #edit-book-div,
 #add-pic-div,
-#all-books-div {
+#all-books-div,
+#search-result-div,
+#user-books-div {
     width:75%;
     margin:auto;
     margin-top:3em;
@@ -73,7 +75,8 @@ body {
 #add-book-form,
 #sign-up,
 #edit-profile,
-#edit-book-form {
+#edit-book-form,
+#add-bio-form {
   background-color: rgb(255, 210, 126);
   box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 3px 0px, rgba(0, 0, 0, 0.06) 0px 1px 2px 0px;
 }
@@ -148,12 +151,19 @@ body {
     padding: 2.5em;;
 }
 
+.form-inline {
+  width:100%;
+}
+
 .form-control {
     border-radius:0.75rem;
 }
 
-#add-bio-div > form {
+#add-bio-form {
     margin-top: 1em;
+    margin-bottom: 3.5em;
+    border-radius: 35px;
+    padding: 2.5em
 }
 
 #edit-profile-div {
@@ -179,6 +189,27 @@ body {
     margin-bottom: 3.5em;
     border-radius: 35px;
     padding: 2.5em;
+}
+
+#all-books-div {
+  margin-bottom: 3.5em;
+}
+
+#book-list-div {
+  padding-top:2em;
+  padding-bottom:2em
+}
+
+/* Försök till att justera bilder i alla-böcker-listan genom CSS istället för HTML
+#book-list div > .rounded-circle {
+  align-items:left;
+}
+*/
+
+#book-list {
+  list-style-type: none;
+  margin: 0;
+  padding: 1em;
 }
 
 footer {

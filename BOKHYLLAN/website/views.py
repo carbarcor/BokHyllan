@@ -51,7 +51,6 @@ def edit_book(book_id):
     return render_template("edit_book.html",user = current_user, book = book)
 
 
-
 def generate_room(length):
     while True:
         room_code = ''.join(random.choice(ascii_uppercase) for _ in range(length))
@@ -64,6 +63,7 @@ def generate_room(length):
             break
 
     return room_code
+
 
 @views.route("/chat/<int:owner_id>", methods= ['POST'])
 @login_required
@@ -107,6 +107,7 @@ def chat(owner_id):
                                user = current_user, 
                                room_code = new_room_code)
 
+
 @socketio.on("message")
 def message(data):
     room = session.get("room")
@@ -120,6 +121,7 @@ def message(data):
     send(content, to=room)
     rooms[room]["messages"].append(content)
     print(f"{session.get('name')} said: {data['data']}")
+
 
 @socketio.on("connect")
 def connect(auth):
@@ -135,6 +137,7 @@ def connect(auth):
     send({"name": name, "message": "has entered the room"}, to=room)
     print(f"{name} joined room {room}")
 
+
 @socketio.on("disconnect")
 def disconnect():
     room = session.get("room")
@@ -145,6 +148,7 @@ def disconnect():
     send({"name": name, "message": "has left the room"}, to=room)
     print(f"{name} has left the room {room}")
 
+
 @views.route('/book-file/<int:book_id>', methods=['GET'])
 @login_required
 def book_file(book_id):
@@ -153,8 +157,8 @@ def book_file(book_id):
     user = User.query.filter_by(id=current_user.id).first()
     owner = User.query.filter_by(id=id_owner).first()
     
-
     return render_template('book_page.html', book=book, user = user, owner= owner)
+
 
 """Denna funktion (sökfunktion) letar efter bok i db. Vi valde denna funktion
 för att den letar fram det mest liknande resultatet till sökningen användaren gör. """
@@ -173,7 +177,6 @@ def search():
     
     print(books_result)
     return render_template("search.html", user=current_user, searched = form, books =books , result= books_result)
-
 
 
 '''Funktion för route till homepage'''
@@ -230,7 +233,6 @@ def add_book():
     return render_template('add_book.html', user=current_user, books=books )
     
 
-
 '''Funktion för att ta bort en uppladdad bok'''
 @views.route('/remove-book/<int:book_id>', methods=['POST'])
 @login_required
@@ -248,10 +250,7 @@ def remove_book(book_id):
     return redirect(url_for('views.add_book'))
 
 
-'''Funktion för att ladda upp bild (över bok eller biografi?)
-Det är inte klart, saknas förstarka "security" som görs genom werkzeug'''
-
-
+'''Funktioner för att ladda upp profilbild'''
 ALLOWED_EXTENSIONS = { 'jpg', 'jpeg','gif'} #denna är de filerna som är godkänns för att ladda upp.
 
 #jämfora filensnamn med den typ av fil som är godkänn dvs jpg och jpeg. 
@@ -310,7 +309,6 @@ def add_pic():
     return render_template('add_pic.html', user=current_user)
 
 
-
 '''Funktion för att ladda upp användarens biografi'''
 @views.route('/add-bio', methods=['GET', 'POST'])
 @login_required
@@ -330,13 +328,22 @@ def add_bio():
     return render_template("add_bio.html", user=current_user)
 
 
+'''Funktion för visning av sida för användarens uppladdade böcker'''
+@views.route('/user-books')
+@login_required
+def user_books():
+    books = Book.query.filter_by(user_id=current_user.id).all()
+    return render_template('user_books.html', user=current_user, books=books)
+
+
+'''Funktion för visning av sida för användarvillkor'''
 @views.route('/policy')
 @login_required
 def policy():
-    
     return render_template('policy.html', user=current_user)
 
-'''Funktion som  gör att en slumpmässig bok framvisas till användaren'''
+
+'''Funktion som gör att en slumpmässig bok framvisas till användaren'''
 @views.route('/random-book')
 @login_required
 def random_book():

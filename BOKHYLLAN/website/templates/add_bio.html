@@ -4,9 +4,8 @@
 
     <div id="add-bio-div">
 
-        <h1>{{user.first_name}}, berätta något om dig själv</h1>
-
-        <form method="POST">
+        <form id="add-bio-form" method="POST">
+            <h1>{{user.first_name}}, berätta något om dig själv</h1>
             <textarea class="form-control" id="bio" name="bio" rows="8" cols="50" placeholder=""></textarea>
             <button type="submit" class="btn btn-primary">Skapa biografi</button>
         </form>
