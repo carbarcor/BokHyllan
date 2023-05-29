@@ -86,28 +86,34 @@ en mer anständig version eller med var egen html och css kod-->
     </div>
   </nav>
 
-  <!-- Flashmeddelande under navbar -->
-  {% with messages = get_flashed_messages(with_categories=true) %}
+<!-- Flashmeddelande under navbar -->
+{% with messages = get_flashed_messages(with_categories=true) %}
   {% if messages %}
-  {% for category, message in messages %}
-  {% if category == 'error' %}
-  <div class="alert alert-danger alert-sismissable fade show" role="alert">
-    {{message}}
-    <button type="button" class="close" data-dismiss="alert">
-      <span aria-hidden="true">&times;</span>
-    </button>
-  </div>
-  {% else %}
-  <div class="alert alert-success alert-sismissable fade show" role="alert">
-    {{message}}
-    <button type="button" class="close" data-dismiss="alert">
-      <span aria-hidden="true">&times;</span>
-    </button>
-  </div>
+    {% for category, message in messages %}
+      {% if category == 'error' %}
+        <div class="alert alert-danger alert-dismissible fade show fade-out" role="alert" id="flash-message">
+          {{ message }}
+        </div>
+      {% else %}
+        <div class="alert alert-success alert-dismissible fade show fade-out" role="alert" id="flash-message">
+          {{ message }}
+        </div>
+      {% endif %}
+    {% endfor %}
   {% endif %}
-  {% endfor %}
-  {% endif %}
-  {% endwith %}
+{% endwith %}
+
+
+  <script>
+    setTimeout(function() {
+      var flashMessage = document.getElementById('flash-message');
+      if (flashMessage) {
+        flashMessage.style.display = 'none';
+      }
+    }, 5000);
+  </script>
+
+
 
   <!-- Container för respektive sidas huvudinnehåll -->
   <div class="container">

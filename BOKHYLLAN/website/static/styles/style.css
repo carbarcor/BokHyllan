@@ -464,3 +464,16 @@ footer > p {
   max-height: 80%;
   cursor: pointer;
   }
+/* att det blir en "fade transition" för flashmedelandena*/
+  .fade-out {
+    animation: fadeOut 5s forwards;
+  }
+  
+  @keyframes fadeOut {
+    from {
+      opacity: 1;
+    }
+    to {
+      opacity: 0;
+    }
+  }
