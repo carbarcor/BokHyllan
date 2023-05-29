@@ -365,7 +365,7 @@ def page_not_found(e):
                 "'And what is the use of a book,' thought Alice, 'without pictures or conversation?'",
                 "Off with their heads!"]
     quote = random.choice(quotes)
-    return render_template('error_404.html', quote = quote), 404
+    return render_template('error_404.html', quote = quote , user=current_user), 404
 
 
 """Error 505. Funktion som skickar användare till error-sida 505 (server-error: användare hittas ej). Visar ett slumpat citat av 5st """
@@ -377,7 +377,7 @@ def page_not_found(e):
                 "'And what is the use of a book,' thought Alice, 'without pictures or conversation?'",
                 "Off with their heads!"]
     quote = random.choice(quotes)
-    return render_template('error_505.html', quote = quote), 505
+    return render_template('error_505.html', quote = quote, user=current_user), 505
 
 
 """Error 500. Funktion som skickar användare till error-sida 500 (server-error: internt fel på servern) Visar ett slumpat citat av 5st"""
@@ -389,4 +389,4 @@ def page_not_found(e):
                 "'And what is the use of a book,' thought Alice, 'without pictures or conversation?'",
                 "Off with their heads!"]
     quote = random.choice(quotes)
-    return render_template('error_500.html', quote = quote), 500
+    return render_template('error_500.html', quote = quote , user=current_user), 500
