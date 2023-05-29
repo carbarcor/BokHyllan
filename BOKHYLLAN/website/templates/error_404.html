@@ -1,30 +1,45 @@
-{% extends "base.html" %}
-{% block title %}Error 404{% endblock %}
-{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+ <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script type="text/javascript"></script>
+    <title> 400 ! </title>
 
-<div id="error-404-div">
-    <div class="error-info">
-        <h1> Ohh Alice, you're lost in Wonderland!! </h1>
-        <p>Sidan du försökte nå går tyvärr inte att nå (404 Error) </p>
-    </div>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css"
+    integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles/css.css')}}">
+</head>
 
-    <div id="quote404">   
-        <h2 >{{quote}}</h2>
-        </br>
-        <h3>- Lewis Carroll</h3>
-    </div>
+
+
+<body>
+    <div id="error-404-div">
+        <div class="error-info">
+            <h1> Ohh Alice, you're lost in Wonderland!! </h1>
+            <p>Sidan du försökte nå går tyvärr inte att nå (404 Error) </p>
+        </div>
+
+        <div id="quote404">   
+            <h2 >{{quote}}</h2>
+            </br>
+            <h3>- Lewis Carroll</h3>
+        </div>
         
-    <div id="drink-me">
-        <h3>Vill du dricka denna dryck för att ta dig tillbaka?</h3>
-        <a href="home.html"><img src="bottle-image.png"></a>
-    </div>
+        <div id="drink-me">
+            <h3>Vill du dricka denna dryck för att ta dig tillbaka?</h3>
+            <a href="home.html"><img src="bottle-image.png"></a>
+        </div>
     
-    <div id="img404">
-        <img src="{{url_for('static', filename='images/alice_par_John_Tenniel_23.png')}}">
+        <div id="img404">
+            <img src="{{url_for('static', filename='images/alice_par_John_Tenniel_23.png')}}">
+        </div>
+
+        <p><a href="home.html" länk tillbaka för den som inte har js></a>#infoga</p>   
     </div>
+</body>
 
-    <p><a href="home.html" länk tillbaka för den som inte har js></a>#infoga</p>   
-</div>
+</html>
 
 
-{% endblock %}
