@@ -532,7 +532,7 @@ footer > p {
   }
 /* att det blir en "fade transition" för flashmedelandena*/
   .fade-out {
-    animation: fadeOut 5s forwards;
+    animation: fadeOut 10s forwards;
   }
   
   @keyframes fadeOut {
