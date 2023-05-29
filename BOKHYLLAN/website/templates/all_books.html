@@ -22,27 +22,27 @@
                 {%else%}
                     <img src="{{url_for('static', filename='images/emty_profile.jpg')}}" alt="#" class="rounded-circle" width="150" height="150" align="left">
                 {%endif%}
-                </div>
 
-                <ul id="book-list">
-                    <li>
-                        Titel:  {{book.title}}
-                    </li>
-                    <li>
-                        Författare:  {{book.author}}
-                    </li>
-                    <li>
-                        ISBN: {{book.isbn}}
-                    </li>
-                    <li>
-                        Beskrivning: 
-                        {% if book.review|length > 100 %}
-                            {{ book.review[:100] }}
-                        {% else %}
-                            {{ book.review }}
-                        {% endif %}
-                    </li>
-                </ul>
+                    <ul id="book-list">
+                        <li>
+                            Titel:  {{book.title}}
+                        </li>
+                        <li>
+                            Författare:  {{book.author}}
+                        </li>
+                        <li>
+                            ISBN: {{book.isbn}}
+                        </li>
+                        <li>
+                            Beskrivning: 
+                            {% if book.review|length > 100 %}
+                                {{ book.review[:70] }}
+                            {% else %}
+                                {{ book.review }}
+                            {% endif %}
+                        </li>
+                    </ul>
+                </div>
                 <!--
                 <p><h4>Title:  {{book.title}} </br> Författare:  {{book.author}}</br> ISBN: {{book.isbn}} </br>
                     Beskrivning: 
