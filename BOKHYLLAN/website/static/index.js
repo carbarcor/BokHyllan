@@ -10,8 +10,9 @@ input.addEventListener('change', function() {
 });
 
 
+
 // Visa popupen/drink-me flaskan på skärmen efter 15 sekunder
-setTimeout(function() {
-  document.getElementById('drink-me').style.display = 'block';
-}, 15000);
+///setTimeout(function() {
+///document.getElementById('drink-me').style.display = 'block';
+///}, 15000);
 

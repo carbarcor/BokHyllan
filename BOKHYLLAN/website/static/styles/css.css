@@ -1,99 +1,105 @@
-body {
- background-color:#ffffff;
- display: flex;
- justify-content: center;
- align-items: flex;
- min-height:100vh;
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Playfair Display SC', serif;
 }
 
-  /* Error-sidor */
-  #error-400-div, 
-  #error-500-div, 
-  #error-505-div{
-    background-color:#F9618B;
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background: white no-repeat;
+  background-size: cover;
+  background-position: center;
+}
 
-  }
+.error-info {
+  text-align: justify;
+  position: absolute;
+  left: 50%;
+  top: 20%;
+  max-width: 100%;
+  width: 40%;
+  height: 15vh;
+  background: transparent;
+  backdrop-filter: blur(20px);
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: center;
+  z-index: 1;
+}
 
-  .error-info{
-    background-color:#ffffff ; /*Kommentar: ändra färg på denna sen*/
-    box-shadow:rgba(52, 51, 51, 0.4) 3px 3px, rgba(47, 47, 47, 0.3) 5px 5px;
-    padding-top:20px;
-    margin-top: 20px;
-    padding-bottom: 5px;
-    padding: ;
-    top: 10px; /* Justera värdet efter behov */
-    left: 50%; /* Centrera horisontellt */
-  }
+.error-info h1 {
+  margin-top: 10%;
+  text-align: center;
+  font-size: 4vw;
+  font-weight: bold;
+  color: #422800;
+}
 
-  .error-info h1{
-    text-align: center;
-    font-size: large;
-    font-weight: bold;
-    color: #422800;
+.error-info a {
+  text-decoration: none;
+  text-align: center;
+  font-size: 1.5vw;
+  font-weight: bold;
+  color: #422800;
+}
 
-  }
+.error-info p {
+  text-align: center;
+  color: #422800;
+}
 
-  .error-info p{
-    text-align: center;
-    color: #422800;
+.quote404 {
+  left: 30%;
+  position: absolute;
+  top: 60%;
+  width: 20%;
+  height: 30vh;
+  background: transparent;
+  backdrop-filter: blur(20px);
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: center;
+  z-index: 1;
+}
 
-  }
+.quote404 h2 {
+  margin-bottom: 5vh;
+}
 
-  #quote404{
-    width: 50%;
-    box-shadow:rgba(52, 51, 51, 0.4) 5px 5px, rgba(47, 47, 47, 0.3) 10px 10px, rgba(106, 106, 106, 0.2) 15px 15px, rgba(107, 107, 107, 0.1) 20px 20px, rgba(213, 212, 213, 0.05) 25px 25px;
-    text-align: center;
-    color: #422800;
-    padding: 40px;
-    position: relative;
-    z-index: 1; /* Högre z-index än #img404 */
-    top: 700px; /* Justera värdet efter behov */
-    left: 50%; /* Centrera horisontellt */
-  }
+.quote404 h3 {
+  position: absolute;
+  bottom: 0;
+}
 
-  #img404{
-      background-image: url("../images/Alice_par_John_Tenniel_23.png") ;
-      background-repeat: no-repeat;
-      position: absolute;
-      z-index:0; /* Lägre z-index än .quote404 */
-      margin-top: -200px;
-      padding-left: 10%;
-      background: no-repeat;
-  }
-  
+.img404 {
+  max-width: 100%;
+  position: absolute;
+  top: 2%;
+  left: 2%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 0;
+}
 
-  #quote500{
-    width: 20%;
-    box-shadow:rgba(52, 51, 51, 0.4) 5px 5px, rgba(47, 47, 47, 0.3) 10px 10px, rgba(106, 106, 106, 0.2) 15px 15px, rgba(107, 107, 107, 0.1) 20px 20px, rgba(213, 212, 213, 0.05) 25px 25px;    
-    text-align: center;    
-    color: #422800;
-  }
-
-
-  #quote505{
-    width: 20%;
-    box-shadow:rgba(52, 51, 51, 0.4) 5px 5px, rgba(47, 47, 47, 0.3) 10px 10px, rgba(106, 106, 106, 0.2) 15px 15px, rgba(107, 107, 107, 0.1) 20px 20px, rgba(213, 212, 213, 0.05) 25px 25px;    
-    text-align: center;    text-align: center;
-    color: #422800;
-  }
-
-
-  #drink-me{
-    display: none; /* Dölj popupen från början */
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 50%;
-    height: 50%;
-    background-color: rgba(0, 0, 0, 0.8); /* En svart transparent bakgrund */
-
-  }
-
-  #drink-me img{
-  display: block;
-  margin: auto;
-  margin-top: 20%;
-  max-width: 80%;
-  max-height: 80%;
-  cursor: pointer;
-  }
+.drink-me {
+  right: 30%;
+  position: absolute;
+  top: 30%;
+  width: 25%;
+  height: 65vh;
+  background: transparent;
+  border: 2px solid rgba(255, 255, 255, .5);
+  border-radius: 20px;
+  backdrop-filter: blur(20px);
+  box-shadow: 0 0 30px rgba(0, 0, 0, .5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
