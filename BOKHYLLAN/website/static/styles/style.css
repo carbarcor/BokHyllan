@@ -454,6 +454,8 @@ footer > p {
     box-shadow:rgba(52, 51, 51, 0.4) 5px 5px, rgba(47, 47, 47, 0.3) 10px 10px, rgba(106, 106, 106, 0.2) 15px 15px, rgba(107, 107, 107, 0.1) 20px 20px, rgba(213, 212, 213, 0.05) 25px 25px;
     padding-top:15px;
     margin-top: 20px;
+    top: 10px; /* Justera värdet efter behov */
+    left: 50%; /* Centrera horisontellt */
   }
 
   .error-info h1{
@@ -470,7 +472,7 @@ footer > p {
 
   }
 
-  .quote404{
+  #quote404{
     width: 50%;
     box-shadow:rgba(52, 51, 51, 0.4) 5px 5px, rgba(47, 47, 47, 0.3) 10px 10px, rgba(106, 106, 106, 0.2) 15px 15px, rgba(107, 107, 107, 0.1) 20px 20px, rgba(213, 212, 213, 0.05) 25px 25px;
     text-align: center;
@@ -478,21 +480,20 @@ footer > p {
     padding: 40px;
     position: relative;
     z-index: 1; /* Högre z-index än #img404 */
-    top: 750px; /* Justera värdet efter behov */
+    top: 700px; /* Justera värdet efter behov */
     left: 50%; /* Centrera horisontellt */
   }
 
   #img404{
-    #img404{
       background-image: url("../images/Alice_par_John_Tenniel_23.png") ;
       background-repeat: no-repeat;
       position: absolute;
-      z-index: 0; /* Lägre z-index än .quote404 */
-      margin-top: -200px;
+      z-index:0; /* Lägre z-index än .quote404 */
+      margin-top: -250px;
   }
-  }
+  
 
-  .quote500{
+  #quote500{
     width: 20%;
     box-shadow:rgba(52, 51, 51, 0.4) 5px 5px, rgba(47, 47, 47, 0.3) 10px 10px, rgba(106, 106, 106, 0.2) 15px 15px, rgba(107, 107, 107, 0.1) 20px 20px, rgba(213, 212, 213, 0.05) 25px 25px;    
     text-align: center;    text-align: center;
@@ -500,7 +501,7 @@ footer > p {
   }
 
 
-  .quote505{
+  #quote505{
     width: 20%;
     box-shadow:rgba(52, 51, 51, 0.4) 5px 5px, rgba(47, 47, 47, 0.3) 10px 10px, rgba(106, 106, 106, 0.2) 15px 15px, rgba(107, 107, 107, 0.1) 20px 20px, rgba(213, 212, 213, 0.05) 25px 25px;    
     text-align: center;    text-align: center;
