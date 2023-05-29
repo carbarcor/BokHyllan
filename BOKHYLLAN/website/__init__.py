@@ -1,5 +1,5 @@
-#detta är jätte viktigt for flask eftersom det genererar automatisk databasen, 
-#den tillåter oss att skapa ett lösenord för att administrerat administratörsområdet
+#detta är jätte viktigt for flask applikationen eftersom det genererar automatisk databasen, 
+#den tillåter oss att skapa ett lösenord för att administrera administratörsområdet
 from flask import Flask, flash
 from flask_sqlalchemy import SQLAlchemy
 from os import path

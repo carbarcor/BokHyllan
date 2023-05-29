@@ -1,7 +1,7 @@
 """
 Vi har importerat olika paket från flask som redan finns redo för att kunna
 bygga de olika funktionena i programmet
-Blueprint hjälper oss att dela projektet och sortera i olika files.
+Blueprint hjälper oss att dela upp projektet och sortera i olika filer.
 Render_template används för att flask ska kunna använda sig av html, 
 Request hjälper oss för att kunna använda POST-method och GET-method,
 Flash pop up meddelanderna. 
@@ -31,6 +31,7 @@ views = Blueprint('views', __name__)
 rooms = {} 
 socketio = SocketIO()
 
+'''Hanterar redigering av en bok baserat på bokens ID.'''
 @views.route('/edit-book/<int:book_id>', methods=['GET', 'POST'])
 @login_required
 def edit_book(book_id):
@@ -148,7 +149,7 @@ def disconnect():
     send({"name": name, "message": "has left the room"}, to=room)
     print(f"{name} has left the room {room}")
 
-
+""" Renderar en boksida för en specifik bok baserat på bokens ID. """
 @views.route('/book-file/<int:book_id>', methods=['GET'])
 @login_required
 def book_file(book_id):
@@ -160,8 +161,8 @@ def book_file(book_id):
     return render_template('book_page.html', book=book, user = user, owner= owner)
 
 
-"""Denna funktion (sökfunktion) letar efter bok i db. Vi valde denna funktion
-för att den letar fram det mest liknande resultatet till sökningen användaren gör. """
+"""Denna funktion (sökfunktion) söker efter boken i databasen. Denna funktion valdes
+för att den letar fram liknande resultat till sökningen som användaren gör. """
 @views.route('/search', methods=["POST"])
 def search():
     form = request.form.get('searched')
@@ -253,13 +254,13 @@ def remove_book(book_id):
 '''Funktioner för att ladda upp profilbild'''
 ALLOWED_EXTENSIONS = { 'jpg', 'jpeg','gif'} #denna är de filerna som är godkänns för att ladda upp.
 
-#jämfora filensnamn med den typ av fil som är godkänn dvs jpg och jpeg. 
+#jämföra filens namn med den typ av fil som godkänns av programmet, dvs jpg och jpeg. 
 def allowed_file(pic_name):
     return '.' in pic_name and \
            pic_name.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
 
 
-#denna är för att ta bort profilbilden från användaren och ta bort automatisk den gammla. 
+#denna funktionen är till för att ta bort profilbilden från användaren där den automatiskt ta bort den gamla. 
 def delete_old_pic():
     user = User.query.filter_by(id=current_user.id).first()
     old_profile_pic = str(user.profile_pic)
@@ -277,29 +278,29 @@ def add_pic():
             delete_old_pic()
             #den fysiska filen sparas i denna variabel.
             image = request.files['image']
-            #i denna variable säkerställs filen. 
+            #i denna variabeln säkerställs filen. 
             pic_name = secure_filename(image.filename)
             #filen får en unik namn.
             pic_file_name = str(uuid.uuid1()) + "_" + pic_name
             #hämta current user och letar efter den i databasen.
             pic_user = User.query.filter_by(id=current_user.id).first()
-            #denna är profil bild Kolumn i databasen.
+            #denna är profil bild kolumn i databasen.
             pic_user.profile_pic = pic_file_name
-            # image refererat till image html om det är inte en request så visas error.
+            # image refererat till image html om det inte är en request så visas error.
             if 'image' not in request.files:
                 flash('Bilden har inte sparat!', category='error')
                 return redirect(url_for('views.add_pic'))
-            #om user klickar på skicka utan att ladda upp en bildformat så visas error.
+            #om user klickar på skicka utan att ladda upp en bild så visas error.
             if pic_name == '':
                 flash('Ingen fil har valts')
                 return redirect(url_for('views.add_pic'))
-            #kontrollerar filen, om filen är inte godkänns så visas det att det inte går
+            #kontrollerar filen, om filen är inte godkänns så får användaren ett medelande att det ej går.
             if allowed_file(image.filename) == False:
                 flash('filformat inte tillåtet!')
                 return redirect(url_for('views.add_pic'))
             else:
                 image and allowed_file(image.filename)
-                #spara filen i mappen: static/images
+                #sparar filen i mappen: static/images
                 image.save(os.path.join(current_app.config['UPLOAD_FOLDER'], pic_file_name))
                 #bifoga filens namn i databasen
                 db.session.commit()
@@ -353,7 +354,7 @@ def random_book():
         return redirect(url_for('views.home'))
 
     random_book = random.choice(books)
-    cover_pic_path = 'images/' + random_book.cover_pic  # Modify the path here
+    cover_pic_path = 'images/' + random_book.cover_pic  
 
     book_data = {
         'title': random_book.title,
@@ -363,7 +364,7 @@ def random_book():
     return render_template('random_book.html', user=current_user, book=book_data)
 
 
-"""Error 404. Funktion som skickar användare till error-sida 404 (client-error). Visar ett slumpat citat av 5 st """
+"""Error 404. Funktion som skickar användaren till error-sida 404 (client-error). Visar ett slumpat citat av 5 st """
 @views.app_errorhandler(404)
 def page_not_found(e):
     quotes = ["Why, sometimes I've believed as many as six impossible things before breakfast.",
@@ -375,7 +376,7 @@ def page_not_found(e):
     return render_template('error_404.html', quote = quote , user=current_user), 404
 
 
-"""Error 505. Funktion som skickar användare till error-sida 505 (server-error: användare hittas ej). Visar ett slumpat citat av 5st """
+"""Error 505. Funktion som skickar användaren till error-sida 505 (server-error: användare hittas ej). Visar ett slumpat citat av 5st """
 @views.app_errorhandler(505)
 def page_not_found(e):
     quotes = ["Why, sometimes I've believed as many as six impossible things before breakfast.",
@@ -393,7 +394,7 @@ def trigger_error_505():
     abort(505)"""
 
 
-"""Error 500. Funktion som skickar användare till error-sida 500 (server-error: internt fel på servern) Visar ett slumpat citat av 5st"""
+"""Error 500. Funktion som skickar användaren till error-sida 500 (server-error: internt fel på servern) Visar ett slumpat citat av 5st"""
 @views.app_errorhandler(500)
 def page_not_found(e):
     quotes = ["Why, sometimes I've believed as many as six impossible things before breakfast.",
