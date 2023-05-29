@@ -3,7 +3,8 @@
 {% block content %}
 
 <div id="edit-book-div">
-    <p>{{book.title}} - {{book.author}}</p>
+
+    <h2>Redigera boken {{book.title}} - {{book.author}}</h2>
     <form id="edit-book-form" method="POST" action="{{ url_for('views.edit_book', book_id=book.id) }}">
         <div class="form-group">
             <label for="new_title">Ny titel</label>
@@ -25,12 +26,16 @@
             <input type="checkbox" class="form-check-input" id="Check1" required>
             <label class="form-check-label" for="Check1">Bekräfta ändringarna</label>
         </div>
-        <button type="submit" class="btn btn-primary">Uppdatera bok</button>
+        <button type="submit" class="btn btn-primary">Uppdatera</button>
     </form>
 
-    <form method="POST" action="{{ url_for('views.remove_book', book_id=book.id) }}">
-        <button type="submit" class="btn btn-primary">Ta bort bok</button>
-    </form>
+    <div id="delete-book-div">
+        <h3>Vill du ta bort boken?</h3>
+        <form method="POST" action="{{ url_for('views.remove_book', book_id=book.id) }}">
+            <button type="submit" class="btn btn-primary">Ta bort</button>
+        </form>
+    </div>
+
     
 </div>
 

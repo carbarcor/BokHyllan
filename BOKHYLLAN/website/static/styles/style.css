@@ -28,23 +28,33 @@ body {
 }
 
 /* Knappar */ 
-.btn-primary {
-  color: whitesmoke;
-  background-color:#F9618B;
-  border-color: #F9618B;
-  margin-top:1em;
-  border-radius:10px;
-  box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 3px 0px, 
-              rgba(0, 0, 0, 0.06) 0px 1px 2px 0px;
-}
+  .btn-primary,
+  .btn-outline-success {
+    color: whitesmoke;
+    background-color:#F9618B;
+    border-color: #F9618B;
+    margin-top:1em;
+    border-radius:10px;
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 3px 0px, 
+                rgba(0, 0, 0, 0.06) 0px 1px 2px 0px;
+  }
 
-.btn-primary:hover {
-  background-color:rgb(127, 28, 122);
-  color:whitesmoke;
-  border-color:rgb(127, 28, 122);
-  box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 3px 0px,
-              rgba(0, 0, 0, 0.06) 0px 1px 2px 0px;
-}
+  .btn-primary:hover,
+  .btn-outline-success:hover {
+    background-color:rgb(127, 28, 122);
+    color:whitesmoke;
+    border-color:rgb(127, 28, 122);
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 3px 0px,
+                rgba(0, 0, 0, 0.06) 0px 1px 2px 0px;
+  }
+
+/* Länkar */
+  a {
+    color:rgb(51, 51, 51)
+  }
+  a:hover {
+    color:#F9618B
+  }
 
 #home-div,
 #add-book-div,
@@ -53,7 +63,6 @@ body {
 #edit-profile-div,
 #edit-book-div,
 #add-pic-div,
-#search-div,
 #all-books-div {
     width:75%;
     margin:auto;
@@ -101,7 +110,8 @@ body {
 }
 
 
-#add-book-form, #edit-book-form {
+#add-book-form,
+#edit-book-form {
     position: sticky;
     margin-top: 5%;
     margin-bottom: 3.5em;
@@ -157,7 +167,7 @@ body {
     padding: 2.5em;
 }
 
-#user-books-div {
+#user-books-div, #delete-book-div {
     margin-bottom: 3.5em;
     width:75%;
     margin-top:3em;
@@ -255,7 +265,7 @@ footer > p {
 
 #policyh1,
 #policyp {
-    text-align: center;
+  text-align: center;
 }
 
 #policy-div{
@@ -357,12 +367,12 @@ footer > p {
     transform: translate(2px, 2px);
   }
   
-  @media (min-width: 768px) {
-    #refresh-btn {
-      min-width: 120px;
-      padding: 0 25px;
+    @media (min-width: 768px) {
+      #refresh-btn {
+        min-width: 120px;
+        padding: 0 25px;
+      }
     }
-  }
   #randomtitle,#randomauthor{
     font-size: larger;
   }
