@@ -63,8 +63,6 @@ body {
 #Login form {
   margin-top: 15;
 
-
-
 }
 /*
 #user-points {
@@ -206,36 +204,36 @@ footer > p {
   bottom: 10%;
   position: absolute;
   text-align: center;
-  font-size: 1w; /* Usar unidades vw para tamaño de fuente responsive */
+  font-size: 1w; /* Använda vw-enheter för responsiv textstorlek. */
   font-weight: 800;
   margin-top: 50%;
 }
 
 .welcome p .highlighted {
-  font-size: 1vw; /* Usar unidades vw para tamaño de fuente responsive */
+  font-size: 1vw; /*Använda vw-enheter för responsiv textstorlek.*/
 }
 
-/* Estilos adicionales para hacer el contenedor responsive */
+/*Ytterligare stilar för att göra container responsiv*/
 @media screen and (max-width: 768px) {
-  .welcome {
+.welcome {
     width: 90%;
     left: 5%;
     margin: 10% auto;
-  }
+}
 
-  .welcome img {
+.welcome img {
     height: auto;
-  }
+}
 
-  .welcome p {
+.welcome p {
     font-size: 4vw;
     margin-top: 40%;
-  }
-
-  .welcome p .highlighted {
-    font-size: 5vw;
-  }
 }
+
+.welcome p .highlighted {
+    font-size: 5vw;
+}
+
 
 
 /* Knappar */ 
