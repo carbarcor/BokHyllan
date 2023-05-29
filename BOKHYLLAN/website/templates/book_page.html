@@ -1,8 +1,8 @@
 {% extends "base.html" %}
-{% block title %}bok!{% endblock %}
+{% block title %}Bok{% endblock %}
 {% block content %}
 
-<div>
+<div id="book-page">
     <h1>Det här boken tillhör: </h1>
     <h1>{{owner.first_name}}</h1>
     <div id="user-pic">
@@ -21,31 +21,41 @@
       <h1>0</h1>
       {%endif%}
     </p>
-  </div> </div>
+  </div>
 
-  {% if owner.id != user.id%}
-<div>
-  <form action="/chat/{{ owner.id }}" method="POST">
-    <button type="submit">chat!</button>
-  </form>
+
+  {% if book.cover_pic %}
+  <img src="{{url_for('static', filename='images/' + book.cover_pic)}}" alt="#" class="rounded-circle" width="150" height="150" align="left">
   {%else%}
-  <h1> Boken är redan din </h1>
+  <img src="{{url_for('static', filename='images/emty_profile.jpg')}}" alt="#" class="rounded-circle" width="150" height="150" align="left">
   {%endif%}
 
+  <p><h4>Title:  {{book.title}} </br> Författare:  {{book.author}}</br> ISBN: {{book.isbn}} </br>
+        Beskrivning: 
+        {% if book.review|length > 100 %}
+            {{ book.review[:100] }}
+        {% else %}
+            {{ book.review }}
+        {% endif %}</h4></p>
+
+
+  {% if owner.id != user.id%}
+    <div>
+      <form action="/chat/{{ owner.id }}" method="POST">
+        <button type="submit">chat!</button>
+      </form>
+      {%else%}
+      <h1> Boken är redan din </h1>
+      {%endif%}
+    </div>
+
+  <script>
+    document.getElementById("chatForm").addEventListener("submit", function(event) {
+      event.preventDefault();
+      var ownerId = document.getElementById("chatButton").value;
+      this.submit();
+    });
+  </script>
+
 </div>
-<div>
-
-  {{book.title}}
-</br>
-  {{book.author}}
-
-</div>
-
-<script>
-  document.getElementById("chatForm").addEventListener("submit", function(event) {
-    event.preventDefault();
-    var ownerId = document.getElementById("chatButton").value;
-    this.submit();
-  });
-</script>
 {% endblock %}
