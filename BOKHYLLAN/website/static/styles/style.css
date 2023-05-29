@@ -27,13 +27,31 @@ body {
     width: 100%;
 }
 
+/* Knappar */ 
+.btn-primary {
+  color: whitesmoke;
+  background-color:#F9618B;
+  border-color: #F9618B;
+  margin-top:1em;
+  border-radius:10px;
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 3px 0px, 
+              rgba(0, 0, 0, 0.06) 0px 1px 2px 0px;
+}
+
+.btn-primary:hover {
+  background-color:rgb(127, 28, 122);
+  color:whitesmoke;
+  border-color:rgb(127, 28, 122);
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 3px 0px,
+              rgba(0, 0, 0, 0.06) 0px 1px 2px 0px;
+}
 
 #home-div,
 #add-book-div,
 #sign-up-div,
 #add-bio-div,
 #edit-profile-div,
-#edit-book_div,
+#edit-book-div,
 #add-pic-div,
 #search-div,
 #all-books-div {
@@ -45,11 +63,10 @@ body {
 
 #add-book-form,
 #sign-up,
-
 #edit-profile,
 #edit-book-form {
-    background-color: rgb(255, 210, 126);
-    box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 3px 0px, rgba(0, 0, 0, 0.06) 0px 1px 2px 0px;
+  background-color: rgb(255, 210, 126);
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 3px 0px, rgba(0, 0, 0, 0.06) 0px 1px 2px 0px;
 }
 
 
@@ -84,7 +101,7 @@ body {
 }
 
 
-#add-book-form {
+#add-book-form, #edit-book-form {
     position: sticky;
     margin-top: 5%;
     margin-bottom: 3.5em;
@@ -213,45 +230,27 @@ footer > p {
   font-size: 1vw; /*Använda vw-enheter för responsiv textstorlek.*/
 }
 
-/*Ytterligare stilar för att göra container responsiv*/
-@media screen and (max-width: 768px) {
-.welcome {
-    width: 90%;
-    left: 5%;
-    margin: 10% auto;
-}
-
-.welcome img {
-    height: auto;
-}
-
-.welcome p {
-    font-size: 4vw;
-    margin-top: 40%;
-}
-
-.welcome p .highlighted {
-    font-size: 5vw;
-}
-
-
-
-/* Knappar */ 
-    .btn-primary {
-        color: #0c0c0c;
-        background-color:#F9618B;
-        border-color: #F9618B;
-        margin-top:1em;
-        border-radius:10px;
-        box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 3px 0px, rgba(0, 0, 0, 0.06) 0px 1px 2px 0px;
+  /*Ytterligare stilar för att göra container responsiv*/
+  @media screen and (max-width: 768px) {
+    .welcome {
+        width: 90%;
+        left: 5%;
+        margin: 10% auto;
     }
 
-    .btn-primary:hover {
-        background-color:rgb(127, 28, 122);
-        color:whitesmoke;
-        border-color:rgb(127, 28, 122);
-        box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 3px 0px, rgba(0, 0, 0, 0.06) 0px 1px 2px 0px;
+    .welcome img {
+        height: auto;
     }
+
+    .welcome p {
+        font-size: 4vw;
+        margin-top: 40%;
+    }
+
+    .welcome p .highlighted {
+        font-size: 5vw;
+    }
+  }
 
 
 #policyh1,
@@ -454,5 +453,4 @@ footer > p {
   max-width: 80%;
   max-height: 80%;
   cursor: pointer;
-
   }

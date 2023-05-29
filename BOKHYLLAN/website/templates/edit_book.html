@@ -3,14 +3,14 @@
 {% block content %}
 
 <div id="edit-book-div">
-
+    <p>{{book.title}} - {{book.author}}</p>
     <form id="edit-book-form" method="POST" action="{{ url_for('views.edit_book', book_id=book.id) }}">
         <div class="form-group">
-            <label for="new_title">Nytt titel</label>
+            <label for="new_title">Ny titel</label>
             <input type="text" class="form-control" id="new_title" name="new_title" value="{{ book.title }}">
         </div>
         <div class="form-group">
-            <label for="new_author">Nytt författare</label>
+            <label for="new_author">Ny författare</label>
             <input type="text" class="form-control" id="new_author" name="new_author" value="{{ book.author }}">
         </div>
         <div class="form-group">
@@ -18,7 +18,7 @@
             <input type="text" class="form-control" id="new_isbn" name="new_isbn" value="{{ book.isbn }}">
         </div>
         <div class="form-group">
-            <label for="new_review">Nytt review</label>
+            <label for="new_review">Ny beskrivning</label>
             <textarea class="form-control" id="new_review" name="new_review">{{ book.review }}</textarea>
         </div>
         <div class="form-group form-check">
@@ -28,9 +28,10 @@
         <button type="submit" class="btn btn-primary">Uppdatera bok</button>
     </form>
 
+    <form method="POST" action="{{ url_for('views.remove_book', book_id=book.id) }}">
+        <button type="submit" class="btn btn-primary">Ta bort bok</button>
+    </form>
     
 </div>
-<form method="POST" action="{{ url_for('views.remove_book', book_id=book.id) }}">
-    <button type="submit" class="btn btn-primary">Ta bort!</button>
-</form>
+
 {% endblock %}
