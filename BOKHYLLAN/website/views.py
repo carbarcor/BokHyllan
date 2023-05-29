@@ -386,6 +386,12 @@ def page_not_found(e):
     quote = random.choice(quotes)
     return render_template('error_505.html', quote = quote, user=current_user), 505
 
+"""#Triggar error 505 så att jag får en sökväg för den till CSS
+@app.route('/error_505')
+def trigger_error_505():
+    #stimulerar att ett internt fel inträffat
+    abort(505)"""
+
 
 """Error 500. Funktion som skickar användare till error-sida 500 (server-error: internt fel på servern) Visar ett slumpat citat av 5st"""
 @views.app_errorhandler(500)
@@ -397,3 +403,10 @@ def page_not_found(e):
                 "Off with their heads!"]
     quote = random.choice(quotes)
     return render_template('error_500.html', quote = quote , user=current_user), 500
+
+"""
+#Triggar error 500 så att jag får en sökväg för den till CSS
+@app.route('/error_500')
+def trigger_error_500():
+    #Stimulerar att användaren inte finns
+    abort(500)"""
