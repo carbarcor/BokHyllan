@@ -17,6 +17,7 @@ body {
   letter-spacing: 3px;
 }
 
+
 .navbar {
     background-color:#F97821;
     position:sticky;
@@ -49,7 +50,7 @@ body {
 
 /* Länkar */
   a {
-    color:rgb(51, 51, 51) !important;
+    color:rgb(51, 51, 51)
   }
   a:hover {
     color:#F9618B
@@ -75,83 +76,82 @@ body {
 #sign-up,
 #edit-profile,
 #edit-book-form,
-#add-bio-form,
-#user-info-div {
+#add-bio-form {
   background-color: rgb(255, 210, 126);
   box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 3px 0px, rgba(0, 0, 0, 0.06) 0px 1px 2px 0px;
 }
+.container {
+  max-width: 800px;
+  margin: 0 auto;
+}
 
-/*Positionering av home.html med grids*/
-  #home-div {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    grid-template-rows: auto; /* Automatically adjust the height based on content */
-    gap: 1em;
-    align-items: flex-start;
-    grid-template-areas: 
-      "user-header user-header"
-      "user-books user-pic"
-      "user-books user-bio"
-      "user-books user-points";
-  }
-
-  #user-info-div {
-    margin-top: 1em;
-    margin-bottom: 3.5em;
-    border-radius: 35px;
-    padding: 2.5em;
-  }
-
-  #user-header {
-    grid-area: user-header; 
-  }
-
-  #user-pic {
-    grid-area: user-pic;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin-bottom: 1em;
-  }
-
-  #user-bio {
-    grid-area: user-bio;
-  }
-
-  #user-books {
-    grid-area: user-books;
-    margin-top: 1em;
-    margin-bottom: 3.5em;
-  }
-
-  #user-points {
-    grid-area: user-points;
-    margin-top:2em;
-  }
-
-  @media screen and (max-width: 991px) {
-    #home-div {
-      grid-template-columns: 1fr; 
-      grid-template-rows: auto auto; 
-      grid-template-areas:
-        "user-header"
-        "user-pic"
-        "user-bio"
-        "user-points"
-        "user-books";
-    }
-  }
-
-#Login {
+#login-box {
   background-color: rgb(255, 210, 126);
-  box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 3px 0px, rgba(0, 0, 0, 0.06) 0px 1px 2px 0px;
-  
+  box-shadow: 0 0 30px rgba(0, 0, 0, 0.3);
+  position: absolute;
+  right: 12%;
+  width: 30%;
+  height: 60%;
+  margin-top: 5%;
+  border-radius: 25px;
+  padding: 2.5em;
+}
+
+#login-box h3{
+  text-align: center;
+}
+
+#login-box form {
+  margin-top: 15px;
+}
+
+#login-box .btn {
+  display: block;
+  width: 100%;
+}
+
+@media (max-width: 600px) {
+  .container {
+    padding: 5px;
+  }
+
+  #login-box {
+    width: 80%;
+  }
+
+  .form-group {
+    margin-bottom: 5px;
+  }
+}
+
+@media (max-width: 900px) {
+  #login-box {
+    background-color: rgba(255, 210, 126, 0.8);
+  }
+
+  #login-box form {
+    margin-top: 5px;
+  }
+}
+
+
+/*
+#user-points {
 
 }
 
-#Login form {
-  margin-top: 15;
+#user-pic {
 
+}
+*/
+
+#user-bio {
+    float:right;
+    margin-top: 3em;
+}
+
+#user-books {
+    float:left;
 }
 
 
@@ -170,16 +170,6 @@ body {
 }
  */ 
 
-#Login {
-    position: absolute;
-    right: 12%;
-    width: 30%;
-    height: 60%;
-    margin-top: 5%;
-    border-radius: 25px;
-    padding: 2.5em;
-    box-shadow: rgba(240, 46, 170, 0.4) 5px 5px, rgba(240, 46, 170, 0.3) 10px 10px, rgba(240, 46, 170, 0.2) 15px 15px, rgba(240, 46, 170, 0.1) 20px 20px, rgba(240, 46, 170, 0.05) 25px 25px;
-}
 
 #Login > h3 {
     text-align:center;
@@ -293,17 +283,13 @@ footer > p {
   width: 30%;
   height: 60%;
   left: 8%;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
   border-radius: 25px;
   overflow: hidden;
-  box-shadow: rgba(240, 46, 170, 0.4) -5px -5px,
-              rgba(240, 46, 170, 0.3) -10px -10px,
-              rgba(240, 46, 170, 0.2) -15px -15px,
-              rgba(240, 46, 170, 0.1) -20px -20px,
-              rgba(240, 46, 170, 0.05) -25px -25px;
 }
 
 .welcome img {
-  margin-top: 2%;
+  margin-top: 0%;
   margin-right: 3%;
   position: absolute;
   float: left;
@@ -319,37 +305,19 @@ footer > p {
   bottom: 10%;
   position: absolute;
   text-align: center;
-  font-size: 1w; /* Använda vw-enheter för responsiv textstorlek. */
+  font-size: 1vw;
   font-weight: 800;
   margin-top: 50%;
 }
 
 .welcome p .highlighted {
-  font-size: 1vw; /*Använda vw-enheter för responsiv textstorlek.*/
+  font-size: 1vw;
 }
-
-  /*Ytterligare stilar för att göra container responsiv*/
-  @media screen and (max-width: 768px) {
-    .welcome {
-        width: 90%;
-        left: 5%;
-        margin: 10% auto;
-    }
-
-    .welcome img {
-        height: auto;
-    }
-
-    .welcome p {
-        font-size: 4vw;
-        margin-top: 40%;
-    }
-
-    .welcome p .highlighted {
-        font-size: 5vw;
-    }
+@media (max-width: 600px) {
+  .welcome {
+    display: none; 
   }
-
+}
 
 #policyh1,
 #policyp {
@@ -491,95 +459,3 @@ footer > p {
       opacity: 0;
     }
   }
-
-/* Dark Theme */
-body.dark {
-  background-color: #F97821;
- 
-}
-
-
-.navbar-dark {
-  background-color: white; 
-  
-}
-
-.navbar-light .navbar-nav .nav-link {
-  color: black;
-}
-
-.dropdown-menu .dropdown-item {
-  color: black;
-}
-
-.dark-icon {
-  color: black;
-}
-
-/* CSS for the toggler button in dark theme */
-.dark-button {
-  background-color: #F97821;
-}
-
-#edit-profile-div form label,
-#edit-profile-div form input[type="text"]::placeholder,
-#edit-profile-div form input[type="password"]::placeholder,
-#edit-profile-div form input[type="checkbox"] + label {
-  color: black;
-}
-#add-book-div form label,
-#add-book-div form input[type="text"]::placeholder,
-#add-book-div form textarea::placeholder {
-  color: black;
-}
-
-#add-book-text {
-  color: black;
-}
-
-.profile-pic-wrapper {
-  position: relative;
-  display: inline-block;
-  width: 150px;
-  height: 150px;
-  border-radius: 50%;
-  overflow: hidden;
-}
-
-.profile-pic-wrapper img {
-  display: block;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  transition: filter 0.3s ease;
-}
-
-.profile-pic-overlay {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(123, 123, 123, 0.8); 
-  opacity: 0;
-  transition: opacity 0.3s ease;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.profile-pic-wrapper:hover img {
-  filter: grayscale(10%); 
-}
-
-.profile-pic-wrapper:hover .profile-pic-overlay {
-  opacity: 1;
-}
-
-.overlay-text {
-  color: rgb(198, 198, 198); 
-  font-size: 14px; 
-  font-weight: bold;
-  text-align: center;
-  padding: 8px;
-}

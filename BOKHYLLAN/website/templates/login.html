@@ -18,36 +18,28 @@
                  Byten sker från person till person, genom att välja ut specifika böcker från en annan användares bibliotek, 
                  eller genom att låta webbtjänsten slumpa fram en bok. Det är en <span class="highlighted">kostnadsfri tjänst!</span></p>
     </div>
-    
 
 
-    <form id="Login" method="POST">
-        <h3>Logga in</h3>
-            <div class ="form-group">
-                <label for="email">Mejladress</label>
-                <input 
-                    type="email" 
-                    class="form-control" 
-                    id="email" 
-                    name="email" 
-                    placeholder="exempel@email.se"/>
-            </div>
-            <div class ="form-group">
-                <label for="password">Lösenord</label>
-                <input 
-                    type="password" 
-                    class="form-control" 
-                    id="password" 
-                    name="password" 
-                    placeholder=""/> 
-            </div>
 
-        <button type="submit" class="btn btn-primary">Logga in</button>
+    <div class="container">
+        <form id="login-box" method="POST">
+          <h3>Logga in</h3>
+          <div class="form-group">
+            <label for="email">Mejladress</label>
+            <input type="email" class="form-control" id="email" name="email" placeholder="exempel@email.se" />
+          </div>
+          <div class="form-group">
+            <label for="password">Lösenord</label>
+            <input type="password" class="form-control" id="password" name="password" placeholder="" />
+          </div>
 
-        <a class="button" id="signUp" href="/sign-up">
+          <button type="submit" class="btn btn-primary">Logga in</button>
+
+          <a class="button" id="signUp" href="/sign-up">
             <button type="button" class="btn btn-primary">Registrera nytt konto</button>
-        </a>
+          </a>
+        </form>
+      </div>
 
-    </form>
 
 {% endblock %}
