@@ -154,15 +154,6 @@ body {
 
 }
 
-#user-bio {
-    float:right;
-    margin-top: 3em;
-}
-
-#user-books {
-    float:left;
-}
-
 
 #add-book-form,
 #edit-book-form {
