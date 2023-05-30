@@ -51,13 +51,18 @@
             {%endif%}
         </div>
 
+
       </div>
 
       <div id="user-books">
         <h1>Dina böcker</h1>
           {% for book in books %}
           <div class="book">
-            <h3>{{ book.title }}</h3>
+            <h3>
+              <a href="{{ url_for('views.book_file', book_id=book.id) }}">
+                {{ book.title }}
+              </a>
+            </h3>
           </div>
           {% endfor %}
       </div>
