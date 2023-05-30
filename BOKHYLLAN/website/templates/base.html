@@ -56,11 +56,7 @@ en mer anständig version eller med var egen html och css kod-->
           </a>
           <div class="dropdown-menu" aria-labelledby="valjdinfarg">
             <a class="dropdown-item no-bullet" href="#" onclick="setTheme('default')">Default</a>
-            <a class="dropdown-item no-bullet" href="#" onclick="setTheme('dark')">Dark</a>
-            <a class="dropdown-item no-bullet" href="#" onclick="setTheme('light')">Light</a>
-            <a class="dropdown-item no-bullet" href="#" onclick="setTheme('alice')">Alice in Wonderland</a>
-            <a class="dropdown-item no-bullet" href="#" onclick="setTheme('harrypotter')">Harry Potter</a>
-            <a class="dropdown-item no-bullet" href="#" onclick="setTheme('crazy')">Crazy</a>
+            <a class="dropdown-item no-bullet" href="#" onclick="setTheme('dark')">Inverterad</a>
           </div>
           {% endif %}
 
@@ -148,48 +144,41 @@ en mer anständig version eller med var egen html och css kod-->
   {% endblock %}
 
   <script>
-    // Funktion så att färgpaletten du har valt aktiveras
+    // Function to activate the selected theme
     function setTheme(theme) {
       const body = document.querySelector('body');
+      const navbar = document.querySelector('.navbar');
+      const navbarTogglerIcon = document.querySelector('.navbar-toggler-icon');
+      const navbarToggler = document.querySelector('.navbar-toggler');
+  
       switch (theme) {
         case 'default':
-          body.style.backgroundColor = '#f2f2f2';
-          body.style.color = '#333';
-          break;
-        case 'alice':
-          body.style.backgroundColor = '#ffefd5';
-          body.style.color = '#333';
-          break;
-        case 'harrypotter':
-          body.style.backgroundColor = '#7f0909';
-          body.style.color = '#ffd700';
+          body.classList.remove('dark'); // Remove the 'dark' class from body
+          navbar.classList.remove('navbar-dark'); // Remove the 'navbar-dark' class from navbar
+          navbarTogglerIcon.classList.remove('dark-icon'); // Remove the 'dark-icon' class from the toggler icon
+          navbarToggler.classList.remove('dark-button'); // Remove the 'dark-button' class from the toggler button
           break;
         case 'dark':
-          body.style.backgroundColor = '#333';
-          body.style.color = '#fff';
-          break;
-        case 'light':
-          body.style.backgroundColor = '#333';
-          body.style.color = '#fff';
-          break;
-        case 'crazy':
-          body.style.backgroundColor = '#ff00ff';
-          body.style.color = '#00ffff';
-          break;
-        default:
-          break;
+          body.classList.add('dark'); // Add the 'dark' class to body
+          navbar.classList.add('navbar-dark'); // Add the 'navbar-dark' class to navbar
+          navbarTogglerIcon.classList.add('dark-icon'); // Add the 'dark-icon' class to the toggler icon
+          navbarToggler.classList.add('dark-button'); // Add the 'dark-button' class to the toggler button
+          break;  
       }
-
-      // lagrar färgpaletten du valt
+  
+      // Store the selected theme
       localStorage.setItem('selectedTheme', theme);
     }
-
-    // kollar i local storage så att samma färgpalett hålls konsist efter du bytt.
+  
+    // Check local storage to maintain the selected theme consistency
     const selectedTheme = localStorage.getItem('selectedTheme');
     if (selectedTheme) {
       setTheme(selectedTheme);
     }
   </script>
+  
+
+  
 
 
   

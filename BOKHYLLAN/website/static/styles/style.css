@@ -17,7 +17,6 @@ body {
   letter-spacing: 3px;
 }
 
-
 .navbar {
     background-color:#F97821;
     position:sticky;
@@ -50,7 +49,7 @@ body {
 
 /* Länkar */
   a {
-    color:rgb(51, 51, 51)
+    color:rgb(51, 51, 51) !important;
   }
   a:hover {
     color:#F9618B
@@ -449,3 +448,48 @@ footer > p {
       opacity: 0;
     }
   }
+
+/* Dark Theme */
+body.dark {
+  background-color: #F97821;
+ 
+}
+
+
+.navbar-dark {
+  background-color: white; 
+  
+}
+
+.navbar-light .navbar-nav .nav-link {
+  color: black;
+}
+
+.dropdown-menu .dropdown-item {
+  color: black;
+}
+
+.dark-icon {
+  color: black;
+}
+
+/* CSS for the toggler button in dark theme */
+.dark-button {
+  background-color: #F97821;
+}
+
+#edit-profile-div form label,
+#edit-profile-div form input[type="text"]::placeholder,
+#edit-profile-div form input[type="password"]::placeholder,
+#edit-profile-div form input[type="checkbox"] + label {
+  color: black;
+}
+#add-book-div form label,
+#add-book-div form input[type="text"]::placeholder,
+#add-book-div form textarea::placeholder {
+  color: black;
+}
+
+#add-book-text {
+  color: black;
+}
