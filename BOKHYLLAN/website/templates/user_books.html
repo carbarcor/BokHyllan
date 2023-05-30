@@ -16,32 +16,35 @@
                 {%else%}
                     <img src="{{url_for('static', filename='images/emty_profile.jpg')}}" alt="#" class="rounded-circle" width="150" height="150" align="left">
                 {%endif%}
-                </div>
 
-                <ul id="book-list">
-                    <li>
-                        Titel:  {{book.title}}
-                    </li>
-                    <li>
-                        Författare:  {{book.author}}
-                    </li>
-                    <li>
-                        ISBN: {{book.isbn}}
-                    </li>
-                    <li>
-                        Beskrivning: 
-                        {% if book.review|length > 100 %}
-                            {{ book.review[:100] }}
-                        {% else %}
-                            {{ book.review }}
-                        {% endif %}
-                    </li>
-                </ul>
+                    <ul id="book-list">
+                        <li>
+                            Titel:  {{book.title}}
+                        </li>
+                        <li>
+                            Författare:  {{book.author}}
+                        </li>
+                        <li>
+                            ISBN: {{book.isbn}}
+                        </li>
+                        <li>
+                            Beskrivning: 
+                            {% if book.review|length > 100 %}
+                                {{ book.review[:100] }}
+                            {% else %}
+                                {{ book.review }}
+                            {% endif %}
+                        </li>
+                    </ul>
+                </div>
+            </a>
+
 
                 <form method="GET" action="{{ url_for('views.edit_book', book_id=book.id) }}">
                     <button type="submit" class="btn btn-primary">Redigera</button>
                 </form>
-            </a>
+
+
         </div>
         {%endfor%}
 
