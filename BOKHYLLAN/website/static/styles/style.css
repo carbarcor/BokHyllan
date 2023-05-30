@@ -75,11 +75,72 @@ body {
 #sign-up,
 #edit-profile,
 #edit-book-form,
-#add-bio-form {
+#add-bio-form,
+#user-info-div {
   background-color: rgb(255, 210, 126);
   box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 3px 0px, rgba(0, 0, 0, 0.06) 0px 1px 2px 0px;
 }
 
+/*Positionering av home.html med grids*/
+  #home-div {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: auto; /* Automatically adjust the height based on content */
+    gap: 1em;
+    align-items: flex-start;
+    grid-template-areas: 
+      "user-header user-header"
+      "user-books user-pic"
+      "user-books user-bio"
+      "user-books user-points";
+  }
+
+  #user-info-div {
+    margin-top: 1em;
+    margin-bottom: 3.5em;
+    border-radius: 35px;
+    padding: 2.5em;
+  }
+
+  #user-header {
+    grid-area: user-header; 
+  }
+
+  #user-pic {
+    grid-area: user-pic;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 1em;
+  }
+
+  #user-bio {
+    grid-area: user-bio;
+  }
+
+  #user-books {
+    grid-area: user-books;
+    margin-top: 1em;
+    margin-bottom: 3.5em;
+  }
+
+  #user-points {
+    grid-area: user-points;
+    margin-top:2em;
+  }
+
+  @media screen and (max-width: 991px) {
+    #home-div {
+      grid-template-columns: 1fr; 
+      grid-template-rows: auto auto; 
+      grid-template-areas:
+        "user-header"
+        "user-pic"
+        "user-bio"
+        "user-points"
+        "user-books";
+    }
+  }
 
 #Login {
   background-color: rgb(255, 210, 126);
@@ -92,15 +153,6 @@ body {
   margin-top: 15;
 
 }
-/*
-#user-points {
-
-}
-
-#user-pic {
-
-}
-*/
 
 #user-bio {
     float:right;
