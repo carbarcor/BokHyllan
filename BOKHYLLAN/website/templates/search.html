@@ -12,11 +12,24 @@
             </div>
 
         <h1>Sökresultat</h1>
-        <h2>You are looking for {{searched}}</h2>
 
         {% for book in result %}
         <a href="{{ url_for('views.book_file', book_id=book.id) }}">
-            {{ book.title }} - {{ book.author }} - {{ book.isbn }}</a>
+            <ul>
+                <li>
+                    Titel: {{ book.title }}
+                </li>
+                <li>
+                    Författare: {{ book.author }}
+                </li>
+                <li>
+                    ISBN: {{ book.isbn }}
+                </li>
+                <li>
+                    Beskrivning: {{ book.review }}
+                </li>
+            </ul>
+        </a>
         {% endfor %}
 
     </div>

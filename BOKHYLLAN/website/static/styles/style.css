@@ -264,18 +264,15 @@ body {
     padding: 2.5em;
 }
 
-/* Om man vill göra böckerna till samma stil som formulären
-#book-list-div {
-  background-color: rgb(255, 210, 126);
-  box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 3px 0px, rgba(0, 0, 0, 0.06) 0px 1px 2px 0px;
-  margin-bottom: 3.5em;
-  border-radius: 35px;
-  padding: 2.5em;
+/* Styling av alla bilder */
+.rounded-circle {
+  width:150px;
+  height:150px;
 }
-*/
 
 /* Styling av all_books bilder och text
 Behöver läggas till @media för responsivitet*/
+
   #all-books-div {
     margin-bottom: 3.5em;
   }

@@ -7,9 +7,9 @@
     <h1>{{owner.first_name}}</h1>
     <div id="user-pic">
     {% if owner.profile_pic %}
-    <img src="{{url_for('static', filename='images/' + owner.profile_pic)}}" alt="profile_img" class="rounded-circle" width="150" height="150" align="right">
+    <img src="{{url_for('static', filename='images/' + owner.profile_pic)}}" alt="profile_img" class="rounded-circle" align="right">
     {%else%}
-    <img src="{{url_for('static', filename='images/emty_profile.jpg')}}" alt="profile_img" class="rounded-circle" width="150" height="150" align="right">
+    <img src="{{url_for('static', filename='images/emty_profile.jpg')}}" alt="profile_img" class="rounded-circle" align="right">
     {%endif%}
   </div>
 
@@ -25,9 +25,9 @@
 
 
   {% if book.cover_pic %}
-  <img src="{{url_for('static', filename='images/' + book.cover_pic)}}" alt="#" class="rounded-circle" width="150" height="150" align="left">
+  <img src="{{url_for('static', filename='images/' + book.cover_pic)}}" alt="#" class="rounded-circle" align="left">
   {%else%}
-  <img src="{{url_for('static', filename='images/emty_profile.jpg')}}" alt="#" class="rounded-circle" width="150" height="150" align="left">
+  <img src="{{url_for('static', filename='images/emty_profile.jpg')}}" alt="#" class="rounded-circle" align="left">
   {%endif%}
 
   <p><h4>Title:  {{book.title}} </br> Författare:  {{book.author}}</br> ISBN: {{book.isbn}} </br>

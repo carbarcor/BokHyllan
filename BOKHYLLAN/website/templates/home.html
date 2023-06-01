@@ -14,7 +14,7 @@
           {% if user.profile_pic %}
           <a href="/add-pic">
             <div class="profile-pic-wrapper">
-              <img src="{{url_for('static', filename='images/' + user.profile_pic)}}" alt="profile_img" class="rounded-circle" width="150" height="150">
+              <img src="{{url_for('static', filename='images/' + user.profile_pic)}}" alt="profile_img" class="rounded-circle">
               <div class="profile-pic-overlay">
                 <span class="overlay-text">Ändra profilbild</span>
               </div>
@@ -23,7 +23,7 @@
           {% else %}
           <a href="/add-pic">
             <div class="profile-pic-wrapper">
-              <img src="{{url_for('static', filename='images/emty_profile.jpg')}}" alt="profile_img" class="rounded-circle" width="150" height="150">
+              <img src="{{url_for('static', filename='images/emty_profile.jpg')}}" alt="profile_img" class="rounded-circle">
               <div class="profile-pic-overlay">
                 <span class="overlay-text">Ändra profilbild</span>
               </div>

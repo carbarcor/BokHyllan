@@ -12,9 +12,9 @@
 
                 <div id="book-list-img-div">
                 {% if book.cover_pic %}
-                    <img src="{{url_for('static', filename='images/' + book.cover_pic)}}" alt="#" class="rounded-circle" width="150" height="150" align="left">
+                    <img src="{{url_for('static', filename='images/' + book.cover_pic)}}" alt="#" class="rounded-circle" align="left">
                 {%else%}
-                    <img src="{{url_for('static', filename='images/emty_profile.jpg')}}" alt="#" class="rounded-circle" width="150" height="150" align="left">
+                    <img src="{{url_for('static', filename='images/emty_profile.jpg')}}" alt="#" class="rounded-circle" align="left">
                 {%endif%}
 
                     <ul id="book-list">
