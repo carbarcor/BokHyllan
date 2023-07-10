@@ -9,6 +9,12 @@ from sqlalchemy.orm import relationship
 from datetime import datetime
 
 
+# Define the association table for favorites
+favorites = db.Table('favorites',
+    db.Column('user_id', db.Integer, db.ForeignKey('user.id'), primary_key=True),
+    db.Column('book_id', db.Integer, db.ForeignKey('book.id'), primary_key=True)
+)
+
 '''Klassen "rooms" representerar chattrummen där två användare möts.'''
 class Rooms(db.Model):
     #identifiereingsnummer för rummet, unikt värde.
@@ -40,8 +46,7 @@ class Book(db.Model):
     # Id för den användare som äger boken.
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
     # Bokens omslagsbild.
-    cover_pic = db.Column(db.String())
-
+    cover_pic = db.Column(db.String())   
 
 '''Databas för användare.
 Primary key är det id som genereras automatiskt när en användare registrerar sig.'''
@@ -62,3 +67,5 @@ class User(db.Model, UserMixin):
     profile_pic = db.Column(db.String())
     # Poäng för användaren (förvalt till 0).
     score = db.Column(db.Integer, default = 0)
+
+    

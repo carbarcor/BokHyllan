@@ -1,62 +1,84 @@
 {% extends "base.html" %}
+
 {% block title %}Bokhyllan{% endblock %}
+
 {% block content %}
-
-    <div id="all-books-div">
-
-            <div id="search-div">
-                <form method= "POST" action="/search" class="form-inline my-2 my-lg-0">
-                    <input name="searched" class="form-control mr-sm-2" type="search" placeholder="Titel, författare..." aria-label="Search">
-                    <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Sök</button>
-                </form>
-            </div>
-
-
-        {% for book in books %}
-        <div id="book-list-div">
-            <a href="{{ url_for('views.book_file', book_id=book.id) }}">
-
-                <div id="book-list-img-div">
-                {% if book.cover_pic %}
-                    <img src="{{url_for('static', filename='images/' + book.cover_pic)}}" alt="#" class="rounded-circle" align="left">
-                {%else%}
-                    <img src="{{url_for('static', filename='images/emty_profile.jpg')}}" alt="#" class="rounded-circle" align="left">
-                {%endif%}
-
-                    <ul id="book-list">
-                        <li>
-                            Titel:  {{book.title}}
-                        </li>
-                        <li>
-                            Författare:  {{book.author}}
-                        </li>
-                        <li>
-                            ISBN: {{book.isbn}}
-                        </li>
-                        <li>
-                            Beskrivning: 
-                            {% if book.review|length > 100 %}
-                                {{ book.review[:70] }}
-                            {% else %}
-                                {{ book.review }}
-                            {% endif %}
-                        </li>
-                    </ul>
-                </div>
-                <!--
-                <p><h4>Title:  {{book.title}} </br> Författare:  {{book.author}}</br> ISBN: {{book.isbn}} </br>
-                    Beskrivning: 
-                {% if book.review|length > 100 %}
-                    {{ book.review[:100] }}
-                {% else %}
-                    {{ book.review }}
-                {% endif %}
-                </h4></p>
-                -->
-            </a>
-        </div>
-        {%endfor%}
-
+<div id="all-books-div">
+    <div id="search-div">
+        <form method="POST" action="/search" class="form-inline my-2 my-lg-0">
+            <input name="searched" class="form-control mr-sm-2" type="search" placeholder="Titel, författare..."
+                aria-label="Search">
+            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Sök</button>
+        </form>
     </div>
 
+    {% for book in books %}
+    <div id="book-list-div">
+        <a href="{{ url_for('views.book_file', book_id=book.id) }}">
+            <div id="book-list-img-div">
+                {% if book.cover_pic %}
+                <img src="{{ url_for('static', filename='images/' + book.cover_pic) }}" alt="#" class="rounded-circle"
+                    align="left">
+                {% else %}
+                <img src="{{ url_for('static', filename='images/emty_profile.jpg') }}" alt="#" class="rounded-circle"
+                    align="left">
+                {% endif %}
+
+                <ul id="book-list">
+                    <li>
+                        Titel: {{ book.title }}
+                    </li>
+                    <li>
+                        Författare: {{ book.author }}
+                    </li>
+                    <li>
+                        ISBN: {{ book.isbn }}
+                    </li>
+                    <li>
+                        Beskrivning:
+                        {% if book.review|length > 100 %}
+                        {{ book.review[:70] }}
+                        {% else %}
+                        {{ book.review }}
+                        {% endif %}
+                    </li>
+                    <li>
+                        {% if current_user.is_authenticated %}
+                        {% if book in current_user.favorite_books %}
+                        <button class="favorite-button" onclick="toggleFavorite({{ book.id }})">
+                            <i class="fas fa-star"></i> Unfavorite
+                        </button>
+                        {% else %}
+                        <button class="favorite-button" onclick="toggleFavorite({{ book.id }})">
+                            <i class="far fa-star"></i> Favorite
+                        </button>
+                        {% endif %}
+                        {% endif %}
+                    </li>
+                </ul>
+            </div>
+        </a>
+    </div>
+    {% endfor %}
+</div>
+
+<script>
+    function toggleFavorite(bookId) {
+        fetch('/toggle_favorite/' + bookId, { method: 'POST' })
+            .then(response => response.json())
+            .then(data => {
+                if (data.status === 'success') {
+                    const favoriteButton = document.querySelector(`[onclick="toggleFavorite(${bookId})"]`);
+                    if (favoriteButton.innerHTML.includes('Unfavorite')) {
+                        favoriteButton.innerHTML = '<i class="far fa-star"></i> Favorite';
+                    } else {
+                        favoriteButton.innerHTML = '<i class="fas fa-star"></i> Unfavorite';
+                    }
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+            });
+    }
+</script>
 {% endblock %}
