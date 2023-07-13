@@ -9,7 +9,7 @@ from sqlalchemy.orm import relationship
 from datetime import datetime
 
 
-# Define the association table for favorites
+# Definiera id för favoriter.
 favorites = db.Table('favorites',
     db.Column('user_id', db.Integer, db.ForeignKey('user.id'), primary_key=True),
     db.Column('book_id', db.Integer, db.ForeignKey('book.id'), primary_key=True)

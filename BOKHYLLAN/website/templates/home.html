@@ -2,71 +2,83 @@
 {% block title %}Home Page{% endblock %}
 {% block content %}
 
-  <div id="home-div">
+<div id="home-div">
 
-    <div id="user-header">
-      <h1>Hej, {{user.first_name}}!</h1>
+  <div id="user-header">
+    <h1>Hej, {{ user.first_name }}!</h1>
+  </div>
+
+  <div id="user-info-div">
+
+    <div id="user-pic">
+      {% if user.profile_pic %}
+      <a href="/add-pic">
+        <div class="profile-pic-wrapper">
+          <img src="{{ url_for('static', filename='images/' + user.profile_pic) }}" alt="profile_img" class="rounded-circle">
+          <div class="profile-pic-overlay">
+            <span class="overlay-text">Ändra profilbild</span>
+          </div>
+        </div>
+      </a>
+      {% else %}
+      <a href="/add-pic">
+        <div class="profile-pic-wrapper">
+          <img src="{{ url_for('static', filename='images/emty_profile.jpg') }}" alt="profile_img" class="rounded-circle">
+          <div class="profile-pic-overlay">
+            <span class="overlay-text">Ändra profilbild</span>
+          </div>
+        </div>
+      </a>
+      {% endif %}
     </div>
 
-      <div id="user-info-div">
 
-        <div id="user-pic">
-          {% if user.profile_pic %}
-          <a href="/add-pic">
-            <div class="profile-pic-wrapper">
-              <img src="{{url_for('static', filename='images/' + user.profile_pic)}}" alt="profile_img" class="rounded-circle">
-              <div class="profile-pic-overlay">
-                <span class="overlay-text">Ändra profilbild</span>
-              </div>
-            </div>
-          </a>
-          {% else %}
-          <a href="/add-pic">
-            <div class="profile-pic-wrapper">
-              <img src="{{url_for('static', filename='images/emty_profile.jpg')}}" alt="profile_img" class="rounded-circle">
-              <div class="profile-pic-overlay">
-                <span class="overlay-text">Ändra profilbild</span>
-              </div>
-            </div>
-          </a>
-          {% endif %}
-        </div>
-        
-  
-        <div id="user-bio">
-          <h2>Biografi</h2>
-            {% if user.bio %}
-            <p>{{user.bio}}</p>
-            <a class="button" id="addBio" href="/add-bio"><button type="button" class="btn btn-primary">Ändra bio</button></a>
-            {% else %}
-            <a class="button" id="addBio" href="/add-bio"><button type="button" class="btn btn-primary">Lägg till bio</button></a>
-            {% endif %}
-        </div>
+    <div id="user-bio">
+      <h2>Biografi</h2>
+      {% if user.bio %}
+      <p>{{ user.bio }}</p>
+      <a class="button" id="addBio" href="/add-bio"><button type="button" class="btn btn-primary">Ändra bio</button></a>
+      {% else %}
+      <a class="button" id="addBio" href="/add-bio"><button type="button" class="btn btn-primary">Lägg till bio</button></a>
+      {% endif %}
+    </div>
 
-        <div id="user-points">
-            {% if user.score %}
-            <h3>Poäng: {{user.score}}</h3>
-            {%else%}
-            <h3>Poäng: 0</h3>
-            {%endif%}
-        </div>
-
-
-      </div>
-
-      <div id="user-books">
-        <h1>Dina böcker</h1>
-          {% for book in books %}
-          <div class="book">
-            <h3>
-              <a href="{{ url_for('views.book_file', book_id=book.id) }}">
-                {{ book.title }}
-              </a>
-            </h3>
-          </div>
-          {% endfor %}
-      </div>
+    <div id="user-points">
+      {% if user.score %}
+      <h3>Poäng: {{ user.score }}</h3>
+      {% else %}
+      <h3>Poäng: 0</h3>
+      {% endif %}
+    </div>
 
   </div>
+
+  <div id="user-books">
+    <h1>Dina böcker</h1>
+    {% for book in books %}
+    <div class="book">
+      <h3>
+        <a href="{{ url_for('views.book_file', book_id=book.id) }}">
+          {{ book.title }}
+        </a>
+      </h3>
+    </div>
+    {% endfor %}
+  </div>
+
+  <div id="user-favorites">
+    <h1>Favoritböcker</h1>
+    {% for favorite in user.favorite_books %}
+    <div class="book">
+      <h3>
+        <a href="{{ url_for('views.book_file', book_id=favorite.id) }}">
+          {{ favorite.title }}
+        </a>
+      </h3>
+    </div>
+    {% endfor %}
+  </div>
+
+</div>
 
 {% endblock %}

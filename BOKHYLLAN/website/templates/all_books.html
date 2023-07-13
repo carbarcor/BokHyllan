@@ -42,24 +42,25 @@
                         {{ book.review }}
                         {% endif %}
                     </li>
-                    <li>
-                        {% if current_user.is_authenticated %}
-                        {% if book in current_user.favorite_books %}
-                        <button class="favorite-button" onclick="toggleFavorite({{ book.id }})">
-                            <i class="fas fa-star"></i> Unfavorite
-                        </button>
-                        {% else %}
-                        <button class="favorite-button" onclick="toggleFavorite({{ book.id }})">
-                            <i class="far fa-star"></i> Favorite
-                        </button>
-                        {% endif %}
-                        {% endif %}
-                    </li>
-                </ul>
-            </div>
         </a>
+        <li>
+            {% if current_user.is_authenticated %}
+            {% if book in current_user.favorite_books %}
+            <button class="favorite-button" onclick="toggleFavorite({{ book.id }})">
+                <i class="fas fa-star"></i> Unfavorite
+            </button>
+            {% else %}
+            <button class="favorite-button" onclick="toggleFavorite({{ book.id }})">
+                <i class="far fa-star"></i> Favorite
+            </button>
+            {% endif %}
+            {% endif %}
+        </li>
+        </ul>
     </div>
-    {% endfor %}
+
+</div>
+{% endfor %}
 </div>
 
 <script>
