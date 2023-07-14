@@ -20,6 +20,7 @@ from . import db
 from werkzeug.utils import secure_filename
 from flask_socketio import SocketIO, send, join_room, leave_room
 from string import ascii_uppercase
+from flask import jsonify
 import uuid as uuid
 import os
 import random
@@ -362,6 +363,35 @@ def random_book():
         'cover_pic': cover_pic_path
     }
     return render_template('random_book.html', user=current_user, book=book_data)
+
+
+@views.route('/toggle_favorite/<int:book_id>', methods=['POST'])
+def toggle_favorite(book_id):
+    # Find the book in the database based on the book_id
+    book = Book.query.get(book_id)
+
+    if book is None:
+        # Book not found, handle the error case
+        response = {'status': 'error', 'message': 'Book not found'}
+        return jsonify(response), 404
+
+    if current_user.is_authenticated:
+        if book in current_user.favorite_books:
+            # Book is already in the user's favorite list, remove it
+            current_user.favorite_books.remove(book)
+            db.session.commit()
+            response = {'status': 'success', 'message': 'Book removed from favorites'}
+        else:
+            # Book is not in the user's favorite list, add it
+            current_user.favorite_books.append(book)
+            db.session.commit()
+            response = {'status': 'success', 'message': 'Book added to favorites'}
+    else:
+        # User not authenticated, handle the error case
+        response = {'status': 'error', 'message': 'User not authenticated'}
+        return jsonify(response), 401
+
+    return jsonify(response)
 
 
 """Error 404. Funktion som skickar användaren till error-sida 404 (client-error). Visar ett slumpat citat av 5 st """

@@ -46,11 +46,11 @@
         <li>
             {% if current_user.is_authenticated %}
             {% if book in current_user.favorite_books %}
-            <button class="favorite-button" onclick="toggleFavorite({{ book.id }})">
+            <button class="favorite-button" data-book-id="{{ book.id }}">
                 <i class="fas fa-star"></i> Unfavorite
             </button>
             {% else %}
-            <button class="favorite-button" onclick="toggleFavorite({{ book.id }})">
+            <button class="favorite-button" data-book-id="{{ book.id }}">
                 <i class="far fa-star"></i> Favorite
             </button>
             {% endif %}
@@ -64,12 +64,19 @@
 </div>
 
 <script>
+    document.getElementById('all-books-div').addEventListener('click', function(event) {
+        if (event.target.matches('.favorite-button')) {
+            const bookId = event.target.getAttribute('data-book-id');
+            toggleFavorite(bookId);
+        }
+    });
+
     function toggleFavorite(bookId) {
         fetch('/toggle_favorite/' + bookId, { method: 'POST' })
             .then(response => response.json())
             .then(data => {
                 if (data.status === 'success') {
-                    const favoriteButton = document.querySelector(`[onclick="toggleFavorite(${bookId})"]`);
+                    const favoriteButton = document.querySelector(`[data-book-id="${bookId}"]`);
                     if (favoriteButton.innerHTML.includes('Unfavorite')) {
                         favoriteButton.innerHTML = '<i class="far fa-star"></i> Favorite';
                     } else {
@@ -82,4 +89,5 @@
             });
     }
 </script>
+
 {% endblock %}

@@ -67,5 +67,5 @@ class User(db.Model, UserMixin):
     profile_pic = db.Column(db.String())
     # Poäng för användaren (förvalt till 0).
     score = db.Column(db.Integer, default = 0)
-
+    favorite_books = db.relationship('Book', secondary=favorites, backref=db.backref('favorited_by', lazy='dynamic'))
     
