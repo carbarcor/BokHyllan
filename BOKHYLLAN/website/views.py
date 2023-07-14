@@ -367,27 +367,27 @@ def random_book():
 
 @views.route('/toggle_favorite/<int:book_id>', methods=['POST'])
 def toggle_favorite(book_id):
-    # Find the book in the database based on the book_id
+    # hittar boken i db genom bookid
     book = Book.query.get(book_id)
 
     if book is None:
-        # Book not found, handle the error case
+        # om boken ej hittas.
         response = {'status': 'error', 'message': 'Book not found'}
         return jsonify(response), 404
 
     if current_user.is_authenticated:
         if book in current_user.favorite_books:
-            # Book is already in the user's favorite list, remove it
+            # boken är redan i listan.
             current_user.favorite_books.remove(book)
             db.session.commit()
             response = {'status': 'success', 'message': 'Book removed from favorites'}
         else:
-            # Book is not in the user's favorite list, add it
+            # b
             current_user.favorite_books.append(book)
             db.session.commit()
             response = {'status': 'success', 'message': 'Book added to favorites'}
     else:
-        # User not authenticated, handle the error case
+        # boken är
         response = {'status': 'error', 'message': 'User not authenticated'}
         return jsonify(response), 401
 
