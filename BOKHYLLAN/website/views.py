@@ -450,10 +450,12 @@ def create_challenge():
         goal = request.form.get('goal')
         target_number = request.form.get('target_number')
         
+        # Validerar att alla fält är ifyllda
         if not goal or not target_number:
             flash('Vänligen fyll i alla fält.', category='error')
             return redirect(url_for('views.create_challenge'))
 
+        # Skapar en ny läsutmaning med den inloggade användarens ID
         new_challenge = ReadingChallenge(user_id=current_user.id, goal=goal, target_number=target_number)
         db.session.add(new_challenge)
         db.session.commit()
@@ -469,11 +471,12 @@ def my_challenges():
     challenges = ReadingChallenge.query.filter_by(user_id=current_user.id).all()
     return render_template('my_challenges.html', user=current_user, challenges=challenges)
 
-# Funktion för att uppdatera framsteg för en utmaning
+# Funktion för att "uppdatera framsteg" för en utmaning.
 @views.route('/update-progress/<int:challenge_id>', methods=['POST'])
 @login_required
 def update_progress(challenge_id):
     challenge = ReadingChallenge.query.get(challenge_id)
+    # Kontrollerar om utmaningen finns och om den tillhör den inloggade användaren.
     if challenge and challenge.user_id == current_user.id:
         challenge.progress += 1
         db.session.commit()
@@ -488,6 +491,7 @@ def update_progress(challenge_id):
 @login_required
 def delete_challenge(challenge_id):
     challenge = ReadingChallenge.query.get(challenge_id)
+    # Kontrollerar om utmaningen finns och om den tillhör den inloggade användaren
     if challenge and challenge.user_id == current_user.id:
         db.session.delete(challenge)
         db.session.commit()

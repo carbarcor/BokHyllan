@@ -70,11 +70,15 @@ class User(db.Model, UserMixin):
     favorite_books = db.relationship('Book', secondary=favorites, backref=db.backref('favorited_by', lazy='dynamic'))
     reading_challenges = db.relationship('ReadingChallenge', back_populates='user')  # Ny rad för relationen
  
+'''Databas för läsutmaningar.
+Relation till Users för att kunna koppla användarens läsutmaningar med den inloggade användaren.'''
 class ReadingChallenge(db.Model):
     __tablename__ = 'reading_challenges'
+    # Primärnyckel för att identifiera varje läsutmaning unikt
     id = db.Column(db.Integer, primary_key=True)
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
     goal = db.Column(db.String(200), nullable=False)
     target_number = db.Column(db.Integer, nullable=False)
+    # progress(framsteg) för användaren (förvalt till 0).
     progress = db.Column(db.Integer, default=0)
     user = relationship('User', back_populates='reading_challenges')  # Relation till användare

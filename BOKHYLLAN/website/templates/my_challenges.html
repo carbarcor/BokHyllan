@@ -15,10 +15,10 @@
           <strong>{{ challenge.goal }}</strong> - Mål: {{ challenge.target_number }} - Lästa: {{ challenge.progress }}
           <div class="btn-group float-right" role="group">
             <form action="{{ url_for('views.update_progress', challenge_id=challenge.id) }}" method="POST" style="display:inline;">
-              <button type="submit" class="btn btn-secondary btn-sm">Uppdatera framsteg</button>
+              <button type="submit" class="btn btn-primary">Uppdatera framsteg</button>
             </form>
             <form action="{{ url_for('views.delete_challenge', challenge_id=challenge.id) }}" method="POST" style="display:inline;">
-              <button type="submit" class="btn btn-danger btn-sm">Ta bort</button>
+              <button type="submit" class="btn btn-primary">Ta bort</button>
             </form>
           </div>
         </li>
