@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+
+{% block content %}
+  <h1>Skapa en ny läsutmaning</h1>
+  <form method="POST">
+      <input type="text" name="goal" placeholder="Döp ditt mål" required>
+      <input type="number" name="target_number" placeholder="Antal böcker" required>
+      <button type="submit">Skapa Utmaning</button>
+      <p>Här kan du skapa en läsutmaning, du döper ditt mål och fyller i hur många böcker du hoppas läsa.</p>
+  </form>
+{% endblock %}

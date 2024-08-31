@@ -15,7 +15,7 @@ os är en del av standarbiblioteket, låter användaren interagera med det inbyg
 """
 from flask import Blueprint, render_template, request, flash, redirect, url_for, current_app, abort, session
 from flask_login import login_required, current_user
-from .models import User, Book, Rooms
+from .models import User, Book, Rooms, ReadingChallenge
 from . import db
 from werkzeug.utils import secure_filename
 from flask_socketio import SocketIO, send, join_room, leave_room
@@ -441,3 +441,58 @@ def page_not_found(e):
 def trigger_error_500():
     #Stimulerar att användaren inte finns
     abort(500)"""
+
+# Funktion för att skapa en ny läsutmaning
+@views.route('/create-challenge', methods=['GET', 'POST'])
+@login_required
+def create_challenge():
+    if request.method == 'POST':
+        goal = request.form.get('goal')
+        target_number = request.form.get('target_number')
+        
+        if not goal or not target_number:
+            flash('Vänligen fyll i alla fält.', category='error')
+            return redirect(url_for('views.create_challenge'))
+
+        new_challenge = ReadingChallenge(user_id=current_user.id, goal=goal, target_number=target_number)
+        db.session.add(new_challenge)
+        db.session.commit()
+        flash('Läsutmaningen har skapats!', category='success')
+        return redirect(url_for('views.home'))
+
+    return render_template('create_challenge.html', user=current_user)
+
+# Funktion för att visa användarens läsutmaningar
+@views.route('/my-challenges')
+@login_required
+def my_challenges():
+    challenges = ReadingChallenge.query.filter_by(user_id=current_user.id).all()
+    return render_template('my_challenges.html', user=current_user, challenges=challenges)
+
+# Funktion för att uppdatera framsteg för en utmaning
+@views.route('/update-progress/<int:challenge_id>', methods=['POST'])
+@login_required
+def update_progress(challenge_id):
+    challenge = ReadingChallenge.query.get(challenge_id)
+    if challenge and challenge.user_id == current_user.id:
+        challenge.progress += 1
+        db.session.commit()
+        flash('Ditt framsteg har uppdaterats!', category='success')
+    else:
+        flash('Utmaning inte hittad eller behörighet nekad.', category='error')
+    
+    return redirect(url_for('views.my_challenges'))
+
+# Funktion för att ta bort en utmaning
+@views.route('/delete-challenge/<int:challenge_id>', methods=['POST'])
+@login_required
+def delete_challenge(challenge_id):
+    challenge = ReadingChallenge.query.get(challenge_id)
+    if challenge and challenge.user_id == current_user.id:
+        db.session.delete(challenge)
+        db.session.commit()
+        flash('Läsutmaningen har tagits bort!', category='success')
+    else:
+        flash('Utmaning inte hittad eller behörighet nekad.', category='error')
+
+    return redirect(url_for('views.my_challenges'))

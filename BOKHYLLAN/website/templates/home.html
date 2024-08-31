@@ -66,6 +66,12 @@
     {% endfor %}
   </div>
 
+  <div id="user-challenges">
+    <h1>Läsutmaningar</h1>
+    <a href="{{ url_for('views.my_challenges') }}" class="btn btn-secondary">Visa mina läsutmaningar</a>
+  </div>
+  
+
   <div id="user-favorites">
     <h1>Favoritböcker</h1>
     {% for favorite in user.favorite_books %}

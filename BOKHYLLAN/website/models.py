@@ -68,4 +68,13 @@ class User(db.Model, UserMixin):
     # Poäng för användaren (förvalt till 0).
     score = db.Column(db.Integer, default = 0)
     favorite_books = db.relationship('Book', secondary=favorites, backref=db.backref('favorited_by', lazy='dynamic'))
-    
+    reading_challenges = db.relationship('ReadingChallenge', back_populates='user')  # Ny rad för relationen
+ 
+class ReadingChallenge(db.Model):
+    __tablename__ = 'reading_challenges'
+    id = db.Column(db.Integer, primary_key=True)
+    user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
+    goal = db.Column(db.String(200), nullable=False)
+    target_number = db.Column(db.Integer, nullable=False)
+    progress = db.Column(db.Integer, default=0)
+    user = relationship('User', back_populates='reading_challenges')  # Relation till användare
