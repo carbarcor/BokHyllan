@@ -8,6 +8,7 @@ Påbörja med att installera respektive ramverk i Python:
 2. flask_login      (pip install flask_login)
 3. sqlalchemy       (pip install sqlalchemy)
 4. SocketIO         (pip install flask_socketio)
+5. Werkzeug         (pip install werkzeug==2.2.3) 
 För alla mac-användare: pip3 
 
 Länk till Flask: https://flask.palletsprojects.com/en/2.2.x/installation/
